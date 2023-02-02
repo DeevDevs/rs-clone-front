@@ -5,6 +5,7 @@ enum PagePath {
   offers = 'offers',
   offerDescription = 'offers/:offerId',
   profile = 'profile',
+  error = '*',
 }
 
 export default PagePath;
