@@ -1,11 +1,11 @@
 enum PagePath {
-  root = '/',
-  tripForm = 'trip',
-  trip = 'trip/:tripId',
-  offers = 'offers',
-  offerDescription = 'offers/:offerId',
-  profile = 'profile',
-  error = '*',
+  Root = '/',
+  TripForm = 'trip',
+  Trip = 'trip/:tripId',
+  Offers = 'offers',
+  OfferDescription = 'offers/:offerId',
+  Profile = 'profile',
+  Error = '*',
 }
 
 export default PagePath;

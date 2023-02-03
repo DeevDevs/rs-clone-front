@@ -14,33 +14,33 @@ const Router = () => (
   <BrowserRouter>
     <Routes>
       <Route
-        path={PagePath.root}
+        path={PagePath.Root}
         element={<Root />}
       >
         <Route index element={<MainPage />} />
         <Route
-          path={PagePath.tripForm}
+          path={PagePath.TripForm}
           element={<TripFormPage />}
         />
         <Route
-          path={PagePath.trip}
+          path={PagePath.Trip}
           element={<TripPage />}
         />
         <Route
-          path={PagePath.offers}
+          path={PagePath.Offers}
           element={<OffersPage />}
         />
         <Route
-          path={PagePath.offerDescription}
+          path={PagePath.OfferDescription}
           element={<OfferDescriptionPage />}
         />
         <Route
-          path={PagePath.profile}
+          path={PagePath.Profile}
           element={<ProfilePage />}
         />
       </Route>
       <Route
-        path={PagePath.error}
+        path={PagePath.Error}
         element={<ErrorPage />}
       />
     </Routes>
