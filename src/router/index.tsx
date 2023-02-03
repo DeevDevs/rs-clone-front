@@ -7,7 +7,7 @@ import PagePath from '../enums/pagePathEnum';
 import TripFormPage from '../pages/rootPage/tripFormPage';
 import TripPage from '../pages/rootPage/tripFormPage/tripPage';
 import OffersPage from '../pages/rootPage/offersPage';
-import OfferDescriptionPage from '../pages/rootPage/offersPage/offerDesctiptionPage';
+import OfferDescriptionPage from '../pages/rootPage/offersPage/offerDescriptionPage';
 import ProfilePage from '../pages/rootPage/profilePage';
 
 const Router = () => (
