@@ -8,4 +8,8 @@ enum PagePath {
   error = '*',
 }
 
+export type WrapperProps = {
+  children: React.ReactNode;
+};
+
 export default PagePath;
