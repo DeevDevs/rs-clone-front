@@ -1,5 +1,6 @@
 import React from 'react';
-import { WrapperProps } from '../../enums/pagePathEnum';
+import { WrapperProps } from '../../types';
+
 import './wrapper.scss';
 
 const Wrapper = ({ children }: WrapperProps) => (
