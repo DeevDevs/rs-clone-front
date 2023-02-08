@@ -19,10 +19,12 @@ const TripForm = () => {
       errors,
     },
     handleSubmit,
+    reset,
   } = useForm<FormInputItems>({ mode: 'onBlur' });
 
   const onSubmit: SubmitHandler<FormInputItems> = ((data) => {
     console.log(data);
+    reset();
   });
 
   const inputs = Object
