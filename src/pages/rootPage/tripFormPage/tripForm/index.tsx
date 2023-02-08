@@ -52,6 +52,14 @@ const TripForm = () => {
 
   const { name: nameArea, ref: refArea, onChange: onChangeArea } = register('description', {
     required: 'please, fill in the field',
+    maxLength: {
+      value: 500,
+      message: 'description must be no more than 500 characters',
+    },
+    minLength: {
+      value: 100,
+      message: 'description must be at least 100 characters',
+    },
   });
 
   const { name: nameDateFrom, ref: refDateFrom, onChange: onChangeDateFrom } = register('dateFrom', {
@@ -100,6 +108,9 @@ const TripForm = () => {
           ref={refArea}
           onChange={onChangeArea}
         />
+        <div className={style['form-inputError']}>
+          {errors.description && <p>{errors.description?.message || 'Error!'}</p>}
+        </div>
       </div>
     </form>
   );
