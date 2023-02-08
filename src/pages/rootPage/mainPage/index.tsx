@@ -1,9 +1,11 @@
 import React from 'react';
+import SignUpLoginContainer from './signUpLoginContainer';
 
 const MainPage = () => (
-  <div>
+  <main>
     This is main page
-  </div>
+    <SignUpLoginContainer />
+  </main>
 );
 
 export default MainPage;
