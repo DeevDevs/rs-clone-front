@@ -35,18 +35,17 @@ const TripForm = () => {
       });
 
       return (
-        <div key={`${key}Div`}>
-          <label key={`${key}Label`} htmlFor={key}>
+        <div key={key}>
+          <label htmlFor={key}>
             {key}
             <input
               name={name}
               ref={ref}
               onBlur={onBlur}
-              key={`${key}Input`}
             />
           </label>
-          <div className={style['form-inputError']} key={key}>
-            {errors[name] && <p key={`${key}P`}>{errors[name]?.message || 'Error!'}</p>}
+          <div className={style['form-inputError']}>
+            {errors[name] && <p>{errors[name]?.message || 'Error!'}</p>}
           </div>
         </div>
       );
