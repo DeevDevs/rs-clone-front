@@ -1,0 +1,102 @@
+@use "../../../../sass/index";
+
+.form {
+  @include index.font(normal, 400, 32px, 37px);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  &-leftSide {
+    max-width: 746px;
+  }
+  &-rightSide {
+    max-width: 708px;
+  }
+  &-rightSide,
+  &-leftSide {
+    width: 100%;
+  }
+  &>div>div>label {
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+  }
+  &-inputError {
+    height: 40px;
+    text-align: right;
+    padding-right: 10px;
+    font-size: 20px;
+  }
+  &>div>div>label>input {
+    max-width: 440px;
+    @include index.font(inherit, inherit, inherit, inherit);
+    font-family: inherit;
+    border: 2px solid index.$very-dark-blue;
+    border-radius: 10px; 
+    width: 100%;
+    padding: 0 5px 0 5px;
+  }
+  &-sightBox {
+    height: 170px;
+    border: 2px solid index.$very-dark-blue;
+    border-radius: 10px;
+    background-color: #FFF;
+  }
+  &-mapTitle {
+    font-family: inherit;
+    @include index.font(inherit, inherit, inherit, inherit);
+    padding-top: 66px;
+    padding-bottom: 30px;
+  }
+  &-date {
+    padding-top: 30px;
+    padding-bottom: 80px;
+    &>div {
+      display: flex;
+      justify-content: space-between;
+    }
+    &>div>div>div {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+  &-area {
+    height: 534px;
+    width: 100%;
+    background-color: index.$light-blue;
+    border: 2px solid index.$very-dark-blue;
+    border-radius: 10px;
+    resize: none;
+    @include index.font(normal, 400, 25px, 37px);
+    padding: 5px;
+  }
+  &-submit {
+    width: 320px;
+    height: 60px;
+    font-family: 'Finger Paint';
+    @include index.font(normal, 400, 24px, 35px);
+    color: #FFF;
+    background: index.$button-gradient;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    border-color: index.$very-dark-blue;
+    cursor: pointer;
+  }
+}
+.map {
+  max-width: 746px;
+  height: 313px;
+  border: 2px solid index.$very-dark-blue;
+  border-radius: 10px;
+  overflow: hidden;
+}
+input[type="date" i] {
+  appearance: none;
+  width: 200px;
+  border: 2px solid index.$very-dark-blue;
+  border-radius: 10px;
+  font-family: "Comic Neue";
+  letter-spacing: 2px;
+  @include index.font(normal, 400, 25px, 37px);
+  padding: 0 5px 0 5px;
+}
