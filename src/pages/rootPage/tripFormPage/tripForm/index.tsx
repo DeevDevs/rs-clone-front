@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FormInputItems, ValuesKey } from '../../../../types';
+import TripMap from '../tripMap';
 import style from './TripForm.module.scss';
 
 const initialFormValues = {
@@ -67,7 +68,7 @@ const TripForm = () => {
         <div className={style['form-sightBox']} />
         <h2 className={style['form-mapTitle']}>Show us where you arrived from</h2>
         <div className={style.map}>
-          Map here
+          <TripMap />
         </div>
         <div className={style['form-date']}>
           <div>
