@@ -1,4 +1,4 @@
-export type TDBError = {
+export type TDBMsg = {
   status: string;
 };
 
@@ -12,6 +12,11 @@ export type TDBUser = {
   memoirIDs: string[];
 };
 
+export type TUserDataResp = {
+  status: string;
+  data: TDBUser;
+};
+
 export type TUser = {
   id: string;
   name: string;
@@ -20,18 +25,20 @@ export type TUser = {
   role: string;
   stateID: string;
   memoirIDs: string[];
-  error: null | TDBError;
+  message: null | string;
   token: string;
 };
 
-export type TSignup = {
+// Signup Data Objects
+
+export type TSignupReq = {
   name: string;
   email: string;
   password: string;
   passwordConfirm: string;
 };
 
-export type TSignupResponse = {
+export type TSignupResp = {
   status: string;
   token: string;
   data: {
@@ -39,33 +46,21 @@ export type TSignupResponse = {
   };
 };
 
-export type TLogin = {
+// Login Data Objects
+
+export type TLoginReq = {
   email: string;
   password: string;
 };
 
-export type TLogoutResponse = {
+// Logout Data Object
+
+export type TLogoutResp = {
   status: string;
   token: string;
 };
 
-export type TIsLoggedInRequest = {
-  token: string | null;
-};
-
-export type TLoggedInResponse = {
-  status: string;
-  data: TDBUser;
-};
-
-export type TGetUserRequest = {
-  id: string;
-};
-
-export type TUserCreds = {
-  id: string;
-  token: string;
-};
+// UpdateUser Data Object
 
 export type TUpdUserReq = {
   id: string;

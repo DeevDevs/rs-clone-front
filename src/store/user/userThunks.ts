@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as userTypes from './userTypes';
 
 export const signup = createAsyncThunk<
-userTypes.TSignupResponse,
-userTypes.TSignup,
-{ rejectValue: userTypes.TDBError }
->('signup', async (newUserData: userTypes.TSignup, thunkApi) => {
-  const reqBody: userTypes.TSignup = {
+userTypes.TSignupResp,
+userTypes.TSignupReq,
+{ rejectValue: userTypes.TDBMsg }
+>('signup', async (newUserData: userTypes.TSignupReq, thunkApi) => {
+  const reqBody: userTypes.TSignupReq = {
     name: newUserData.name,
     email: newUserData.email,
     password: newUserData.password,
@@ -26,37 +26,37 @@ userTypes.TSignup,
       status: errorMessage.status,
     });
   }
-  const data: userTypes.TSignupResponse = await response.json();
+  const data: userTypes.TSignupResp = await response.json();
   return data;
 });
 
 export const isLoggedIn = createAsyncThunk<
-userTypes.TLoggedInResponse,
+userTypes.TUserDataResp,
 void,
-{ rejectValue: userTypes.TDBError }
+{ rejectValue: userTypes.TDBMsg }
 >('isloggedin', async (_, thunkApi) => {
   // const authString = `Bearer ${cookie}`;
   const response = await fetch('https://rs-clone-back.herokuapp.com/api/user/isloggedin', {
-    method: 'POST',
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
   });
-  if (response.status !== 201) {
+  if (response.status !== 200) {
     const errorMessage = await response.json();
     return thunkApi.rejectWithValue({
       status: errorMessage.status,
     });
   }
-  const data: userTypes.TLoggedInResponse = await response.json();
+  const data: userTypes.TUserDataResp = await response.json();
   return data;
 });
 
 export const logout = createAsyncThunk<
-userTypes.TLogoutResponse,
+userTypes.TLogoutResp,
 void,
-{ rejectValue: userTypes.TDBError }
+{ rejectValue: userTypes.TDBMsg }
 >('logout', async (_, thunkApi) => {
   const response = await fetch('https://rs-clone-back.herokuapp.com/api/user/logout', {
     method: 'POST',
@@ -71,16 +71,17 @@ void,
       status: errorMessage.status,
     });
   }
-  const data: userTypes.TLogoutResponse = await response.json();
+  const data: userTypes.TLogoutResp = await response.json();
+  console.log(data);
   return data;
 });
 
 export const login = createAsyncThunk<
-userTypes.TSignupResponse,
-userTypes.TLogin,
-{ rejectValue: userTypes.TDBError }
->('login', async (loginData: userTypes.TLogin, thunkApi) => {
-  const reqBody: userTypes.TLogin = {
+userTypes.TSignupResp,
+userTypes.TLoginReq,
+{ rejectValue: userTypes.TDBMsg }
+>('login', async (loginData: userTypes.TLoginReq, thunkApi) => {
+  const reqBody: userTypes.TLoginReq = {
     email: loginData.email,
     password: loginData.password,
   };
@@ -98,14 +99,14 @@ userTypes.TLogin,
       status: errorMessage.status,
     });
   }
-  const data: userTypes.TSignupResponse = await response.json();
+  const data: userTypes.TSignupResp = await response.json();
   return data;
 });
 
 export const updateUser = createAsyncThunk<
-userTypes.TLoggedInResponse,
+userTypes.TUserDataResp,
 userTypes.TUpdUserReq,
-{ rejectValue: userTypes.TDBError }
+{ rejectValue: userTypes.TDBMsg }
 >('updateUser', async (userData: userTypes.TUpdUserReq, thunkApi) => {
   const response = await fetch('https://rs-clone-back.herokuapp.com/api/user/updateUser', {
     method: 'PATCH',
@@ -123,14 +124,14 @@ userTypes.TUpdUserReq,
       status: errorMessage.status,
     });
   }
-  const data: userTypes.TLoggedInResponse = await response.json();
+  const data: userTypes.TUserDataResp = await response.json();
   return data;
 });
 
 export const getUser = createAsyncThunk<
-userTypes.TLoggedInResponse,
+userTypes.TUserDataResp,
 string,
-{ rejectValue: userTypes.TDBError }
+{ rejectValue: userTypes.TDBMsg }
 >('getUser', async (id, thunkApi) => {
   // const authString = `Bearer ${credentials.token}`;
   const response = await fetch(
@@ -151,6 +152,31 @@ string,
       status: errorMessage.status,
     });
   }
-  const data: userTypes.TLoggedInResponse = await response.json();
+  const data: userTypes.TUserDataResp = await response.json();
   return data;
+});
+
+export const deleteUser = createAsyncThunk<
+null,
+string,
+{ rejectValue: userTypes.TDBMsg }
+>('deleteUser', async (id, thunkApi) => {
+  console.log(id);
+  // const authString = `Bearer ${credentials.token}`;
+  const response = await fetch(`https://rs-clone-back.herokuapp.com/api/user/deleteUser?id=${id}`, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      // Authorization: authString,
+      // Cookie: credentials.token,
+    },
+  });
+  if (response.status !== 204) {
+    const errorMessage = await response.json();
+    return thunkApi.rejectWithValue({
+      status: errorMessage.status,
+    });
+  }
+  return null;
 });
