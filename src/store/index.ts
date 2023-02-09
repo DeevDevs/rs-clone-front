@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import { userReducer } from './user';
+import { memoirReducer } from './memoir';
 import { temp } from './temp';
 
 export const rootReducer = combineReducers({
   tempReducer: temp.reducer,
   userReducer,
+  memoirReducer,
 });
 
 export const store = () => configureStore({ reducer: rootReducer });

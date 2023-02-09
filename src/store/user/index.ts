@@ -57,7 +57,7 @@ export const userSlice = createSlice({
       if (payload) state.message = payload.status;
     });
     builder.addCase(userThunks.login.pending, (state) => {
-      state.message = 'Checking, if the user is logged in';
+      state.message = 'Logging in';
     });
     builder.addCase(userThunks.logout.fulfilled, (state) => {
       state.name = '';
