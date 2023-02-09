@@ -35,6 +35,7 @@ export type TMemoir = {
   memoirPhoto: string;
   description: string;
   message: string | null;
+  previews: TMemoirPreview[];
 };
 
 // Signup Data Objects
@@ -73,4 +74,15 @@ export type TUpdMemoirReq = {
   rateValue?: number;
   days?: number;
   sites?: string[];
+};
+
+export type TMemoirPreview = {
+  memoirID: string;
+  memoirLocation: number[];
+  memoirName: string;
+};
+
+export type TPreviewsResp = {
+  status: string;
+  data: TMemoirPreview[];
 };

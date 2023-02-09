@@ -20,6 +20,7 @@ const initialState: memoirTypes.TMemoir = {
   memoirPhoto: '',
   description: '',
   message: null,
+  previews: [],
 };
 
 export const memoirSlice = createSlice({
@@ -124,6 +125,18 @@ export const memoirSlice = createSlice({
     });
     builder.addCase(memoirThunks.updateMemoir.pending, (state) => {
       state.message = 'Updating a memoir';
+    });
+    builder.addCase(memoirThunks.getMemoirPreviews.fulfilled, (state, { payload }) => {
+      const previews: memoirTypes.TMemoirPreview[] = payload.data;
+      console.log(previews);
+      state.previews = previews;
+      state.message = 'Previews were retrieved';
+    });
+    builder.addCase(memoirThunks.getMemoirPreviews.rejected, (state, { payload }) => {
+      if (payload) state.message = payload.status;
+    });
+    builder.addCase(memoirThunks.getMemoirPreviews.pending, (state) => {
+      state.message = 'Getting previews';
     });
   },
 });

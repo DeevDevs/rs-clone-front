@@ -108,3 +108,26 @@ memoirTypes.TUpdMemoirReq,
   const data: memoirTypes.TMemoirResp = await response.json();
   return data;
 });
+
+export const getMemoirPreviews = createAsyncThunk<
+memoirTypes.TPreviewsResp,
+void,
+{ rejectValue: memoirTypes.TDBMsg }
+>('getMemoirPreviews', async (_, thunkApi) => {
+  // const authString = `Bearer ${cookie}`;
+  const response = await fetch('https://rs-clone-back.herokuapp.com/api/previews', {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.status !== 200) {
+    const errorMessage = await response.json();
+    return thunkApi.rejectWithValue({
+      status: errorMessage.status,
+    });
+  }
+  const data: memoirTypes.TPreviewsResp = await response.json();
+  return data;
+});
