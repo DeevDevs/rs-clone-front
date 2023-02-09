@@ -72,7 +72,6 @@ void,
     });
   }
   const data: userTypes.TLogoutResp = await response.json();
-  console.log(data);
   return data;
 });
 
@@ -161,7 +160,6 @@ null,
 string,
 { rejectValue: userTypes.TDBMsg }
 >('deleteUser', async (id, thunkApi) => {
-  console.log(id);
   // const authString = `Bearer ${credentials.token}`;
   const response = await fetch(`https://rs-clone-back.herokuapp.com/api/user/deleteUser?id=${id}`, {
     method: 'DELETE',

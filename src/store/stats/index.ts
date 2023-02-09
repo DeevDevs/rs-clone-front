@@ -42,7 +42,6 @@ export const statsSlice = createSlice({
     // });
     builder.addCase(statsThunks.getStats.fulfilled, (state, { payload }) => {
       const newStats: statsTypes.TDBStats = payload.data;
-      console.log(newStats._id);
       state.id = newStats._id;
       state.places = newStats.places;
       state.days = newStats.days;

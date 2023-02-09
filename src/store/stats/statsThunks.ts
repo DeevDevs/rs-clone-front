@@ -30,7 +30,6 @@ statsTypes.TStatsResp,
 string,
 { rejectValue: statsTypes.TDBMsg }
 >('getStats', async (id: string, thunkApi) => {
-  console.log(id);
   // const authString = `Bearer ${cookie}`;
   const response = await fetch(`https://rs-clone-back.herokuapp.com/api/stats?id=${id}`, {
     method: 'GET',
@@ -39,7 +38,6 @@ string,
       'Content-Type': 'application/json',
     },
   });
-  console.log(response);
   if (response.status !== 200) {
     const errorMessage = await response.json();
     return thunkApi.rejectWithValue({
@@ -47,7 +45,6 @@ string,
     });
   }
   const data: statsTypes.TStatsResp = await response.json();
-  console.log(data);
   return data;
 });
 

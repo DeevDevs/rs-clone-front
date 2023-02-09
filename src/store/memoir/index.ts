@@ -30,7 +30,6 @@ export const memoirSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(memoirThunks.createNewMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
-      console.log(newMemoir._id);
       state.id = newMemoir._id;
       state.tripName = newMemoir.tripName;
       state.destinationName = newMemoir.destinationName;
@@ -55,7 +54,6 @@ export const memoirSlice = createSlice({
     });
     builder.addCase(memoirThunks.getMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
-      console.log(newMemoir._id);
       state.id = newMemoir._id;
       state.tripName = newMemoir.tripName;
       state.destinationName = newMemoir.destinationName;
@@ -103,7 +101,6 @@ export const memoirSlice = createSlice({
     });
     builder.addCase(memoirThunks.updateMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
-      console.log(newMemoir._id);
       state.id = newMemoir._id;
       state.tripName = newMemoir.tripName;
       state.destinationName = newMemoir.destinationName;
@@ -128,7 +125,6 @@ export const memoirSlice = createSlice({
     });
     builder.addCase(memoirThunks.getMemoirPreviews.fulfilled, (state, { payload }) => {
       const previews: memoirTypes.TMemoirPreview[] = payload.data;
-      console.log(previews);
       state.previews = previews;
       state.memoirMsg = 'Previews were retrieved';
     });

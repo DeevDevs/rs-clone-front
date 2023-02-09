@@ -29,11 +29,11 @@ export type TStats = {
 
 // Update Data Objects
 
-export type TUpdStatsReq = {
-  statsID: string;
-  memoirID: string;
-  condition: string;
-};
+// export type TUpdStatsReq = {
+//   statsID: string;
+//   memoirID: string;
+//   condition: string;
+// };
 
 export type TStatsResp = {
   status: string;

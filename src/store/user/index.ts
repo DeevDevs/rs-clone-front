@@ -25,7 +25,6 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(userThunks.signup.fulfilled, (state, { payload }) => {
       const newUser = payload.data.user;
-      console.log('Signup token:', newUser._id);
       state.name = newUser.name;
       state.email = newUser.email;
       state.photo = newUser.photo;
@@ -57,7 +56,6 @@ export const userSlice = createSlice({
       state.memoirIDs = newUser.memoirIDs.slice();
       state.token = payload.token;
       state.userMsg = 'User logged in';
-      console.log(newUser._id);
     });
     builder.addCase(userThunks.login.rejected, (state, { payload }) => {
       if (payload) state.userMsg = payload.status;
@@ -104,8 +102,8 @@ export const userSlice = createSlice({
       state.userMsg = 'Checking if logged in';
     });
     builder.addCase(userThunks.getUser.fulfilled, (state, { payload }) => {
+      console.log(payload.data);
       state.userMsg = 'User data received';
-      console.log(payload);
     });
     builder.addCase(userThunks.getUser.rejected, (state, { payload }) => {
       if (payload) state.userMsg = payload.status;
@@ -114,7 +112,6 @@ export const userSlice = createSlice({
       state.userMsg = 'Getting user data';
     });
     builder.addCase(userThunks.updateUser.fulfilled, (state, { payload }) => {
-      console.log('Updated user data:', payload.data);
       const userUpdateData = payload.data;
       state.name = userUpdateData.name;
       state.email = userUpdateData.email;
