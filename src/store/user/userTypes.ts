@@ -7,8 +7,10 @@ export type TDBUser = {
   name: string;
   email: string;
   photo: string;
-  role: string;
-  stateID: string;
+  age: number;
+  from: string;
+  bio: string;
+  statsID: string;
   memoirIDs: string[];
 };
 
@@ -20,12 +22,14 @@ export type TUserDataResp = {
 export type TUser = {
   id: string;
   name: string;
-  email: string;
+  age: number;
+  from: string;
+  bio: string;
   photo: string;
-  role: string;
-  stateID: string;
+  statsID: string;
+  email: string;
   memoirIDs: string[];
-  message: null | string;
+  userMsg: null | string;
   token: string;
 };
 

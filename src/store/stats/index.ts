@@ -13,7 +13,7 @@ const initialState: statsTypes.TStats = {
   sites: [],
   countries: [],
   continents: [],
-  message: null,
+  statsMsg: null,
 };
 
 export const statsSlice = createSlice({
@@ -21,25 +21,25 @@ export const statsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(statsThunks.updateStats.fulfilled, (state, { payload }) => {
-      const newStats: statsTypes.TDBStats = payload.data;
-      console.log(newStats._id);
-      state.id = newStats._id;
-      state.places = newStats.places;
-      state.days = newStats.days;
-      state.averageRate = newStats.averageRate;
-      state.distance = newStats.distance;
-      state.sites = JSON.parse(JSON.stringify(newStats.sites));
-      state.countries = JSON.parse(JSON.stringify(newStats.countries));
-      state.continents = JSON.parse(JSON.stringify(newStats.continents));
-      state.message = 'Stats were updated';
-    });
-    builder.addCase(statsThunks.updateStats.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
-    });
-    builder.addCase(statsThunks.updateStats.pending, (state) => {
-      state.message = 'Updating stats';
-    });
+    // builder.addCase(statsThunks.updateStats.fulfilled, (state, { payload }) => {
+    //   const newStats: statsTypes.TDBStats = payload.data;
+    //   console.log(newStats._id);
+    //   state.id = newStats._id;
+    //   state.places = newStats.places;
+    //   state.days = newStats.days;
+    //   state.averageRate = newStats.averageRate;
+    //   state.distance = newStats.distance;
+    //   state.sites = JSON.parse(JSON.stringify(newStats.sites));
+    //   state.countries = JSON.parse(JSON.stringify(newStats.countries));
+    //   state.continents = JSON.parse(JSON.stringify(newStats.continents));
+    //   state.statsMsg = 'Stats were updated';
+    // });
+    // builder.addCase(statsThunks.updateStats.rejected, (state, { payload }) => {
+    //   if (payload) state.statsMsg = payload.status;
+    // });
+    // builder.addCase(statsThunks.updateStats.pending, (state) => {
+    //   state.statsMsg = 'Updating stats';
+    // });
     builder.addCase(statsThunks.getStats.fulfilled, (state, { payload }) => {
       const newStats: statsTypes.TDBStats = payload.data;
       console.log(newStats._id);
@@ -51,13 +51,13 @@ export const statsSlice = createSlice({
       state.sites = JSON.parse(JSON.stringify(newStats.sites));
       state.countries = JSON.parse(JSON.stringify(newStats.countries));
       state.continents = JSON.parse(JSON.stringify(newStats.continents));
-      state.message = 'Stats were got';
+      state.statsMsg = 'Stats were got';
     });
     builder.addCase(statsThunks.getStats.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.statsMsg = payload.status;
     });
     builder.addCase(statsThunks.getStats.pending, (state) => {
-      state.message = 'Getting stats';
+      state.statsMsg = 'Getting stats';
     });
   },
 });

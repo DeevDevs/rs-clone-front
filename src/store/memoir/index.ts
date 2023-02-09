@@ -19,7 +19,7 @@ const initialState: memoirTypes.TMemoir = {
   sites: [],
   memoirPhoto: '',
   description: '',
-  message: null,
+  memoirMsg: null,
   previews: [],
 };
 
@@ -45,13 +45,13 @@ export const memoirSlice = createSlice({
       state.sites = newMemoir.sites;
       state.memoirPhoto = newMemoir.memoirPhoto;
       state.description = newMemoir.description;
-      state.message = 'New Memoir was created';
+      state.memoirMsg = 'New Memoir was created';
     });
     builder.addCase(memoirThunks.createNewMemoir.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.createNewMemoir.pending, (state) => {
-      state.message = 'Creating a memoir';
+      state.memoirMsg = 'Creating a memoir';
     });
     builder.addCase(memoirThunks.getMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
@@ -70,13 +70,13 @@ export const memoirSlice = createSlice({
       state.sites = newMemoir.sites;
       state.memoirPhoto = newMemoir.memoirPhoto;
       state.description = newMemoir.description;
-      state.message = 'A Memoir was retrieved';
+      state.memoirMsg = 'A Memoir was retrieved';
     });
     builder.addCase(memoirThunks.getMemoir.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.getMemoir.pending, (state) => {
-      state.message = 'Retrieving a memoir';
+      state.memoirMsg = 'Retrieving a memoir';
     });
     builder.addCase(memoirThunks.deleteMemoir.fulfilled, (state) => {
       state.id = '';
@@ -93,13 +93,13 @@ export const memoirSlice = createSlice({
       state.sites = [];
       state.memoirPhoto = '';
       state.description = '';
-      state.message = 'Memoir was deleted';
+      state.memoirMsg = 'Memoir was deleted';
     });
     builder.addCase(memoirThunks.deleteMemoir.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.deleteMemoir.pending, (state) => {
-      state.message = 'Deleting a memoir';
+      state.memoirMsg = 'Deleting a memoir';
     });
     builder.addCase(memoirThunks.updateMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
@@ -118,25 +118,25 @@ export const memoirSlice = createSlice({
       state.sites = newMemoir.sites;
       state.memoirPhoto = newMemoir.memoirPhoto;
       state.description = newMemoir.description;
-      state.message = 'A Memoir was updated';
+      state.memoirMsg = 'A Memoir was updated';
     });
     builder.addCase(memoirThunks.updateMemoir.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.updateMemoir.pending, (state) => {
-      state.message = 'Updating a memoir';
+      state.memoirMsg = 'Updating a memoir';
     });
     builder.addCase(memoirThunks.getMemoirPreviews.fulfilled, (state, { payload }) => {
       const previews: memoirTypes.TMemoirPreview[] = payload.data;
       console.log(previews);
       state.previews = previews;
-      state.message = 'Previews were retrieved';
+      state.memoirMsg = 'Previews were retrieved';
     });
     builder.addCase(memoirThunks.getMemoirPreviews.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.getMemoirPreviews.pending, (state) => {
-      state.message = 'Getting previews';
+      state.memoirMsg = 'Getting previews';
     });
   },
 });

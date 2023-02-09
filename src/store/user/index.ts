@@ -9,10 +9,12 @@ const initialState: userTypes.TUser = {
   name: 'Whatever',
   email: '',
   photo: '',
-  role: '',
-  stateID: '',
+  age: 0,
+  from: '',
+  bio: '',
+  statsID: '',
   memoirIDs: [],
-  message: null,
+  userMsg: null,
   token: '',
 };
 
@@ -27,111 +29,128 @@ export const userSlice = createSlice({
       state.name = newUser.name;
       state.email = newUser.email;
       state.photo = newUser.photo;
-      state.role = newUser.role;
-      state.stateID = newUser.stateID;
+      state.age = newUser.age;
+      state.from = newUser.from;
+      state.bio = newUser.bio;
+      state.statsID = newUser.statsID;
       state.id = newUser._id;
       state.memoirIDs = newUser.memoirIDs.slice();
       state.token = payload.token;
-      state.message = 'User signed up';
+      state.userMsg = 'User signed up';
     });
     builder.addCase(userThunks.signup.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.signup.pending, (state) => {
-      state.message = 'Trying to sign up';
+      state.userMsg = 'Trying to sign up';
     });
     builder.addCase(userThunks.login.fulfilled, (state, { payload }) => {
       const newUser = payload.data.user;
       state.name = newUser.name;
       state.email = newUser.email;
       state.photo = newUser.photo;
-      state.role = newUser.role;
-      state.stateID = newUser.stateID;
+      state.age = newUser.age;
+      state.from = newUser.from;
+      state.bio = newUser.bio;
+      state.statsID = newUser.statsID;
       state.id = newUser._id;
       state.memoirIDs = newUser.memoirIDs.slice();
       state.token = payload.token;
-      state.message = 'User logged in';
+      state.userMsg = 'User logged in';
       console.log(newUser._id);
     });
     builder.addCase(userThunks.login.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.login.pending, (state) => {
-      state.message = 'Logging in';
+      state.userMsg = 'Logging in';
     });
     builder.addCase(userThunks.logout.fulfilled, (state) => {
       state.name = '';
       state.email = '';
       state.photo = '';
-      state.role = '';
-      state.stateID = '';
+      state.age = 0;
+      state.from = '';
+      state.bio = '';
+      state.statsID = '';
       state.id = '';
       state.memoirIDs = [];
       state.token = '';
-      state.message = 'User logged out';
+      state.userMsg = 'User logged out';
     });
     builder.addCase(userThunks.logout.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.logout.pending, (state) => {
-      state.message = 'Logging out';
+      state.userMsg = 'Logging out';
     });
     builder.addCase(userThunks.isLoggedIn.fulfilled, (state, { payload }) => {
       const newUser = payload.data;
       state.name = newUser.name;
       state.email = newUser.email;
       state.photo = newUser.photo;
-      state.role = newUser.role;
-      state.stateID = newUser.stateID;
+      state.age = newUser.age;
+      state.from = newUser.from;
+      state.bio = newUser.bio;
+      state.statsID = newUser.statsID;
       state.id = newUser._id;
       state.memoirIDs = newUser.memoirIDs.slice();
-      state.message = 'User logged in';
+      state.userMsg = 'User logged in';
     });
     builder.addCase(userThunks.isLoggedIn.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.isLoggedIn.pending, (state) => {
-      state.message = 'Checking if logged in';
+      state.userMsg = 'Checking if logged in';
     });
     builder.addCase(userThunks.getUser.fulfilled, (state, { payload }) => {
-      state.message = 'User data received';
+      state.userMsg = 'User data received';
       console.log(payload);
     });
     builder.addCase(userThunks.getUser.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.getUser.pending, (state) => {
-      state.message = 'Getting user data';
+      state.userMsg = 'Getting user data';
     });
     builder.addCase(userThunks.updateUser.fulfilled, (state, { payload }) => {
       console.log('Updated user data:', payload.data);
       const userUpdateData = payload.data;
       state.name = userUpdateData.name;
       state.email = userUpdateData.email;
-      state.message = 'Updated user data';
+      state.photo = userUpdateData.photo;
+      state.age = userUpdateData.age;
+      state.from = userUpdateData.from;
+      state.bio = userUpdateData.bio;
+      state.statsID = userUpdateData.statsID;
+      state.id = userUpdateData._id;
+      state.memoirIDs = userUpdateData.memoirIDs.slice();
+      state.userMsg = 'User updated';
     });
     builder.addCase(userThunks.updateUser.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.updateUser.pending, (state) => {
-      state.message = 'Updating user Data';
+      state.userMsg = 'Updating user Data';
     });
     builder.addCase(userThunks.deleteUser.fulfilled, (state) => {
       state.name = '';
       state.email = '';
       state.photo = '';
-      state.role = '';
-      state.stateID = '';
+      state.age = 0;
+      state.from = '';
+      state.bio = 'Please, tell us about yourself a little.';
+      state.statsID = '';
       state.id = '';
       state.memoirIDs = [];
       state.token = '';
-      state.message = 'Deleted a user';
+      state.userMsg = 'Deleted a user';
     });
     builder.addCase(userThunks.deleteUser.rejected, (state, { payload }) => {
-      if (payload) state.message = payload.status;
+      if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.deleteUser.pending, (state) => {
-      state.message = 'Deleting a user';
+      state.userMsg = 'Deleting a user';
     });
   },
 });

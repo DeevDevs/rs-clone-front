@@ -34,7 +34,7 @@ export type TMemoir = {
   sites: string[];
   memoirPhoto: string;
   description: string;
-  message: string | null;
+  memoirMsg: string | null;
   previews: TMemoirPreview[];
 };
 
