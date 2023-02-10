@@ -1,4 +1,6 @@
-import { DevelopersNames, FooterImgAlts, Links } from '../../enums';
+import {
+  DevelopersNames, FooterImgAlts, GitLinksKeys, Links,
+} from '../../enums';
 import gitLogo from '../../assets/svg/gitLogo.svg';
 import rsLogo from '../../assets/svg/rsLogo.svg';
 import logoImg from '../../assets/svg/logo.svg';
@@ -19,18 +21,21 @@ const FooterStore = {
       imgSrc: gitLogo,
       imgAlt: FooterImgAlts.GitLogo,
       spanText: DevelopersNames.Vnuchkov,
+      key: GitLinksKeys.GitLink1,
     },
     {
       to: Links.Kazakov,
       imgSrc: gitLogo,
       imgAlt: FooterImgAlts.GitLogo,
       spanText: DevelopersNames.Kazakov,
+      key: GitLinksKeys.GitLink2,
     },
     {
       to: Links.Luferov,
       imgSrc: gitLogo,
       imgAlt: FooterImgAlts.GitLogo,
       spanText: DevelopersNames.Luferov,
+      key: GitLinksKeys.GitLink3,
     },
   ],
 };

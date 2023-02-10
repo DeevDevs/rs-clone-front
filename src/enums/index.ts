@@ -27,6 +27,12 @@ export enum Links {
   Luferov = 'https://github.com/Luferov1',
 }
 
+export enum GitLinksKeys {
+  GitLink1 = 'gitLink1',
+  GitLink2 = 'gitLink2',
+  GitLink3 = 'gitLink3',
+}
+
 export enum SignUpInputsNames {
   Name = 'Name',
   Email = 'SignUpEmail',

@@ -21,7 +21,7 @@ const Footer = () => {
         />
         <div className={styles.links}>
           {state.gitLinks.map(({
-            to, imgSrc, imgAlt, spanText,
+            to, imgSrc, imgAlt, spanText, key,
           }) => (
             <FooterLink
               to={to}
@@ -30,6 +30,7 @@ const Footer = () => {
               imgClassName={styles.ghLink__img}
               linkClassName={styles.ghLink}
               spanText={spanText}
+              key={key}
             />
           ))}
         </div>
