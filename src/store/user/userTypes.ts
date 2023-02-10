@@ -73,3 +73,37 @@ export type TUpdUserReq = {
   photo?: string;
   password?: string;
 };
+
+type TImgBBTypeData = {
+  extension: string;
+  filename: string;
+  mime: string;
+  name: string;
+  url: string;
+};
+
+export type TUploadImgReq = {
+  id: string;
+  files: FileList;
+};
+
+export type TImgBBResp = {
+  data: {
+    delete_url: string;
+    display_url: string;
+    expiration: number;
+    height: number;
+    id: string;
+    image: TImgBBTypeData;
+    medium: TImgBBTypeData;
+    thumb: TImgBBTypeData;
+    size: number;
+    time: number;
+    title: number;
+    url: string;
+    url_viewer: string;
+    width: number;
+  };
+  status: number;
+  success: boolean;
+};

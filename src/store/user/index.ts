@@ -149,6 +149,31 @@ export const userSlice = createSlice({
     builder.addCase(userThunks.deleteUser.pending, (state) => {
       state.userMsg = 'Deleting a user';
     });
+    builder.addCase(
+      userThunks.addProfileImage.fulfilled,
+      (state, { payload }) => {
+        const userUpdateData = payload.data;
+        state.name = userUpdateData.name;
+        state.email = userUpdateData.email;
+        state.photo = userUpdateData.photo;
+        state.age = userUpdateData.age;
+        state.from = userUpdateData.from;
+        state.bio = userUpdateData.bio;
+        state.statsID = userUpdateData.statsID;
+        state.id = userUpdateData._id;
+        state.memoirIDs = userUpdateData.memoirIDs.slice();
+        state.userMsg = 'Image Uploaded';
+      },
+    );
+    builder.addCase(
+      userThunks.addProfileImage.rejected,
+      (state, { payload }) => {
+        if (payload) state.userMsg = payload.status;
+      },
+    );
+    builder.addCase(userThunks.addProfileImage.pending, (state) => {
+      state.userMsg = 'Uploading an Image';
+    });
   },
 });
 

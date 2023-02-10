@@ -178,3 +178,59 @@ string,
   }
   return null;
 });
+
+export const addProfileImage = createAsyncThunk<
+userTypes.TUserDataResp,
+userTypes.TUploadImgReq,
+{ rejectValue: userTypes.TDBMsg }
+>('addProfileImage', async (updData: userTypes.TUploadImgReq, thunkApi) => {
+  console.log('ThunkCalled');
+  const file = updData.files[0] as File;
+  console.log(file.name.endsWith('png'));
+  if (
+    !file.name.endsWith('png')
+    && !file.name.endsWith('jpg')
+    && !file.name.endsWith('webp')
+  ) return thunkApi.rejectWithValue({ status: 'Wrong file format' });
+  const formData = new FormData();
+  formData.set('set', '20130477ec7d5485cba138eb19349cbe');
+  formData.append('image', file);
+  const imgBBresponse = await fetch(
+    'https://api.imgbb.com/1/upload?expiration=259200&key=20130477ec7d5485cba138eb19349cbe',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  );
+  if (imgBBresponse.status !== 200) {
+    return thunkApi.rejectWithValue({
+      status: 'Could not upload your image. Please, try again later',
+    });
+  }
+  const imageData: userTypes.TImgBBResp = await imgBBresponse.json();
+  const imgUpdateBody = {
+    id: updData.id,
+    photo: imageData.data.url,
+  };
+  const response = await fetch(
+    'https://rs-clone-back.herokuapp.com/api/user/updateUser',
+    {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        // Authorization: authString,
+        // Cookie: credentials.token,
+      },
+      body: JSON.stringify(imgUpdateBody),
+    },
+  );
+  if (response.status !== 200) {
+    const errorMessage = await response.json();
+    return thunkApi.rejectWithValue({
+      status: errorMessage.status,
+    });
+  }
+  const data: userTypes.TUserDataResp = await response.json();
+  return data;
+});
