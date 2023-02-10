@@ -22,32 +22,30 @@ const Footer = () => (
         />
       </Link>
       <div className={styles.links}>
-        <div className={styles.links}>
-          <Link to={Links.Vnuchkov} className={styles.ghLink}>
-            <img
-              src={gitLogo}
-              alt="gitLogo"
-              className={styles.ghLink__img}
-            />
-            <span className={styles.ghLink__name}>Dmitriy Vnuchkov</span>
-          </Link>
-          <Link to={Links.Kazakov} className={styles.ghLink}>
-            <img
-              src={gitLogo}
-              alt="gitLogo"
-              className={styles.ghLink__img}
-            />
-            <span className={styles.ghLink__name}>Maksim Kazakov</span>
-          </Link>
-          <Link to={Links.Luferov} className={styles.ghLink}>
-            <img
-              src={gitLogo}
-              alt="gitLogo"
-              className={styles.ghLink__img}
-            />
-            <span className={styles.ghLink__name}>Dmitriy Luferov</span>
-          </Link>
-        </div>
+        <Link to={Links.Vnuchkov} className={styles.ghLink}>
+          <img
+            src={gitLogo}
+            alt="gitLogo"
+            className={styles.ghLink__img}
+          />
+          <span className={styles.ghLink__name}>Dmitriy Vnuchkov</span>
+        </Link>
+        <Link to={Links.Kazakov} className={styles.ghLink}>
+          <img
+            src={gitLogo}
+            alt="gitLogo"
+            className={styles.ghLink__img}
+          />
+          <span className={styles.ghLink__name}>Maksim Kazakov</span>
+        </Link>
+        <Link to={Links.Luferov} className={styles.ghLink}>
+          <img
+            src={gitLogo}
+            alt="gitLogo"
+            className={styles.ghLink__img}
+          />
+          <span className={styles.ghLink__name}>Dmitriy Luferov</span>
+        </Link>
       </div>
       <span className={styles.year}>Created in 2023</span>
     </div>
