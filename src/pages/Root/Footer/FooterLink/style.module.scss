@@ -1,0 +1,7 @@
+@use './src/sass/index' as basics;
+
+.ghLink__name {
+  color: basics.$black;
+  font-size: 22px;
+  line-height: 25px;
+}

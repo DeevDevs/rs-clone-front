@@ -8,6 +8,18 @@ export enum PagePath {
   Error = '*',
 }
 
+export enum FooterImgAlts {
+  Logo = 'logo',
+  RsLogo = 'rsLogo',
+  GitLogo = 'gitLogo',
+}
+
+export enum DevelopersNames {
+  Vnuchkov = 'Dmitriy Vnuchkov',
+  Kazakov = 'Maksim Kazakov',
+  Luferov = 'Dmitriy Luferov',
+}
+
 export enum Links {
   Rs = 'https://rs.school/',
   Vnuchkov = 'https://github.com/DeevDevs',

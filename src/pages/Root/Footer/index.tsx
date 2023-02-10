@@ -1,55 +1,41 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import styles from './style.module.scss';
-import logo from '../../../assets/svg/logo.svg';
-import gitLogo from '../../../assets/svg/gitLogo.svg';
-import rsLogo from '../../../assets/svg/rsLogo.svg';
-import { Links } from '../../../enums';
+import FooterLink from './FooterLink';
+import FooterStore from '../../../data/FooterLinksStore';
 
-const Footer = () => (
-  <footer className={styles.footer}>
-    <img
-      src={logo}
-      alt="logo"
-      className={styles.logo}
-    />
-    <div className={styles.info}>
-      <Link to={Links.Rs}>
-        <img
-          src={rsLogo}
-          alt="rsLogo"
-          className={styles.rsEmblem}
+const Footer = () => {
+  const [state] = useState(FooterStore);
+  return (
+    <footer className={styles.footer}>
+      <img
+        src={state.logo.src}
+        alt={state.logo.alt}
+        className={styles.logo}
+      />
+      <div className={styles.info}>
+        <FooterLink
+          to={state.rsLink.to}
+          imgSrc={state.rsLink.imgSrc}
+          imgAlt={state.rsLink.imgAlt}
+          imgClassName={styles.rsEmblem}
         />
-      </Link>
-      <div className={styles.links}>
-        <Link to={Links.Vnuchkov} className={styles.ghLink}>
-          <img
-            src={gitLogo}
-            alt="gitLogo"
-            className={styles.ghLink__img}
-          />
-          <span className={styles.ghLink__name}>Dmitriy Vnuchkov</span>
-        </Link>
-        <Link to={Links.Kazakov} className={styles.ghLink}>
-          <img
-            src={gitLogo}
-            alt="gitLogo"
-            className={styles.ghLink__img}
-          />
-          <span className={styles.ghLink__name}>Maksim Kazakov</span>
-        </Link>
-        <Link to={Links.Luferov} className={styles.ghLink}>
-          <img
-            src={gitLogo}
-            alt="gitLogo"
-            className={styles.ghLink__img}
-          />
-          <span className={styles.ghLink__name}>Dmitriy Luferov</span>
-        </Link>
+        <div className={styles.links}>
+          {state.gitLinks.map(({
+            to, imgSrc, imgAlt, spanText,
+          }) => (
+            <FooterLink
+              to={to}
+              imgSrc={imgSrc}
+              imgAlt={imgAlt}
+              imgClassName={styles.ghLink__img}
+              linkClassName={styles.ghLink}
+              spanText={spanText}
+            />
+          ))}
+        </div>
+        <span className={styles.year}>Created in 2023</span>
       </div>
-      <span className={styles.year}>Created in 2023</span>
-    </div>
-  </footer>
-);
-
+    </footer>
+  );
+};
 export default Footer;
