@@ -72,7 +72,7 @@ export enum LengthMessages {
 }
 
 export enum PatternMessages {
-  Name = 'Name must contain only letters',
+  Name = 'Name must contain letters only',
   Email = 'Email must match email format',
   Password = `Password must contain at least: 
   1 lowercase alphabetical character, 
