@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FormInputItems, ValuesKey } from '../../../../types';
-import TripMap from '../tripMap';
+import TripMap from '../TripMap';
 import style from './TripForm.module.scss';
 
 const initialFormValues = {

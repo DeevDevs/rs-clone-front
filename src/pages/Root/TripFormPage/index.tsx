@@ -1,6 +1,6 @@
 import React from 'react';
-import TripForm from './tripForm';
-import style from './tripFormPage.module.scss';
+import TripForm from './TripForm';
+import style from './TripFormPage.module.scss';
 
 const TripFormPage = () => (
   <main className={style.tripPage}>

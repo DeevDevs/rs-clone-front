@@ -2,7 +2,7 @@ import React from 'react';
 import {
   YMaps, Map, Placemark, ZoomControl,
 } from '@pbe/react-yandex-maps';
-import style from './tripMap.module.scss';
+import style from './TripMap.module.scss';
 
 const TripMap = () => {
   const defaultState = {
