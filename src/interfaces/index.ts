@@ -1,3 +1,5 @@
+import { FooterImgAlts, Links } from '../enums';
+
 export interface SignUpLoginState {
   signUpLogin: {
     signUp: boolean
@@ -21,4 +23,13 @@ export interface SignUpFormData {
   LoginEmail: string,
   LoginPassword: string,
   RepeatPassword: string,
+}
+
+export interface FooterLinkInterface {
+  to: Links,
+  imgSrc: string | undefined,
+  imgAlt: FooterImgAlts,
+  linkClassName?: string,
+  imgClassName?: string,
+  spanText?: string,
 }

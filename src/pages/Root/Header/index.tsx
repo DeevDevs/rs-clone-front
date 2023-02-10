@@ -5,7 +5,7 @@ import { PagePath } from '../../../enums';
 
 const Header = () => (
   <header className={styles.header}>
-    <h2 className={styles.header__text}>Travel the world... travel the life!</h2>
+    <h1 className={styles.header__text}>Travel the world... travel the life!</h1>
     <div className={styles.links}>
       <NavLink
         to={PagePath.Root}

@@ -1,5 +1,5 @@
 import React from 'react';
-import SignUpLoginContainer from './signUpLoginContainer';
+import SignUpLoginContainer from './SignUpLoginContainer';
 
 const MainPage = () => (
   <main>

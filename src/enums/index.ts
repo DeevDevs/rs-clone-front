@@ -8,11 +8,29 @@ export enum PagePath {
   Error = '*',
 }
 
+export enum FooterImgAlts {
+  Logo = 'logo',
+  RsLogo = 'rsLogo',
+  GitLogo = 'gitLogo',
+}
+
+export enum DevelopersNames {
+  Vnuchkov = 'Dmitriy Vnuchkov',
+  Kazakov = 'Maksim Kazakov',
+  Luferov = 'Dmitriy Luferov',
+}
+
 export enum Links {
   Rs = 'https://rs.school/',
   Vnuchkov = 'https://github.com/DeevDevs',
   Kazakov = 'https://github.com/KazakovMaksim',
   Luferov = 'https://github.com/Luferov1',
+}
+
+export enum GitLinksKeys {
+  GitLink1 = 'gitLink1',
+  GitLink2 = 'gitLink2',
+  GitLink3 = 'gitLink3',
 }
 
 export enum SignUpInputsNames {
@@ -72,7 +90,7 @@ export enum LengthMessages {
 }
 
 export enum PatternMessages {
-  Name = 'Name must contain only letters',
+  Name = 'Name must contain letters only',
   Email = 'Email must match email format',
   Password = `Password must contain at least: 
   1 lowercase alphabetical character, 
