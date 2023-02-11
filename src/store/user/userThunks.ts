@@ -185,6 +185,7 @@ userTypes.TUploadImgReq,
 { rejectValue: userTypes.TDBMsg }
 >('addProfileImage', async (updData: userTypes.TUploadImgReq, thunkApi) => {
   const file = updData.files[0] as File;
+  if (!file) return thunkApi.rejectWithValue({ status: 'Uploading interrupted. File not found' });
   if (
     !file.name.endsWith('png')
     && !file.name.endsWith('jpg')
@@ -194,7 +195,7 @@ userTypes.TUploadImgReq,
   formData.set('set', '20130477ec7d5485cba138eb19349cbe');
   formData.append('image', file);
   const imgBBresponse = await fetch(
-    'https://api.imgbb.com/1/upload?expiration=259200&key=20130477ec7d5485cba138eb19349cbe',
+    'https://api.imgbb.com/1/upload?expiration=5000&key=20130477ec7d5485cba138eb19349cbe',
     {
       method: 'POST',
       body: formData,

@@ -9,7 +9,7 @@ async function sendUploadImagesRequest(files: FileList) {
       formData.set('set', '20130477ec7d5485cba138eb19349cbe');
       formData.append('image', file);
       const imgBBresponse = await fetch(
-        'https://api.imgbb.com/1/upload?expiration=1000&key=20130477ec7d5485cba138eb19349cbe',
+        'https://api.imgbb.com/1/upload?expiration=259200&key=20130477ec7d5485cba138eb19349cbe',
         {
           method: 'POST',
           body: formData,
