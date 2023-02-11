@@ -101,8 +101,7 @@ export const userSlice = createSlice({
     builder.addCase(userThunks.isLoggedIn.pending, (state) => {
       state.userMsg = 'Checking if logged in';
     });
-    builder.addCase(userThunks.getUser.fulfilled, (state, { payload }) => {
-      console.log(payload.data);
+    builder.addCase(userThunks.getUser.fulfilled, (state) => {
       state.userMsg = 'User data received';
     });
     builder.addCase(userThunks.getUser.rejected, (state, { payload }) => {

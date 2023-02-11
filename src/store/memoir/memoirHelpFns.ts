@@ -15,7 +15,6 @@ async function sendUploadImagesRequest(files: FileList) {
           body: formData,
         },
       );
-      console.log(imgBBresponse);
       if (imgBBresponse.status === 200) {
         const imageData: userTypes.TImgBBResp = await imgBBresponse.json();
         const imgURL: string = imageData.data.url;
@@ -52,7 +51,6 @@ export async function uploadMemoirImages(
       ? listWithoutDeletedPhotos
       : ['default.jpg'];
   }
-  console.log(files.length, files);
   const uploadImgPromises = await sendUploadImagesRequest(files);
   const listOfResolutions = await Promise.allSettled(uploadImgPromises);
   const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'default.jpg'));

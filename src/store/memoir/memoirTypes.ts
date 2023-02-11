@@ -41,6 +41,7 @@ export type TMemoir = {
 // Signup Data Objects
 
 export type TNewMemoirReq = {
+  userID: string;
   tripName: string;
   destinationName: string;
   longLat: number[];
