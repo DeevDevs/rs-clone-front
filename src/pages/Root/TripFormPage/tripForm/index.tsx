@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FormInputItems, ValuesKey } from '../../../../types';
+import Drag from '../DragZone';
 import TripMap from '../TripMap';
 import style from './TripForm.module.scss';
 
@@ -12,7 +13,17 @@ const initialFormValues = {
   sights: '',
 };
 
+type FileTransferObj = {
+  name: string,
+  type: string,
+  size: number,
+  src: string,
+};
+
 const TripForm = () => {
+  const initialPhotos: FileTransferObj[] = [];
+  const [photos, setPhotos] = useState(initialPhotos);
+
   const {
     register,
     formState: {
@@ -20,17 +31,20 @@ const TripForm = () => {
     },
     handleSubmit,
     reset,
-  } = useForm<FormInputItems>({ mode: 'onBlur' });
+  } = useForm<FormInputItems>({ mode: 'all' });
 
   const onSubmit: SubmitHandler<FormInputItems> = ((data) => {
-    console.log(data);
+    console.log('FORM DATA', data);
+    console.log('photosList', photos);
     reset();
   });
 
   const inputs = Object
     .keys(initialFormValues)
     .map((key: ValuesKey | string) => {
-      const { name, ref, onBlur } = register(key as ValuesKey, {
+      const {
+        name, ref, onBlur, onChange,
+      } = register(key as ValuesKey, {
         required: 'please, fill in the field',
       });
 
@@ -42,6 +56,7 @@ const TripForm = () => {
               name={name}
               ref={ref}
               onBlur={onBlur}
+              onChange={onChange}
             />
           </label>
           <div className={style['form-inputError']}>
@@ -51,15 +66,17 @@ const TripForm = () => {
       );
     });
 
-  const { name: nameArea, ref: refArea, onChange: onChangeArea } = register('description', {
+  const {
+    name: nameArea, ref: refArea, onChange: onChangeArea, onBlur: onBlurArea,
+  } = register('description', {
     required: 'please, fill in the field',
     maxLength: {
       value: 500,
       message: 'description must be no more than 500 characters',
     },
     minLength: {
-      value: 100,
-      message: 'description must be at least 100 characters',
+      value: 50,
+      message: 'description must be at least 50 characters',
     },
   });
 
@@ -101,6 +118,7 @@ const TripForm = () => {
         <input className={style['form-submit']} type="submit" value="Record this Memoir" />
       </div>
       <div className={style['form-rightSide']}>
+        <Drag photos={photos} setPhotos={setPhotos} />
         <h2 className={style['form-mapTitle']}>Describe your trip</h2>
         <textarea
           className={style['form-area']}
@@ -108,6 +126,7 @@ const TripForm = () => {
           name={nameArea}
           ref={refArea}
           onChange={onChangeArea}
+          onBlur={onBlurArea}
         />
         <div className={style['form-inputError']}>
           {errors.description && <p>{errors.description?.message || 'Error!'}</p>}

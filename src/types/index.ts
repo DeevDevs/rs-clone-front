@@ -13,6 +13,19 @@ export type FormInputItems = {
   description: string,
   dateFrom: Date;
   dateTo: Date;
+  inputFile: string,
 };
 
 export type ValuesKey = keyof FormInputItems;
+
+export type FileTransferObj = {
+  name: string,
+  type: string,
+  size: number,
+  src: string,
+};
+
+export type FileTransferProps = {
+  photos: FileTransferObj[],
+  setPhotos: (photos: FileTransferObj[]) => void
+};
