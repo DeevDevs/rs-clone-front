@@ -102,6 +102,7 @@ const TestPage = () => {
   };
 
   const tempNewMemoirData = {
+    userID: id,
     tripName: 'Lonesome October',
     destinationName: 'Tashkent',
     longLat: [23.090029, 105.399203],
@@ -133,18 +134,6 @@ const TestPage = () => {
     days: 10,
     sites: ['Palace', 'Market'],
   } as memoirTypes.TUpdMemoirReq;
-
-  // const tempIDsUpdStats = {
-  //   statsID,
-  //   memoirID: lastMemoirID,
-  //   condition: 'add',
-  // };
-
-  // const tempIDsUpdStatsToDelete = {
-  //   statsID,
-  //   memoirID: lastMemoirID,
-  //   condition: 'remove',
-  // };
 
   return (
     <>
@@ -208,7 +197,6 @@ const TestPage = () => {
         <button
           type="button"
           onClick={async () => {
-            console.log('BtnFnCalled');
             const inputField = document.getElementById(
               'file-upload',
             ) as HTMLInputElement;
@@ -231,7 +219,6 @@ const TestPage = () => {
       <button
         type="button"
         onClick={() => {
-          console.log(tempNewMemoirData);
           callbackCreateMemoir(tempNewMemoirData);
         }}
       >
@@ -243,14 +230,8 @@ const TestPage = () => {
       >
         Update Last Memoir
       </button>
-      {/* <button type="button" onClick={() => callbackUpdateStats(tempIDsUpdStats)}>
-        Update Stats After Creating or Updating a Memoir (MUST)
-      </button> */}
       <br />
       <br />
-      {/* <button type="button" onClick={() => callbackUpdateStats(tempIDsUpdStatsToDelete)}>
-        Also Update Stats BEFORE Deleting a Memoir (MUST)
-      </button> */}
       <button type="button" onClick={() => callbackDeleteMemoir(lastMemoirID)}>
         Delete Last Memoir
       </button>
