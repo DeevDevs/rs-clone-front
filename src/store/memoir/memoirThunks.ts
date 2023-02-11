@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as memoirTypes from './memoirTypes';
-import { uploadMemoirImages } from './memoirHelpFns';
+import { uploadMemoirImages, allFilesImages } from './memoirHelpFns';
 
 export const createNewMemoir = createAsyncThunk<
 memoirTypes.TMemoirResp,
@@ -10,6 +10,8 @@ memoirTypes.TNewMemoirReq,
   console.log(newUserData);
   const reqBody: memoirTypes.TNewMemoirReq = JSON.parse(JSON.stringify(newUserData));
   const reqFiles = newUserData.memoirPhotos as FileList;
+  const areFilesImages = allFilesImages(reqFiles);
+  if (!areFilesImages) return thunkApi.rejectWithValue({ status: 'Wrong file format' });
   const imgURLs = await uploadMemoirImages(reqFiles) as string[];
   reqBody.memoirPhotos = imgURLs;
   const response = await fetch('https://rs-clone-back.herokuapp.com/api/memoir/newMemoir', {
@@ -92,13 +94,14 @@ memoirTypes.TUpdMemoirReq,
     JSON.stringify(updateBody),
   );
   const reqFiles = updateBody.memoirPhotos as FileList;
+  const areFilesImages = allFilesImages(reqFiles);
+  if (!areFilesImages) return thunkApi.rejectWithValue({ status: 'Wrong file format' });
   const imgURLs = (await uploadMemoirImages(
     reqFiles,
     true,
     updateBody.prevPhotos,
     updateBody.photosToDelete,
   )) as string[];
-  console.log(imgURLs);
   reqBody.memoirPhotos = imgURLs;
   const response = await fetch(
     `https://rs-clone-back.herokuapp.com/api/memoir/updateMemoir?id=${updateBody.id}`,

@@ -57,10 +57,21 @@ export async function uploadMemoirImages(
   const listOfResolutions = await Promise.allSettled(uploadImgPromises);
   const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'default.jpg'));
   const updatedList = [...originalList, ...listOfURLs] as string[];
-  const listWithoutDeletedPhotos = updatedList.filter((url) => listToRemove.indexOf(url) < 0 || url !== 'default.jpg');
+  const listWithoutDeletedPhotos = updatedList.filter(
+    (url) => listToRemove.indexOf(url) < 0 || url !== 'default.jpg',
+  );
   return listWithoutDeletedPhotos;
 }
 
-export async function temp() {
-  return 0;
+export function allFilesImages(files: FileList) {
+  const arrayOfFiles = Array.from(files);
+  if (arrayOfFiles.length === 0) return true;
+  if (
+    arrayOfFiles.some(
+      (file) => !file.name.endsWith('png')
+      && !file.name.endsWith('jpg')
+      && !file.name.endsWith('webp'),
+    )
+  ) return false;
+  return true;
 }

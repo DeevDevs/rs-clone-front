@@ -184,9 +184,7 @@ userTypes.TUserDataResp,
 userTypes.TUploadImgReq,
 { rejectValue: userTypes.TDBMsg }
 >('addProfileImage', async (updData: userTypes.TUploadImgReq, thunkApi) => {
-  console.log('ThunkCalled');
   const file = updData.files[0] as File;
-  console.log(file.name.endsWith('png'));
   if (
     !file.name.endsWith('png')
     && !file.name.endsWith('jpg')
