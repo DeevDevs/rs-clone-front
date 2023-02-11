@@ -8,6 +8,7 @@ import {
   getUser,
   updateUser,
   deleteUser,
+  addProfileImage,
 } from '../../store/user/userThunks';
 import {
   createNewMemoir,
@@ -23,8 +24,13 @@ import * as memoirTypes from '../../store/memoir/memoirTypes';
 // import * as statsTypes from '../../store/stats/statsTypes';
 
 const TestPage = () => {
-  const { id, userMsg, statsID } = useAppSelector((state) => state.userReducer);
-  const { memoirMsg } = useAppSelector((state) => state.memoirReducer);
+  const {
+    id,
+    userMsg,
+    statsID,
+    photo,
+  } = useAppSelector((state) => state.userReducer);
+  const { memoirMsg, memoirPhotos } = useAppSelector((state) => state.memoirReducer);
   const lastMemoirID = useAppSelector((state) => state.memoirReducer).id;
   const { statsMsg } = useAppSelector((state) => state.statsReducer);
 
@@ -49,6 +55,9 @@ const TestPage = () => {
   }, []);
   const callbackUpdateUser = useCallback(async (userUpdData: userTypes.TUpdUserReq) => {
     await dispatchApp(updateUser(userUpdData));
+  }, []);
+  const callbackAddProfImage = useCallback(async (updData: userTypes.TUploadImgReq) => {
+    await dispatchApp(addProfileImage(updData));
   }, []);
   const callbackCreateMemoir = useCallback(async (memoirData: memoirTypes.TNewMemoirReq) => {
     await dispatchApp(createNewMemoir(memoirData));
@@ -100,11 +109,12 @@ const TestPage = () => {
     continentName: 'Asia',
     whereFromLongLat: [23.090029, 100.399203],
     distance: 239,
+    memoirPhotos: [],
     date: '2023-02-01T10:22:23.815Z',
     rateValue: 4,
     days: 7,
     sites: ['Palace', 'Market', 'Tower'],
-  };
+  } as memoirTypes.TNewMemoirReq;
 
   const tempMemoirDataUpd = {
     id: lastMemoirID,
@@ -117,9 +127,12 @@ const TestPage = () => {
     distance: 239,
     date: '2023-02-01T10:22:23.815Z',
     rateValue: 9,
+    prevPhotos: memoirPhotos,
+    photosToDelete: [memoirPhotos[0]],
+    memoirPhotos: [],
     days: 10,
     sites: ['Palace', 'Market'],
-  };
+  } as memoirTypes.TUpdMemoirReq;
 
   // const tempIDsUpdStats = {
   //   statsID,
@@ -187,10 +200,47 @@ const TestPage = () => {
       </button>
       <br />
       <br />
-      <button type="button" onClick={() => callbackCreateMemoir(tempNewMemoirData)}>
+      <p>
+        Чтобы добавить аватарку пользователю, добавьте фотку с помощью Choose
+        File, а затем нажмите Add User Avatar
+      </p>
+      <div>
+        <button
+          type="button"
+          onClick={async () => {
+            console.log('BtnFnCalled');
+            const inputField = document.getElementById(
+              'file-upload',
+            ) as HTMLInputElement;
+            if (inputField.files) {
+              const updBody = {
+                id,
+                files: inputField.files,
+              };
+              callbackAddProfImage(updBody);
+            }
+          }}
+        >
+          Add User Avatar
+        </button>
+        <input id="file-upload" type="file" />
+        <img src={photo} alt="" />
+      </div>
+      <br />
+      <br />
+      <button
+        type="button"
+        onClick={() => {
+          console.log(tempNewMemoirData);
+          callbackCreateMemoir(tempNewMemoirData);
+        }}
+      >
         Create Memoir
       </button>
-      <button type="button" onClick={() => callbackUpdateMemoir(tempMemoirDataUpd)}>
+      <button
+        type="button"
+        onClick={() => callbackUpdateMemoir(tempMemoirDataUpd)}
+      >
         Update Last Memoir
       </button>
       {/* <button type="button" onClick={() => callbackUpdateStats(tempIDsUpdStats)}>
@@ -216,6 +266,46 @@ const TestPage = () => {
       </button>
       <br />
       <br />
+      <p>
+        Если хотите создать мемуар с фотографиями, добавьте фотографии с помощью
+        Choose Files ниже, а затем нажмите Add Images to Memoir Object. Только
+        после этого можно нажать Create Memoir.
+      </p>
+      <p>
+        Если хотите добавить в мемуар новые фотографии, добавьте фотографии с
+        помощью Choose Files ниже, а затем нажмите Add Images to Memoir Update
+        Object. Только после этого можно нажать Update Last Memoir.
+      </p>
+      <div>
+        <button
+          type="button"
+          onClick={async () => {
+            const inputField = document.getElementById(
+              'file-upload2',
+            ) as HTMLInputElement;
+            if (inputField.files) {
+              tempNewMemoirData.memoirPhotos = inputField.files;
+            }
+          }}
+        >
+          Add Image to Memoir Object
+        </button>
+        <button
+          type="button"
+          onClick={async () => {
+            const inputField = document.getElementById(
+              'file-upload2',
+            ) as HTMLInputElement;
+            if (inputField.files) {
+              tempMemoirDataUpd.memoirPhotos = inputField.files;
+            }
+          }}
+        >
+          Add Image to Memoir Update Object
+        </button>
+        <input id="file-upload2" type="file" multiple />
+        {/* <img src={photo} alt="" /> */}
+      </div>
     </>
   );
 };
