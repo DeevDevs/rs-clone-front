@@ -31,6 +31,7 @@ const TripForm = () => {
     console.log('FORM DATA', data);
     console.log('photosList', photos);
     reset();
+    setPhotos([]);
   });
 
   const inputs = Object
