@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TripErrorMessages } from '../../../../enums';
 import { FileTransferObj, FileTransferProps } from '../../../../types';
 import style from './DragZone.module.scss';
 
@@ -96,7 +97,11 @@ const Drag = ({ photos, setPhotos } : FileTransferProps) => {
           {photos.length > 0 && photos
             .map((item, idx) => (
               <div
-                className={style.prev_img}
+                className={
+                  item.size * 9.537e-7 > 2
+                    ? `${style.prev_img} ${style.forbidden}`
+                    : style.prev_img
+                }
                 key={`${item.name + idx}`}
                 data-imgindex={idx}
               >
@@ -104,6 +109,14 @@ const Drag = ({ photos, setPhotos } : FileTransferProps) => {
                 <img src={item.src} alt={item.name} />
               </div>
             ))}
+        </div>
+        <div className={
+          photos.filter((photo) => photo.size * 9.537e-7 > 2).length
+            ? `${style.size_error} ${style.size_error__active}`
+            : style.size_error
+          }
+        >
+          {TripErrorMessages.MaxFileLength}
         </div>
       </div>
     </div>

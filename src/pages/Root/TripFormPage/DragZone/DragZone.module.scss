@@ -40,6 +40,7 @@
   }
   &_preview {
     display: flex;
+    align-items: center;
     overflow: auto;
     min-height: 120px;
     margin-top: 14px;
@@ -93,6 +94,17 @@
     }
   }
 }
-
-
+.forbidden {
+  border: 4px solid #ff0033;
+}
+.size_error {
+  font-size: 20px;
+  color: #ff0033;
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+  &__active {
+    visibility: visible;
+  }
+}
 

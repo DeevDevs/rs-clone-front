@@ -111,4 +111,5 @@ export enum TripErrorMessages {
   EndDate = 'please, fill in end date',
   FieldMinLength = 'description must be at least 50 characters',
   FieldMaxLength = 'description must be no more than 500 characters',
+  MaxFileLength = 'max file size is 2MB! Please, delete the highlighted file(s)',
 }
