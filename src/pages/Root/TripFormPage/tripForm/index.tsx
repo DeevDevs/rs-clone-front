@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { TripErrorMessages } from '../../../../enums';
 import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
 import Drag from '../DragZone';
 import TripMap from '../TripMap';
@@ -38,7 +39,7 @@ const TripForm = () => {
       const {
         name, ref, onBlur, onChange,
       } = register(key as ValuesKey, {
-        required: 'please, fill in the field',
+        required: TripErrorMessages.Field,
       });
 
       return (
@@ -63,22 +64,22 @@ const TripForm = () => {
   const {
     name: nameArea, ref: refArea, onChange: onChangeArea, onBlur: onBlurArea,
   } = register('description', {
-    required: 'please, fill in the field',
+    required: TripErrorMessages.Field,
     maxLength: {
       value: 500,
-      message: 'description must be no more than 500 characters',
+      message: TripErrorMessages.FieldMaxLength,
     },
     minLength: {
       value: 50,
-      message: 'description must be at least 50 characters',
+      message: TripErrorMessages.FieldMinLength,
     },
   });
 
   const { name: nameDateFrom, ref: refDateFrom, onChange: onChangeDateFrom } = register('dateFrom', {
-    required: 'please, fill in start date',
+    required: TripErrorMessages.StartDate,
   });
   const { name: nameDateTo, ref: refDateTo, onChange: onChangeDateTo } = register('dateTo', {
-    required: 'please, fill in end date',
+    required: TripErrorMessages.EndDate,
   });
 
   return (

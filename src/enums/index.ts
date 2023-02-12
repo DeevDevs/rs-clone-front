@@ -104,3 +104,11 @@ export enum ValidationTypes {
   MinLength = 'minLength',
   Pattern = 'pattern',
 }
+
+export enum TripErrorMessages {
+  Field = 'please, fill in the field',
+  StartDate = 'please, fill in start date',
+  EndDate = 'please, fill in end date',
+  FieldMinLength = 'description must be at least 50 characters',
+  FieldMaxLength = 'description must be no more than 500 characters',
+}
