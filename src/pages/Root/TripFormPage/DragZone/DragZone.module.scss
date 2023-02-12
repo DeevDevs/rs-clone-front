@@ -1,7 +1,7 @@
 @use "../../../../sass/index";
 
 .file {
-  &-upload {
+  &_upload {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
     border-radius: 5px;
     border: 2px solid index.$very-dark-blue;
   }
-  &-dropArea {
+  &_dropArea {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,13 +38,13 @@
       color: index.$very-dark-blue;
     }
   }
-  &-preview {
+  &_preview {
     display: flex;
     overflow: auto;
     min-height: 120px;
     margin-top: 14px;
     gap: 10px;
-    & .prev-img {
+    & .prev_img {
       min-width: 100px;
       width: 100px;
       min-height: 100px;

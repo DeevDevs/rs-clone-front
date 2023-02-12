@@ -54,7 +54,7 @@ const TripForm = () => {
               placeholder={`${key} name`}
             />
           </label>
-          <div className={style['form-inputError']}>
+          <div className={style.form_inputError}>
             {errors[name] && <span className={style.error}>{errors[name]?.message || 'Error!'}</span>}
           </div>
         </div>
@@ -84,46 +84,46 @@ const TripForm = () => {
 
   return (
     <form id="tripForm" className={style.form} onSubmit={handleSubmit(onSubmit)}>
-      <div className={style['form-leftSide']}>
+      <div className={style.form_leftSide}>
         {inputs}
-        <div className={style['form-sightBox']} />
-        <h2 className={style['form-mapTitle']}>Show us where you arrived from</h2>
+        <div className={style.form_sightBox} />
+        <h2 className={style.form_mapTitle}>Show us where you arrived from</h2>
         <div className={style.map}>
           <TripMap />
         </div>
-        <div className={style['form-date']}>
+        <div className={style.form_date}>
           <div>
             <span>
               Trip duration
             </span>
             <div>
               <input type="date" name={nameDateFrom} ref={refDateFrom} onChange={onChangeDateFrom} />
-              <div className={style['form-inputError']}>
+              <div className={style.form_inputError}>
                 {errors.dateFrom && <span className={style.error}>{errors.dateFrom?.message || 'Error!'}</span>}
               </div>
             </div>
             <div>
               <input type="date" name={nameDateTo} ref={refDateTo} onChange={onChangeDateTo} />
-              <div className={style['form-inputError']}>
+              <div className={style.form_inputError}>
                 {errors.dateTo && <span className={style.error}>{errors.dateTo?.message || 'Error!'}</span>}
               </div>
             </div>
           </div>
         </div>
-        <input className={style['form-submit']} type="submit" value="Record this Memoir" />
+        <input className={style.form_submit} type="submit" value="Record this Memoir" />
       </div>
-      <div className={style['form-rightSide']}>
+      <div className={style.form_rightSide}>
         <Drag photos={photos} setPhotos={setPhotos} />
-        <h2 className={style['form-mapTitle']}>Describe your trip</h2>
+        <h2 className={style.form_mapTitle}>Describe your trip</h2>
         <textarea
-          className={style['form-area']}
+          className={style.form_area}
           form="tripForm"
           name={nameArea}
           ref={refArea}
           onChange={onChangeArea}
           onBlur={onBlurArea}
         />
-        <div className={style['form-inputError']}>
+        <div className={style.form_inputError}>
           {errors.description && <span className={style.error}>{errors.description?.message || 'Error!'}</span>}
         </div>
       </div>

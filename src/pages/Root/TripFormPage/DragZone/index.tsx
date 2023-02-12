@@ -68,13 +68,13 @@ const Drag = ({ photos, setPhotos } : FileTransferProps) => {
   };
 
   return (
-    <div className={style['file-upload']}>
+    <div className={style.file_upload}>
       <div>
         <div
           className={
             highLight
-              ? `${style['file-dropArea']} ${style.highLight}`
-              : style['file-dropArea']
+              ? `${style.file_dropArea} ${style.highLight}`
+              : style.file_dropArea
           }
           onDragEnter={handleHighLight}
           onDragOver={handleHighLight}
@@ -92,11 +92,11 @@ const Drag = ({ photos, setPhotos } : FileTransferProps) => {
             />
           </label>
         </div>
-        <div className={style['file-preview']}>
+        <div className={style.file_preview}>
           {photos.length > 0 && photos
             .map((item, idx) => (
               <div
-                className={style['prev-img']}
+                className={style.prev_img}
                 key={`${item.name + idx}`}
                 data-imgindex={idx}
               >
