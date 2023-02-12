@@ -1,23 +1,16 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { FormInputItems, ValuesKey } from '../../../../types';
+import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
 import Drag from '../DragZone';
 import TripMap from '../TripMap';
 import style from './TripForm.module.scss';
 
 const initialFormValues = {
   memoir: '',
-  place: '',
+  destination: '',
   country: '',
-  worldPart: '',
-  sights: '',
-};
-
-type FileTransferObj = {
-  name: string,
-  type: string,
-  size: number,
-  src: string,
+  continent: '',
+  sites: '',
 };
 
 const TripForm = () => {
@@ -57,10 +50,11 @@ const TripForm = () => {
               ref={ref}
               onBlur={onBlur}
               onChange={onChange}
+              placeholder={`${key} name`}
             />
           </label>
           <div className={style['form-inputError']}>
-            {errors[name] && <p>{errors[name]?.message || 'Error!'}</p>}
+            {errors[name] && <span className={style.error}>{errors[name]?.message || 'Error!'}</span>}
           </div>
         </div>
       );
@@ -99,18 +93,18 @@ const TripForm = () => {
         <div className={style['form-date']}>
           <div>
             <span>
-              Trip Duration
+              Trip duration
             </span>
             <div>
               <input type="date" name={nameDateFrom} ref={refDateFrom} onChange={onChangeDateFrom} />
               <div className={style['form-inputError']}>
-                {errors.dateFrom && <p>{errors.dateFrom?.message || 'Error!'}</p>}
+                {errors.dateFrom && <span className={style.error}>{errors.dateFrom?.message || 'Error!'}</span>}
               </div>
             </div>
             <div>
               <input type="date" name={nameDateTo} ref={refDateTo} onChange={onChangeDateTo} />
               <div className={style['form-inputError']}>
-                {errors.dateTo && <p>{errors.dateTo?.message || 'Error!'}</p>}
+                {errors.dateTo && <span className={style.error}>{errors.dateTo?.message || 'Error!'}</span>}
               </div>
             </div>
           </div>
@@ -129,7 +123,7 @@ const TripForm = () => {
           onBlur={onBlurArea}
         />
         <div className={style['form-inputError']}>
-          {errors.description && <p>{errors.description?.message || 'Error!'}</p>}
+          {errors.description && <span className={style.error}>{errors.description?.message || 'Error!'}</span>}
         </div>
       </div>
     </form>

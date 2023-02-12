@@ -36,7 +36,12 @@
     border: 2px solid index.$very-dark-blue;
     border-radius: 10px; 
     width: 100%;
-    padding: 0 5px 0 5px;
+    padding: 0 10px 10px 10px;
+    &::placeholder {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+    }
   }
   &-sightBox {
     height: 170px;
@@ -103,4 +108,7 @@ input[type="date" i] {
   letter-spacing: 2px;
   @include index.font(normal, 400, 25px, 37px);
   padding: 0 5px 0 5px;
+}
+.error {
+  color: #ff0033;
 }
