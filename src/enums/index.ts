@@ -113,3 +113,15 @@ export enum TripErrorMessages {
   FieldMaxLength = 'description must be no more than 500 characters',
   MaxFileLength = 'max file size is 2MB! Please, delete the highlighted file(s)',
 }
+
+export enum StatisticsItemsText {
+  Places = 'Places visited',
+  Satisfaction = 'Satisfaction level',
+  Sites = 'Sites seen',
+}
+
+export enum StatisticsItemsKeys {
+  StatisticsItem1 = 'statisticsItem1',
+  StatisticsItem2 = 'statisticsItem2',
+  StatisticsItem3 = 'statisticsItem3',
+}

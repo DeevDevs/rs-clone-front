@@ -1,0 +1,25 @@
+@use "src/sass/index" as basics;
+
+.container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 100px;
+  width: 100%;
+}
+
+.text {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 37px;
+  color: basics.$black;
+}
+
+.number {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 32.5%;
+  font-size: 42px;
+  line-height: 48px;
+}

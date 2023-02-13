@@ -29,6 +29,7 @@ const Header = () => (
           alt="user-img"
         />
       </NavLink>
+      <NavLink to="test">Test</NavLink>
     </div>
   </header>
 );
