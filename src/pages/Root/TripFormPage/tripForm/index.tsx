@@ -1,7 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { TripErrorMessages } from '../../../../enums';
-import { useAppDispatch } from '../../../../store';
+import { useAppDispatch, useAppSelector } from '../../../../store';
+import { createNewMemoir } from '../../../../store/memoir/memoirThunks';
+import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
 import { isLoggedIn } from '../../../../store/user/userThunks';
 import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
 import Drag from '../DragZone';
@@ -36,9 +38,32 @@ const TripForm = () => {
   }, []);
   // Auth
 
+  // createNewMemoir
+  const { id } = useAppSelector((state) => state.userReducer);
+  const tempNewMemoirData = {
+    userID: id,
+    tripName: 'Lonesome October',
+    destinationName: 'Tashkent',
+    longLat: [23.090029, 105.399203],
+    countryName: 'Uzb',
+    continentName: 'Asia',
+    whereFromLongLat: [23.090029, 100.399203],
+    distance: 239,
+    memoirPhotos: [],
+    date: '2023-02-01T10:22:23.815Z',
+    rateValue: 4,
+    days: 7,
+    sites: ['Palace', 'Market', 'Tower'],
+  } as TNewMemoirReq;
+  const callbackCreateMemoir = useCallback(async (memoirData: TNewMemoirReq) => {
+    await dispatchApp(createNewMemoir(memoirData));
+  }, []);
+  // createNewMemoir
+
   const onSubmit: SubmitHandler<FormInputItems> = ((data) => {
     console.log('FORM DATA', data);
     console.log('photosList', photos);
+    callbackCreateMemoir(tempNewMemoirData);
     reset();
     setPhotos([]);
   });
