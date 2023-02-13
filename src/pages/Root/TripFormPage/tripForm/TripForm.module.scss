@@ -68,6 +68,12 @@
       justify-content: flex-start;
     }
   }
+  &_statistic {
+    padding-top: 70px;
+    &>div>span {
+      font-weight: 400;
+    }
+  }
   &_area {
     height: 558px;
     width: 100%;

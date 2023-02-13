@@ -3,7 +3,7 @@ import { TripErrorMessages } from '../../../../enums';
 import { FileTransferObj, FileTransferProps } from '../../../../types';
 import style from './DragZone.module.scss';
 
-const Drag = ({ photos, setPhotos } : FileTransferProps) => {
+const DragZone = ({ photos, setPhotos } : FileTransferProps) => {
   const [highLight, setHighLight] = useState(false);
 
   const handleFiles = (files: FileList) => {
@@ -123,4 +123,4 @@ const Drag = ({ photos, setPhotos } : FileTransferProps) => {
   );
 };
 
-export default Drag;
+export default DragZone;
