@@ -1,0 +1,198 @@
+@use 'src/sass/index' as basics;
+
+// font-family: 'Comic Neue', cursive;
+// font-family: 'Julee', cursive;
+
+.userdata {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.datablock {
+  display: flex;
+  flex-direction: row;
+  min-height: 120px;
+
+  &_name {
+    width: 100px;
+    height: 30px;
+    margin: auto 0 auto 10px;
+    font-family: 'Julee', cursive;
+    font-weight: 700;
+    font-size: 28px;
+  }
+
+  &_button {
+    outline: none;
+    font-family: 'Comic Neue', cursive;
+    border: none;
+    font-weight: 600;
+    font-size: 19px;
+    background-color: transparent;
+    height: 30px;
+    margin: auto 0 auto 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  &_fieldbox {
+    margin: auto 0;
+  }
+}
+
+.datablockbio {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  min-height: 120px;
+  margin-top: 60px;
+
+  &_name {
+    width: 100px;
+    height: 30px;
+    margin: 0 0 auto 10px;
+    font-family: 'Julee', cursive;
+    font-weight: 700;
+    font-size: 28px;
+  }
+
+  &_button {
+    outline: none;
+    font-family: 'Comic Neue', cursive;
+    border: none;
+    font-weight: 600;
+    font-size: 19px;
+    background-color: transparent;
+    height: 30px;
+    margin: 0 0 auto 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  &_fieldbox {
+    margin: auto 0;
+  }
+}
+
+.field_content {
+  height: 30px;
+  min-width: 450px;
+  font-family: 'Comic Neue', cursive;
+  font-size: 28px;
+  margin-left: 40px;
+}
+
+.field_input {
+  height: 30px;
+  margin-left: 30px;
+  min-width: 450px;
+  border: none;
+  padding-left: 8px;
+  font-family: 'Comic Neue', cursive;
+  font-size: 22px;
+  border: 1px solid #84ceeb;
+  border-radius: 6px;
+}
+
+.afb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30px;
+  min-width: 450px;
+
+  &_date {
+    height: 30px;
+    width: 170px;
+    border: none;
+    height: 30px;
+    background-color: white;
+    padding-left: 8px;
+    font-family: 'Comic Neue', cursive;
+    font-size: 22px;
+    border: 1px solid #84ceeb;
+    border-radius: 6px;
+  }
+
+  &_age {
+    height: 30px;
+    width: 110px;
+    border: none;
+    margin-right: 40px;
+    background-color: white;
+    padding-left: 8px;
+    font-family: 'Comic Neue', cursive;
+    font-size: 22px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    border: 1px solid #84ceeb;
+    border-radius: 6px;
+  }
+
+  &_datename {
+    font-family: 'Julee', cursive;
+    font-weight: 700;
+    font-size: 28px;
+    margin-right: 10px;
+  }
+}
+
+.field_biocontent {
+  padding-left: 8px;
+  padding-top: 10px;
+  height: 126px;
+  min-width: 452px;
+  margin: 0px 0px 5px 30px;
+  font-family: 'Comic Neue', cursive;
+  font-size: 18px;
+}
+
+.field_bioinput {
+  height: 120px;
+  min-width: 452px;
+  padding: 0px;
+  border: none;
+  margin: 0px 0px 5px 30px;
+  padding-left: 8px;
+  padding-top: 10px;
+  font-family: 'Comic Neue', cursive;
+  font-size: 18px;
+  border: 1px solid #84ceeb;
+  border-radius: 6px;
+}
+
+.hidden {
+  display: none;
+}
+
+.btnBox {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 20px 20px auto;
+
+  &_btn {
+    background-color: aquamarine;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.208);
+    }
+  }
+}
+
+.btn_inactive {
+  background-color: gainsboro;
+  border: none;
+  cursor: default;
+}
