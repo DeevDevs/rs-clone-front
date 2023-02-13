@@ -1,4 +1,5 @@
-import { FooterImgAlts, Links } from '../enums';
+import { FooterImgAlts, Links, StatisticsItemsText } from '../enums';
+import { StatsArrays } from '../store/stats/statsTypes';
 
 export interface SignUpLoginState {
   signUpLogin: {
@@ -32,4 +33,25 @@ export interface FooterLinkInterface {
   linkClassName?: string,
   imgClassName?: string,
   spanText?: string,
+}
+
+export interface StatisticsPlacesInterface {
+  places: number,
+  satisfaction: number,
+  sites: number,
+}
+
+export interface StatisticsItemInterface {
+  mark: number,
+  maximum: number,
+  text: StatisticsItemsText,
+}
+
+export interface KilometersInterface {
+  distance: number,
+}
+
+export interface PlacesInterface {
+  continents: StatsArrays[],
+  countries: StatsArrays[],
 }
