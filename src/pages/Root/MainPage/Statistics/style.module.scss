@@ -1,0 +1,24 @@
+@use "src/sass" as *;
+
+.statistics {
+  width: 100%;
+  background-color: $medium-blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 64px;
+}
+
+.header {
+  color: $black;
+  font-size: 52px;
+  line-height: 77px;
+}
+
+.info {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
