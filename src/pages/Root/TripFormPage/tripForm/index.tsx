@@ -5,7 +5,6 @@ import { getFile } from '../../../../functions';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { createNewMemoir } from '../../../../store/memoir/memoirThunks';
 import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
-import { isLoggedIn } from '../../../../store/user/userThunks';
 import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
 import Drag from '../DragZone';
 import TripMap from '../TripMap';
@@ -32,14 +31,8 @@ const TripForm = () => {
     reset,
   } = useForm<FormInputItems>({ mode: 'all' });
 
-  // Auth
-  const dispatchApp = useAppDispatch();
-  const callbackIsLoggedIn = useCallback(async () => {
-    await dispatchApp(isLoggedIn());
-  }, []);
-  // Auth
-
   // createNewMemoir
+  const dispatchApp = useAppDispatch();
   const { id } = useAppSelector((state) => state.userReducer);
   const tempNewMemoirData = {
     userID: id,
@@ -141,11 +134,7 @@ const TripForm = () => {
     <form id="tripForm" className={style.form} onSubmit={handleSubmit(onSubmit)}>
       <div className={style.form_leftSide}>
         {inputs}
-        <div className={style.form_sightBox}>
-          <button type="button" onClick={() => callbackIsLoggedIn()}>
-            IsLoggedIn
-          </button>
-        </div>
+        <div className={style.form_sightBox} />
         <h2 className={style.form_mapTitle}>Show us where you arrived from</h2>
         <div className={style.map}>
           <TripMap />
