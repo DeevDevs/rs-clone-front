@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { TripErrorMessages } from '../../../../enums';
+import { getFile } from '../../../../functions';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { createNewMemoir } from '../../../../store/memoir/memoirThunks';
 import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
@@ -73,15 +74,6 @@ const TripForm = () => {
     tempNewMemoirData.days = duration;
   };
   // createNewMemoir
-
-  // Create Blob
-  const getFile = async (fileInfo: FileTransferObj) => {
-    const blob = await (
-      await fetch(fileInfo.src)).blob();
-    const fileTest = new File([blob], fileInfo.name, { type: fileInfo.type });
-    return fileTest;
-  };
-  // Create Blob
 
   const onSubmit: SubmitHandler<FormInputItems> = (async (data) => {
     const promises = await Promise.allSettled(photos.map(getFile));
