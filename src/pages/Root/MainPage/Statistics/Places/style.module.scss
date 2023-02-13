@@ -1,0 +1,34 @@
+@use "src/sass/index" as basics;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-self: flex-start;
+}
+
+.countries, .continents {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.countries {
+  margin-bottom: 20px;
+}
+
+.text {
+  width: 100%;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 37px;
+  color: basics.$black;
+  text-align: center;
+}
+
+.name {
+  font-size: 26px;
+  line-height: 38px;
+  color: basics.$purple;
+}
