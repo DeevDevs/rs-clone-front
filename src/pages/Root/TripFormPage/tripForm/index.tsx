@@ -78,9 +78,9 @@ const TripForm = () => {
   // createNewMemoir
 
   const onSubmit: SubmitHandler<FormInputItems> = (async (data) => {
-    const promises = await Promise.allSettled(photos.map(getFile));
+    const filesFromDropZone = await Promise.allSettled(photos.map(getFile));
     const dt = new DataTransfer();
-    promises.forEach((item) => {
+    filesFromDropZone.forEach((item) => {
       if (item.status === 'fulfilled') { dt.items.add(item.value); }
     });
     tempNewMemoirData.memoirPhotos = dt.files;
