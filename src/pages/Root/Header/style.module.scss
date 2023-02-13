@@ -11,6 +11,7 @@
 .header__text {
   color: $black;
   @include font(normal, 400, 42px, 49px);
+  font-family: 'Julee', cursive;
 }
 
 .links {
@@ -31,6 +32,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Finger Paint', cursive;
 }
 
 .button_active {
