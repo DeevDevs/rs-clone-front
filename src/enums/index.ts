@@ -104,3 +104,15 @@ export enum ValidationTypes {
   MinLength = 'minLength',
   Pattern = 'pattern',
 }
+
+export enum StatisticsItemsText {
+  Places = 'Places visited',
+  Satisfaction = 'Satisfaction level',
+  Sites = 'Sites seen',
+}
+
+export enum StatisticsItemsKeys {
+  StatisticsItem1 = 'statisticsItem1',
+  StatisticsItem2 = 'statisticsItem2',
+  StatisticsItem3 = 'statisticsItem3',
+}
