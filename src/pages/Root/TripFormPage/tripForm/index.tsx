@@ -79,16 +79,17 @@ const TripForm = () => {
     const blob = await (
       await fetch(fileInfo.src)).blob();
     const fileTest = new File([blob], fileInfo.name, { type: fileInfo.type });
-    console.log('file ready', fileTest);
     return fileTest;
   };
   // Create Blob
 
   const onSubmit: SubmitHandler<FormInputItems> = (async (data) => {
-    // console.log('FORM DATA', data);
-    // console.log('photosList', photos);
-    const fileList = await photos.map((photo) => getFile(photo));
-    console.log('fileList', fileList);
+    const promises = await Promise.allSettled(photos.map(getFile));
+    const dt = new DataTransfer();
+    promises.forEach((item) => {
+      if (item.status === 'fulfilled') { dt.items.add(item.value); }
+    });
+    tempNewMemoirData.memoirPhotos = dt.files;
     addFieldsFromForm(data);
     callbackCreateMemoir(tempNewMemoirData);
     reset();
