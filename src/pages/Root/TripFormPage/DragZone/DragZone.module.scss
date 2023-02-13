@@ -45,6 +45,15 @@
     min-height: 120px;
     margin-top: 14px;
     gap: 10px;
+    &::-webkit-scrollbar {
+      height: 8px;
+      background-color: index.$very-dark-blue;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: index.$dark-blue;
+      border-radius: 9em;
+    }
     & .prev_img {
       min-width: 100px;
       width: 100px;
