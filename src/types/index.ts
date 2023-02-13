@@ -27,5 +27,11 @@ export type FileTransferObj = {
 
 export type FileTransferProps = {
   photos: FileTransferObj[],
-  setPhotos: (photos: FileTransferObj[]) => void
+  setPhotos: (photos: FileTransferObj[]) => void,
+};
+
+export type TripSelectProp = {
+  values: string[],
+  selectedVal: number,
+  handleChange: React.Dispatch<React.SetStateAction<number>>,
 };

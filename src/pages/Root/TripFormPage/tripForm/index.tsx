@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { TripErrorMessages } from '../../../../enums';
+import StatisticItem from '../../../../components/StatisticItem';
+import { StatisticsItemsText, TripErrorMessages } from '../../../../enums';
 import { getFile } from '../../../../functions';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { createNewMemoir } from '../../../../store/memoir/memoirThunks';
@@ -8,6 +9,7 @@ import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
 import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
 import Drag from '../DragZone';
 import TripMap from '../TripMap';
+import TripSelect from '../TripSelect/TripSelect';
 import style from './TripForm.module.scss';
 
 const initialFormValues = {
@@ -18,9 +20,15 @@ const initialFormValues = {
   sites: '',
 };
 
+const satisfaction = {
+  maximum: 10,
+  text: StatisticsItemsText.Satisfaction,
+};
+
 const TripForm = () => {
   const initialPhotos: FileTransferObj[] = [];
   const [photos, setPhotos] = useState(initialPhotos);
+  const [rateValue, setRateValue] = useState(5);
 
   const {
     register,
@@ -64,6 +72,7 @@ const TripForm = () => {
     tempNewMemoirData.continentName = formData.continent;
     tempNewMemoirData.sites = formData.sites.split(' ');
     tempNewMemoirData.date = formData.dateFrom;
+    tempNewMemoirData.rateValue = rateValue;
     tempNewMemoirData.days = duration;
   };
   // createNewMemoir
@@ -79,6 +88,7 @@ const TripForm = () => {
     callbackCreateMemoir(tempNewMemoirData);
     reset();
     setPhotos([]);
+    setRateValue(5);
   });
 
   const inputs = Object
@@ -162,6 +172,18 @@ const TripForm = () => {
       </div>
       <div className={style.form_rightSide}>
         <Drag photos={photos} setPhotos={setPhotos} />
+        <div className={style.form_statistic}>
+          <StatisticItem
+            mark={rateValue}
+            maximum={satisfaction.maximum}
+            text={satisfaction.text}
+          />
+          <TripSelect
+            values={[...new Array(10)].map((el, idx) => String(idx + 1))}
+            handleChange={setRateValue}
+            selectedVal={rateValue}
+          />
+        </div>
         <h2 className={style.form_mapTitle}>Describe your trip</h2>
         <textarea
           className={style.form_area}
