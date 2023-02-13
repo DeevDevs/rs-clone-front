@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { TripErrorMessages } from '../../../../enums';
+import { useAppDispatch } from '../../../../store';
+import { isLoggedIn } from '../../../../store/user/userThunks';
 import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
 import Drag from '../DragZone';
 import TripMap from '../TripMap';
@@ -26,6 +28,13 @@ const TripForm = () => {
     handleSubmit,
     reset,
   } = useForm<FormInputItems>({ mode: 'all' });
+
+  // Auth
+  const dispatchApp = useAppDispatch();
+  const callbackIsLoggedIn = useCallback(async () => {
+    await dispatchApp(isLoggedIn());
+  }, []);
+  // Auth
 
   const onSubmit: SubmitHandler<FormInputItems> = ((data) => {
     console.log('FORM DATA', data);
@@ -87,7 +96,11 @@ const TripForm = () => {
     <form id="tripForm" className={style.form} onSubmit={handleSubmit(onSubmit)}>
       <div className={style.form_leftSide}>
         {inputs}
-        <div className={style.form_sightBox} />
+        <div className={style.form_sightBox}>
+          <button type="button" onClick={() => callbackIsLoggedIn()}>
+            IsLoggedIn
+          </button>
+        </div>
         <h2 className={style.form_mapTitle}>Show us where you arrived from</h2>
         <div className={style.map}>
           <TripMap />
