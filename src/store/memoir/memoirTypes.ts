@@ -15,7 +15,7 @@ export type TDBMemoir = {
   rateValue: number;
   days: number;
   sites: string[];
-  memoirPhoto: string;
+  memoirPhotos: string[];
   description: string;
 };
 
@@ -32,7 +32,7 @@ export type TMemoir = {
   rateValue: number;
   days: number;
   sites: string[];
-  memoirPhoto: string;
+  memoirPhotos: string[];
   description: string;
   memoirMsg: string | null;
   previews: TMemoirPreview[];
@@ -41,6 +41,7 @@ export type TMemoir = {
 // Signup Data Objects
 
 export type TNewMemoirReq = {
+  userID: string;
   tripName: string;
   destinationName: string;
   longLat: number[];
@@ -48,6 +49,7 @@ export type TNewMemoirReq = {
   continentName: string;
   whereFromLongLat: number[];
   distance: number;
+  memoirPhotos?: FileList | string[];
   date: string;
   rateValue: number;
   days: number;
@@ -71,6 +73,9 @@ export type TUpdMemoirReq = {
   whereFromLongLat?: number[];
   distance?: number;
   date?: string;
+  prevPhotos: string[];
+  photosToDelete: string[];
+  memoirPhotos?: FileList | string[];
   rateValue?: number;
   days?: number;
   sites?: string[];

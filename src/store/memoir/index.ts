@@ -17,7 +17,7 @@ const initialState: memoirTypes.TMemoir = {
   rateValue: 0,
   days: 0,
   sites: [],
-  memoirPhoto: '',
+  memoirPhotos: ['default.jpg'],
   description: '',
   memoirMsg: null,
   previews: [],
@@ -42,7 +42,7 @@ export const memoirSlice = createSlice({
       state.rateValue = newMemoir.rateValue;
       state.days = newMemoir.days;
       state.sites = newMemoir.sites;
-      state.memoirPhoto = newMemoir.memoirPhoto;
+      state.memoirPhotos = newMemoir.memoirPhotos;
       state.description = newMemoir.description;
       state.memoirMsg = 'New Memoir was created';
     });
@@ -66,7 +66,7 @@ export const memoirSlice = createSlice({
       state.rateValue = newMemoir.rateValue;
       state.days = newMemoir.days;
       state.sites = newMemoir.sites;
-      state.memoirPhoto = newMemoir.memoirPhoto;
+      state.memoirPhotos = newMemoir.memoirPhotos;
       state.description = newMemoir.description;
       state.memoirMsg = 'A Memoir was retrieved';
     });
@@ -89,7 +89,7 @@ export const memoirSlice = createSlice({
       state.rateValue = 0;
       state.days = 0;
       state.sites = [];
-      state.memoirPhoto = '';
+      state.memoirPhotos = ['default.jpg'];
       state.description = '';
       state.memoirMsg = 'Memoir was deleted';
     });
@@ -113,7 +113,7 @@ export const memoirSlice = createSlice({
       state.rateValue = newMemoir.rateValue;
       state.days = newMemoir.days;
       state.sites = newMemoir.sites;
-      state.memoirPhoto = newMemoir.memoirPhoto;
+      state.memoirPhotos = newMemoir.memoirPhotos;
       state.description = newMemoir.description;
       state.memoirMsg = 'A Memoir was updated';
     });
