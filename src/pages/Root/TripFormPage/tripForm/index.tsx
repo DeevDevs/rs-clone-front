@@ -74,9 +74,21 @@ const TripForm = () => {
   };
   // createNewMemoir
 
-  const onSubmit: SubmitHandler<FormInputItems> = ((data) => {
+  // Create Blob
+  const getFile = async (fileInfo: FileTransferObj) => {
+    const blob = await (
+      await fetch(fileInfo.src)).blob();
+    const fileTest = new File([blob], fileInfo.name, { type: fileInfo.type });
+    console.log('file ready', fileTest);
+    return fileTest;
+  };
+  // Create Blob
+
+  const onSubmit: SubmitHandler<FormInputItems> = (async (data) => {
     // console.log('FORM DATA', data);
     // console.log('photosList', photos);
+    const fileList = await photos.map((photo) => getFile(photo));
+    console.log('fileList', fileList);
     addFieldsFromForm(data);
     callbackCreateMemoir(tempNewMemoirData);
     reset();
