@@ -58,11 +58,26 @@ const TripForm = () => {
   const callbackCreateMemoir = useCallback(async (memoirData: TNewMemoirReq) => {
     await dispatchApp(createNewMemoir(memoirData));
   }, []);
+  const addFieldsFromForm = (formData:FormInputItems): void => {
+    const dateTo = new Date(formData.dateTo);
+    const dateFrom = new Date(formData.dateFrom);
+    const diffHours = +new Date(+dateTo - +dateFrom) / 36e5;
+    const duration = Math.floor(diffHours / 24);
+
+    tempNewMemoirData.tripName = formData.memoir;
+    tempNewMemoirData.destinationName = formData.destination;
+    tempNewMemoirData.countryName = formData.country;
+    tempNewMemoirData.continentName = formData.continent;
+    tempNewMemoirData.sites = formData.sites.split(' ');
+    tempNewMemoirData.date = formData.dateFrom;
+    tempNewMemoirData.days = duration;
+  };
   // createNewMemoir
 
   const onSubmit: SubmitHandler<FormInputItems> = ((data) => {
-    console.log('FORM DATA', data);
-    console.log('photosList', photos);
+    // console.log('FORM DATA', data);
+    // console.log('photosList', photos);
+    addFieldsFromForm(data);
     callbackCreateMemoir(tempNewMemoirData);
     reset();
     setPhotos([]);

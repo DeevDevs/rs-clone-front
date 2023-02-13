@@ -6,13 +6,13 @@ export type WrapperProps = {
 
 export type FormInputItems = {
   memoir: string,
-  place: string,
+  destination: string,
   country: string,
-  worldPart: string,
-  sight: string,
+  continent: string,
+  sites: string,
   description: string,
-  dateFrom: Date;
-  dateTo: Date;
+  dateFrom: string;
+  dateTo: string;
   inputFile: string,
 };
 
