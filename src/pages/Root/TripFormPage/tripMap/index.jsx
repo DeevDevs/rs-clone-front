@@ -12,7 +12,7 @@ const TripMap = () => {
   const defaultGeometryBallon = defaultState.center;
 
   return (
-    <div className={style['map-container']}>
+    <div className={style.map_container}>
       <YMaps query={{ lang: 'en_US' }}>
         <Map
           style={{ width: '100%', height: '100%' }}
