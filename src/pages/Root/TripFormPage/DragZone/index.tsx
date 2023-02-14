@@ -11,22 +11,24 @@ const DragZone = ({ photos, setPhotos } : FileTransferProps) => {
     const photosArr: FileTransferObj[] = [];
 
     arr.forEach((file) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.addEventListener('load', () => {
-        const { result } = reader;
+      if (file.type.split('/')[0] === 'image') {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener('load', () => {
+          const { result } = reader;
 
-        if (typeof result === 'string') {
-          const fileObj: FileTransferObj = {
-            name: file.name,
-            type: file.type,
-            size: file.size,
-            src: result,
-          };
-          photosArr.push(fileObj);
-          setPhotos([...photos, ...photosArr]);
-        }
-      });
+          if (typeof result === 'string') {
+            const fileObj: FileTransferObj = {
+              name: file.name,
+              type: file.type,
+              size: file.size,
+              src: result,
+            };
+            photosArr.push(fileObj);
+            setPhotos([...photos, ...photosArr]);
+          }
+        });
+      }
     });
   };
 
