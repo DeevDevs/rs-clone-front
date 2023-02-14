@@ -8,6 +8,24 @@
   gap: 10px;
   &_leftSide {
     max-width: 746px;
+    &>div:nth-child(5) {
+      position: relative;
+      &>button {
+        position: absolute;
+        right: 13px;
+        top: 13px;
+        width: 50px;
+        height: 35px;
+        border-radius: 10px;
+        border-color: index.$very-dark-blue;
+        text-transform: uppercase;
+        background-color: index.$light-blue;
+        cursor: pointer;
+      }
+      &>label>input {
+        padding-right: 65px;
+      }
+    }
   }
   &_rightSide {
     max-width: 708px;

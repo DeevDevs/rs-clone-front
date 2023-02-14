@@ -37,6 +37,7 @@ const TripForm = () => {
     },
     handleSubmit,
     reset,
+    getValues,
   } = useForm<FormInputItems>({ mode: 'all' });
 
   // createNewMemoir
@@ -91,6 +92,11 @@ const TripForm = () => {
     setRateValue(5);
   });
 
+  const handleSites = (e: React.MouseEvent<HTMLElement>) => {
+    const inputSite = getValues('sites');
+    console.log(e.target, inputSite);
+  };
+
   const inputs = Object
     .keys(initialFormValues)
     .map((key: ValuesKey | string) => {
@@ -115,6 +121,7 @@ const TripForm = () => {
           <div className={style.form_inputError}>
             {errors[name] && <span className={style.error}>{errors[name]?.message || 'Error!'}</span>}
           </div>
+          {(key === 'sites') ? <button type="button" onClick={(e) => handleSites(e)}>add</button> : ''}
         </div>
       );
     });
