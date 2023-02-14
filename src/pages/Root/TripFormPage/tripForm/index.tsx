@@ -74,7 +74,7 @@ const TripForm = () => {
     tempNewMemoirData.destinationName = formData.destination;
     tempNewMemoirData.countryName = formData.country;
     tempNewMemoirData.continentName = formData.continent;
-    tempNewMemoirData.sites = sites;
+    tempNewMemoirData.sites = sites.length ? sites : getValues('sites').split(' ');
     tempNewMemoirData.date = formData.dateFrom;
     tempNewMemoirData.rateValue = rateValue;
     tempNewMemoirData.days = duration;
