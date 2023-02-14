@@ -1,8 +1,9 @@
 import React from 'react';
+import TestPage from '../../../components/TempAllReqComponent';
 
 const OffersPage = () => (
   <div>
-    This is offers page
+    <TestPage />
   </div>
 );
 

@@ -1,0 +1,121 @@
+@use 'src/sass/index' as basics;
+
+// font-family: 'Comic Neue', cursive;
+// font-family: 'Julee', cursive;
+
+.sensdatablock {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  min-height: 600px;
+  margin: 0 80px 20px 20px;
+  padding: 20px;
+}
+
+.emailblock {
+  height: 40px;
+  margin: 0;
+
+  &_name {
+    font-weight: 700;
+    font-size: 28px;
+    font-family: 'Julee', cursive;
+    margin-right: 20px;
+  }
+
+  &_email {
+    font-family: 'Comic Neue', cursive;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+}
+
+.sensdatahead {
+  font-family: 'Comic Neue', cursive;
+  font-size: 30px;
+  font-weight: 700px;
+  margin: 45px 0 5px 0;
+}
+
+.sensdatasub {
+  font-family: 'Comic Neue', cursive;
+  font-size: 18px;
+  font-weight: 500px;
+  margin: 5px 0 35px 0;
+}
+
+.field {
+  height: 40px;
+  margin-top: 10px;
+
+  &_label {
+    display: inline-block;
+    font-family: 'Comic Neue', cursive;
+    font-weight: 500;
+    font-size: 26px;
+    width: 250px;
+  }
+
+  &_input {
+    height: 28px;
+    font-family: 'Comic Neue', cursive;
+    font-size: 20px;
+    width: 240px;
+    border: 1px solid #84ceeb;
+    border-radius: 6px;
+  }
+
+  &_btn {
+    outline: none;
+    cursor: pointer;
+    color: #8d60cc;
+    background-color: #f2f9ff;
+    border: 1px solid #8d60cc;
+    height: 35px;
+    width: 180px;
+    border-radius: 6px;
+    font-family: 'Comic Neue', cursive;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 10px 5px 20px auto;
+
+    &:hover {
+      color: #f2f9ff;
+      background-color: #8d60cc;
+      border: 1px solid #f2f9ff;
+    }
+  }
+}
+
+.both_btn {
+  outline: none;
+  cursor: pointer;
+  color: #8d60cc;
+  background-color: #f2f9ff;
+  border: 1px solid #8d60cc;
+  height: 35px;
+  width: 260px;
+  border-radius: 6px;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 10px 5px 20px auto;
+
+  &:hover {
+    color: #f2f9ff;
+    background-color: #8d60cc;
+    border: 1px solid #f2f9ff;
+  }
+}
+
+.btn_inactive {
+  color: #343434;
+  background-color: gainsboro;
+  border: none;
+  cursor: default;
+  &:hover {
+    color: #343434;
+    background-color: gainsboro;
+    border: none;
+  }
+}
