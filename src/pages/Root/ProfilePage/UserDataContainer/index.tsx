@@ -36,13 +36,6 @@ const UserDataContainer = () => {
     setHaveChanges(true);
   }, [nameUpdate, ageUpdate, locationUpdate, bioUpdate]);
 
-  useEffect(() => {
-    setNameUpdate(false);
-    setAgeUpdate(false);
-    setLocationUpdate(false);
-    setBioUpdate(false);
-  }, [name, age, from, bio]);
-
   return (
     <div className={styles.userdata}>
       <div className={styles.datablock}>
@@ -124,7 +117,7 @@ const UserDataContainer = () => {
         </button>
       </div>
       <div className={styles.datablock}>
-        <p className={styles.datablock_name}>Location:</p>
+        <p className={styles.datablock_name}>From:</p>
         <div className={styles.datablock_fieldbox}>
           <p
             className={`${styles.field_content} ${
@@ -200,7 +193,7 @@ const UserDataContainer = () => {
             haveChanges ? '' : styles.btn_inactive
           }`}
           type="button"
-          onClick={() => {
+          onClick={async () => {
             if (!haveChanges) return;
             saveDataToObject(
               updateObject,
@@ -209,7 +202,12 @@ const UserDataContainer = () => {
               locationUpdate,
               bioUpdate
             );
-            callbackUpdateUser(updateObject);
+            await callbackUpdateUser(updateObject);
+            setHaveChanges(false);
+            setNameUpdate(false);
+            setAgeUpdate(false);
+            setLocationUpdate(false);
+            setBioUpdate(false);
           }}
         >
           Save Changes
