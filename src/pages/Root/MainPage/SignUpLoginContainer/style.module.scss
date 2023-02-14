@@ -24,6 +24,7 @@
 .selectButton {
   background-color: basics.$light-blue;
   color: basics.$black;
+  font-family: 'Finger Paint', cursive;
   cursor: pointer;
   @include basics.font(normal, 400, 26px, 38px);
   border: none;
@@ -79,5 +80,6 @@
   font-size: 32px;
   line-height: 47px;
   color: basics.$white;
+  font-family: 'Finger Paint', cursive;
 }
 
