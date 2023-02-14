@@ -35,3 +35,8 @@ export type TripSelectProp = {
   selectedVal: number,
   handleChange: React.Dispatch<React.SetStateAction<number>>,
 };
+
+export type TripSitesProp = {
+  sites: string[],
+  handleDelete: React.Dispatch<React.SetStateAction<string[]>>,
+};

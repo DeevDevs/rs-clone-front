@@ -10,6 +10,7 @@ import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
 import Drag from '../DragZone';
 import TripMap from '../TripMap';
 import TripSelect from '../TripSelect/TripSelect';
+import TripSitesBox from '../TripSitesBox';
 import style from './TripForm.module.scss';
 
 const initialFormValues = {
@@ -25,10 +26,13 @@ const satisfaction = {
   text: StatisticsItemsText.Satisfaction,
 };
 
+const initialSites: string[] = [];
+
 const TripForm = () => {
   const initialPhotos: FileTransferObj[] = [];
   const [photos, setPhotos] = useState(initialPhotos);
   const [rateValue, setRateValue] = useState(5);
+  const [sites, setSites] = useState(initialSites);
 
   const {
     register,
@@ -40,7 +44,6 @@ const TripForm = () => {
     getValues,
   } = useForm<FormInputItems>({ mode: 'all' });
 
-  // createNewMemoir
   const dispatchApp = useAppDispatch();
   const { id } = useAppSelector((state) => state.userReducer);
   const tempNewMemoirData = {
@@ -71,12 +74,11 @@ const TripForm = () => {
     tempNewMemoirData.destinationName = formData.destination;
     tempNewMemoirData.countryName = formData.country;
     tempNewMemoirData.continentName = formData.continent;
-    tempNewMemoirData.sites = formData.sites.split(' ');
+    tempNewMemoirData.sites = sites;
     tempNewMemoirData.date = formData.dateFrom;
     tempNewMemoirData.rateValue = rateValue;
     tempNewMemoirData.days = duration;
   };
-  // createNewMemoir
 
   const onSubmit: SubmitHandler<FormInputItems> = (async (data) => {
     const filesFromDropZone = await Promise.allSettled(photos.map(getFile));
@@ -90,11 +92,14 @@ const TripForm = () => {
     reset();
     setPhotos([]);
     setRateValue(5);
+    setSites([]);
   });
 
-  const handleSites = (e: React.MouseEvent<HTMLElement>) => {
+  const handleSites = () => {
     const inputSite = getValues('sites');
-    console.log(e.target, inputSite);
+    if (inputSite.trim() && !sites.includes(inputSite.trim())) {
+      setSites([...sites, inputSite.trim()]);
+    }
   };
 
   const inputs = Object
@@ -121,7 +126,7 @@ const TripForm = () => {
           <div className={style.form_inputError}>
             {errors[name] && <span className={style.error}>{errors[name]?.message || 'Error!'}</span>}
           </div>
-          {(key === 'sites') ? <button type="button" onClick={(e) => handleSites(e)}>add</button> : ''}
+          {(key === 'sites') ? <button type="button" onClick={handleSites}>add</button> : ''}
         </div>
       );
     });
@@ -151,7 +156,7 @@ const TripForm = () => {
     <form id="tripForm" className={style.form} onSubmit={handleSubmit(onSubmit)}>
       <div className={style.form_leftSide}>
         {inputs}
-        <div className={style.form_sightBox} />
+        <TripSitesBox sites={sites} handleDelete={setSites} />
         <h2 className={style.form_mapTitle}>Show us where you arrived from</h2>
         <div className={style.map}>
           <TripMap />

@@ -11,6 +11,7 @@
     &>div:nth-child(5) {
       position: relative;
       &>button {
+        font-weight: 600;
         position: absolute;
         right: 13px;
         top: 13px;
@@ -21,6 +22,10 @@
         text-transform: uppercase;
         background-color: index.$light-blue;
         cursor: pointer;
+        &:hover {
+          background-color: index.$purple;
+          border-width: 3px;
+        }
       }
       &>label>input {
         padding-right: 65px;
@@ -60,12 +65,6 @@
       display: flex;
       align-items: center;
     }
-  }
-  &_sightBox {
-    height: 170px;
-    border: 2px solid index.$very-dark-blue;
-    border-radius: 10px;
-    background-color: #FFF;
   }
   &_mapTitle {
     font-family: inherit;
