@@ -4,11 +4,11 @@ import Header from './Header';
 import Footer from './Footer';
 
 const Root = () => (
-  <div>
+  <>
     <Header />
     <Outlet />
     <Footer />
-  </div>
+  </>
 );
 
 export default Root;

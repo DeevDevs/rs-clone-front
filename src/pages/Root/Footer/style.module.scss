@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-top: 20px;
 }
 
 .logo {
@@ -43,5 +44,6 @@
 .year {
   font-size: 20px;
   line-height: 29px;
+  font-family: 'Finger Paint', cursive;
   color: basics.$black;
 }
