@@ -56,7 +56,7 @@ export const statsSlice = createSlice({
       if (payload) state.statsMsg = payload.status;
     });
     builder.addCase(statsThunks.getStats.pending, (state) => {
-      state.statsMsg = 'Getting stats';
+      state.statsMsg = 'Loading';
     });
   },
 });
