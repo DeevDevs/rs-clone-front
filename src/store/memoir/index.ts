@@ -50,7 +50,7 @@ export const memoirSlice = createSlice({
       if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.createNewMemoir.pending, (state) => {
-      state.memoirMsg = 'Creating a memoir';
+      state.memoirMsg = 'Loading';
     });
     builder.addCase(memoirThunks.getMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
@@ -74,7 +74,7 @@ export const memoirSlice = createSlice({
       if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.getMemoir.pending, (state) => {
-      state.memoirMsg = 'Retrieving a memoir';
+      state.memoirMsg = 'Loading';
     });
     builder.addCase(memoirThunks.deleteMemoir.fulfilled, (state) => {
       state.id = '';
@@ -97,7 +97,7 @@ export const memoirSlice = createSlice({
       if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.deleteMemoir.pending, (state) => {
-      state.memoirMsg = 'Deleting a memoir';
+      state.memoirMsg = 'Loading';
     });
     builder.addCase(memoirThunks.updateMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
@@ -121,7 +121,7 @@ export const memoirSlice = createSlice({
       if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.updateMemoir.pending, (state) => {
-      state.memoirMsg = 'Updating a memoir';
+      state.memoirMsg = 'Loading';
     });
     builder.addCase(memoirThunks.getMemoirPreviews.fulfilled, (state, { payload }) => {
       const previews: memoirTypes.TMemoirPreview[] = payload.data;
@@ -132,7 +132,7 @@ export const memoirSlice = createSlice({
       if (payload) state.memoirMsg = payload.status;
     });
     builder.addCase(memoirThunks.getMemoirPreviews.pending, (state) => {
-      state.memoirMsg = 'Getting previews';
+      state.memoirMsg = 'Loading';
     });
   },
 });

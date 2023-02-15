@@ -52,6 +52,7 @@ export type TNewMemoirReq = {
   memoirPhotos?: FileList | string[];
   date: string;
   rateValue: number;
+  description: string;
   days: number;
   sites: string[];
 };

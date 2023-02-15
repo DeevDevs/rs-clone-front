@@ -1,0 +1,70 @@
+@use 'src/sass/index' as basics;
+
+// font-family: 'Comic Neue', cursive;
+// font-family: 'Julee', cursive;
+
+.userimgblock {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  min-height: 300px;
+  margin: 60px auto 20px auto;
+  padding: 20px;
+}
+
+.userimg {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 20px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid #84ceeb;
+  border-radius: 12px;
+}
+
+.toolbox {
+  display: flex;
+  flex-direction: row;
+  margin: 20px auto;
+
+  &_btn {
+    outline: none;
+    cursor: pointer;
+    color: #8d60cc;
+    background-color: #f2f9ff;
+    border: 1px solid #8d60cc;
+    height: 35px;
+    width: 140px;
+    border-radius: 6px;
+    font-family: 'Comic Neue', cursive;
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+
+    &:hover {
+      color: #f2f9ff;
+      background-color: #8d60cc;
+      border: 1px solid #f2f9ff;
+    }
+  }
+
+  &_input[type='file'] {
+    display: none;
+  }
+}
+
+.btn_inactive {
+  color: #343434;
+  background-color: gainsboro;
+  border: none;
+  cursor: default;
+  &:hover {
+    color: #343434;
+    background-color: gainsboro;
+    border: none;
+  }
+}

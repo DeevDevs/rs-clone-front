@@ -72,6 +72,9 @@ export type TUpdUserReq = {
   email?: string;
   photo?: string;
   password?: string;
+  age?: number;
+  from?: string;
+  bio?: string;
 };
 
 type TImgBBTypeData = {

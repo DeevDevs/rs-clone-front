@@ -41,7 +41,7 @@ export const userSlice = createSlice({
       if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.signup.pending, (state) => {
-      state.userMsg = 'Trying to sign up';
+      state.userMsg = 'Loading';
     });
     builder.addCase(userThunks.login.fulfilled, (state, { payload }) => {
       const newUser = payload.data.user;
@@ -61,7 +61,7 @@ export const userSlice = createSlice({
       if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.login.pending, (state) => {
-      state.userMsg = 'Logging in';
+      state.userMsg = 'Loading';
     });
     builder.addCase(userThunks.logout.fulfilled, (state) => {
       state.name = '';
@@ -80,7 +80,7 @@ export const userSlice = createSlice({
       if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.logout.pending, (state) => {
-      state.userMsg = 'Logging out';
+      state.userMsg = 'Loading';
     });
     builder.addCase(userThunks.isLoggedIn.fulfilled, (state, { payload }) => {
       const newUser = payload.data;
@@ -99,7 +99,7 @@ export const userSlice = createSlice({
       if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.isLoggedIn.pending, (state) => {
-      state.userMsg = 'Checking if logged in';
+      state.userMsg = 'Loading';
     });
     builder.addCase(userThunks.getUser.fulfilled, (state) => {
       state.userMsg = 'User data received';
@@ -108,7 +108,7 @@ export const userSlice = createSlice({
       if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.getUser.pending, (state) => {
-      state.userMsg = 'Getting user data';
+      state.userMsg = 'Loading';
     });
     builder.addCase(userThunks.updateUser.fulfilled, (state, { payload }) => {
       const userUpdateData = payload.data;
@@ -127,7 +127,7 @@ export const userSlice = createSlice({
       if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.updateUser.pending, (state) => {
-      state.userMsg = 'Updating user Data';
+      state.userMsg = 'Loading';
     });
     builder.addCase(userThunks.deleteUser.fulfilled, (state) => {
       state.name = '';
@@ -146,12 +146,13 @@ export const userSlice = createSlice({
       if (payload) state.userMsg = payload.status;
     });
     builder.addCase(userThunks.deleteUser.pending, (state) => {
-      state.userMsg = 'Deleting a user';
+      state.userMsg = 'Loading';
     });
     builder.addCase(
       userThunks.addProfileImage.fulfilled,
       (state, { payload }) => {
         const userUpdateData = payload.data;
+        console.log(userUpdateData);
         state.name = userUpdateData.name;
         state.email = userUpdateData.email;
         state.photo = userUpdateData.photo;
@@ -171,7 +172,7 @@ export const userSlice = createSlice({
       },
     );
     builder.addCase(userThunks.addProfileImage.pending, (state) => {
-      state.userMsg = 'Uploading an Image';
+      state.userMsg = 'Loading';
     });
   },
 });

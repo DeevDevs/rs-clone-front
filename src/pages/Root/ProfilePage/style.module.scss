@@ -1,0 +1,12 @@
+@use 'src/sass/index' as basics;
+
+// font-family: 'Comic Neue', cursive;
+// font-family: 'Finger Paint', cursive;
+// font-family: 'Julee', cursive;
+
+.profpageparent {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+}
