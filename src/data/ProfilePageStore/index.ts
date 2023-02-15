@@ -1,8 +1,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/comma-dangle */
 import * as userTypes from '../../store/user/userTypes';
-// const INTEGERS_REG_EXP = /^\d+$/;
+
 const LETTERS_REG_EXP = /^[A-Za-z ]*$/;
+const EMAIL_REG_EXP = /^([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+const PASSWORD_REG_EXP = /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,}$/;
 function filterString(
   event: React.ChangeEvent<HTMLInputElement>,
   regExp: RegExp
@@ -20,7 +22,6 @@ export function countAge(event: React.ChangeEvent<HTMLInputElement>) {
   const birthDate = new Date(enteredDate);
   const mathValue = birthDate.getTime();
   const age = Math.floor((now - mathValue) / 31536000000);
-  console.log(now - mathValue, age);
   ageInput.textContent = `${age}`;
 }
 
@@ -45,6 +46,80 @@ export function saveDataToObject(
 
 export function validateName(event: React.ChangeEvent<HTMLInputElement>) {
   const enteredName: string = filterString(event, LETTERS_REG_EXP);
+  const cutName = enteredName.length > 30 ? enteredName.slice(0, 29) : enteredName;
   // eslint-disable-next-line no-param-reassign
-  event.target.value = enteredName;
+  event.target.value = cutName;
+}
+
+export function validateEmail(event: React.ChangeEvent<HTMLInputElement>) {
+  const enteredEmail = event.target.value;
+  if (enteredEmail.length === 0) {
+    event.target.style.borderColor = '#84ceeb';
+    return false;
+  }
+  if (!EMAIL_REG_EXP.test(enteredEmail)) {
+    event.target.style.borderColor = 'red';
+    return false;
+  }
+  event.target.style.borderColor = 'green';
+  return true;
+}
+
+export function validatePasswords(
+  setNewPassRdy: React.Dispatch<React.SetStateAction<boolean>>
+) {
+  const passElement = document.getElementById(
+    'newPassword'
+  ) as HTMLInputElement;
+  const passCopy = document.getElementById(
+    'newPassConfirm'
+  ) as HTMLInputElement;
+  const enteredPassCopy = passCopy.value;
+  const enteredPassword = passElement.value;
+  if (!PASSWORD_REG_EXP.test(enteredPassword)) {
+    if (enteredPassword.length === 0) {
+      passElement.style.borderColor = '#84ceeb';
+    }
+    if (enteredPassword.length > 0) {
+      passElement.style.borderColor = 'red';
+    }
+    setNewPassRdy(false);
+  }
+  if (PASSWORD_REG_EXP.test(enteredPassword)) {
+    passElement.style.borderColor = 'green';
+  }
+
+  if (enteredPassword !== enteredPassCopy) {
+    if (enteredPassCopy.length === 0) {
+      passCopy.style.borderColor = '#84ceeb';
+    }
+    if (enteredPassCopy.length > 0) {
+      passCopy.style.borderColor = 'red';
+    }
+    setNewPassRdy(false);
+  }
+  if (
+    enteredPassword === enteredPassCopy
+    && enteredPassCopy.length > 0
+  ) {
+    passCopy.style.borderColor = 'green';
+  }
+  if (
+    PASSWORD_REG_EXP.test(enteredPassword)
+    && enteredPassword === enteredPassCopy
+  ) {
+    setNewPassRdy(true);
+  }
+}
+
+export function storeNewEmail(updateBody: userTypes.TUpdUserReq) {
+  const newEmailField = document.getElementById('newEmail') as HTMLInputElement;
+  updateBody.email = newEmailField.value;
+}
+
+export function storeNewPassword(updateBody: userTypes.TUpdUserReq) {
+  const passElement = document.getElementById(
+    'newPassword'
+  ) as HTMLInputElement;
+  updateBody.password = passElement.value;
 }

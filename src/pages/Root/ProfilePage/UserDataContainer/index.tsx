@@ -10,7 +10,7 @@ import { countAge, saveDataToObject } from '../../../../data/ProfilePageStore';
 
 const UserDataContainer = () => {
   const dispatchApp = useAppDispatch();
-  const { id, name, age, from, bio } = useAppSelector(
+  const { id, name, age, from, bio, email } = useAppSelector(
     (state) => state.userReducer
   );
   const callbackUpdateUser = useCallback(
@@ -164,6 +164,7 @@ const UserDataContainer = () => {
           </p>
           <textarea
             id="biofield"
+            maxLength={500}
             className={`${styles.field_bioinput} ${
               bioUpdate ? '' : styles.hidden
             }`}
@@ -186,6 +187,23 @@ const UserDataContainer = () => {
         >
           {bioUpdate ? 'Cancel edit' : 'Edit'}
         </button>
+      </div>
+      <div className={styles.datablock}>
+        <p className={styles.datablock_name}>Email:</p>
+        <div className={styles.datablock_fieldbox}>
+          <p
+            className={styles.field_content}
+          >
+            {email}
+          </p>
+          <input
+            className={`${styles.field_input} ${
+              nameUpdate ? '' : styles.hidden
+            }`}
+            type="text"
+            id="namefield"
+          />
+        </div>
       </div>
       <div className={styles.btnBox}>
         <button
