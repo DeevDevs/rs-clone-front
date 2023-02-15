@@ -113,6 +113,7 @@ const TestPage = () => {
     memoirPhotos: [],
     date: '2023-02-01T10:22:23.815Z',
     rateValue: 4,
+    description: 'dsfgsdfgdsfg',
     days: 7,
     sites: ['Palace', 'Market', 'Tower'],
   } as memoirTypes.TNewMemoirReq;
@@ -144,9 +145,9 @@ const TestPage = () => {
         onClick={() => {
           const userData = {
             name: 'William Shake',
-            email: 'dfgfht@fgdf.com',
-            password: '23423423434',
-            passwordConfirm: '23423423434',
+            email: 'dfgfhft@fgdf.com',
+            password: '23423423434F',
+            passwordConfirm: '23423423434F',
           };
           callbackSignup(userData);
         }}

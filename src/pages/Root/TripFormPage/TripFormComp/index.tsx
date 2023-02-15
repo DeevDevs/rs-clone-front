@@ -8,7 +8,7 @@ import { createNewMemoir } from '../../../../store/memoir/memoirThunks';
 import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
 import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
 import Drag from '../DragZone';
-import TripMap from '../TripMap';
+import TripMap from '../TripMapComp';
 import TripSelect from '../TripSelect/TripSelect';
 import TripSitesBox from '../TripSitesBox';
 import style from './TripForm.module.scss';
@@ -55,6 +55,7 @@ const TripForm = () => {
     continentName: 'Asia',
     whereFromLongLat: [23.090029, 100.399203],
     distance: 239,
+    description: 'Whatever is here',
     memoirPhotos: [],
     date: '2023-02-01T10:22:23.815Z',
     rateValue: 4,
