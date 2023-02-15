@@ -152,6 +152,19 @@ const UserDataContainer = () => {
           {locationUpdate ? 'Cancel edit' : 'Edit'}
         </button>
       </div>
+      <div className={styles.datablock}>
+        <p className={styles.datablock_name}>Email:</p>
+        <div className={styles.datablock_fieldbox}>
+          <p className={styles.field_content}>{email}</p>
+          <input
+            className={`${styles.field_input} ${
+              nameUpdate ? '' : styles.hidden
+            }`}
+            type="text"
+            id="emailfield"
+          />
+        </div>
+      </div>
       <div className={styles.datablockbio}>
         <p className={styles.datablockbio_name}>Bio:</p>
         <div className={styles.datablockbio_fieldbox}>
@@ -187,23 +200,6 @@ const UserDataContainer = () => {
         >
           {bioUpdate ? 'Cancel edit' : 'Edit'}
         </button>
-      </div>
-      <div className={styles.datablock}>
-        <p className={styles.datablock_name}>Email:</p>
-        <div className={styles.datablock_fieldbox}>
-          <p
-            className={styles.field_content}
-          >
-            {email}
-          </p>
-          <input
-            className={`${styles.field_input} ${
-              nameUpdate ? '' : styles.hidden
-            }`}
-            type="text"
-            id="emailfield"
-          />
-        </div>
       </div>
       <div className={styles.btnBox}>
         <button

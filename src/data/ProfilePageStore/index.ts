@@ -3,8 +3,8 @@
 import * as userTypes from '../../store/user/userTypes';
 
 const LETTERS_REG_EXP = /^[A-Za-z ]*$/;
-const EMAIL_REG_EXP = /^([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-const PASSWORD_REG_EXP = /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,}$/;
+const EMAIL_REG_EXP = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_-]+)(\.[a-zA-Z]{2,5}){1,2}$/;
+const PASSWORD_REG_EXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
 function filterString(
   event: React.ChangeEvent<HTMLInputElement>,
   regExp: RegExp
@@ -76,7 +76,7 @@ export function validatePasswords(
   ) as HTMLInputElement;
   const enteredPassCopy = passCopy.value;
   const enteredPassword = passElement.value;
-  if (!PASSWORD_REG_EXP.test(enteredPassword)) {
+  if (!PASSWORD_REG_EXP.test(enteredPassword) || enteredPassword.length < 8) {
     if (enteredPassword.length === 0) {
       passElement.style.borderColor = '#84ceeb';
     }
@@ -85,7 +85,7 @@ export function validatePasswords(
     }
     setNewPassRdy(false);
   }
-  if (PASSWORD_REG_EXP.test(enteredPassword)) {
+  if (PASSWORD_REG_EXP.test(enteredPassword) && enteredPassword.length >= 8) {
     passElement.style.borderColor = 'green';
   }
 
@@ -106,7 +106,7 @@ export function validatePasswords(
   }
   if (
     PASSWORD_REG_EXP.test(enteredPassword)
-    && enteredPassword === enteredPassCopy
+    && enteredPassword === enteredPassCopy && enteredPassword.length >= 8
   ) {
     setNewPassRdy(true);
   }

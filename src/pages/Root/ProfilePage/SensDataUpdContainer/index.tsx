@@ -69,6 +69,10 @@ const SensDataUpdContainer = () => {
       >
         Update Email
       </button>
+      <p className={styles.sensdatasub2}>
+        Your new password must have at least one capital letter, one small
+        letter, one digit and one special character.
+      </p>
       <div className={styles.field}>
         <label className={styles.field_label} htmlFor="newPassword">
           New Password:

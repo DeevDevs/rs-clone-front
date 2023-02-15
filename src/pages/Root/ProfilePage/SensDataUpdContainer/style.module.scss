@@ -10,6 +10,7 @@
   min-height: 600px;
   margin: 0 auto 20px auto;
   padding: 20px;
+  border-left: 1px solid #84ceeb;
 }
 
 .emailblock {
@@ -39,9 +40,15 @@
 
 .sensdatasub {
   font-family: 'Comic Neue', cursive;
-  font-size: 18px;
-  font-weight: 500px;
+  font-size: 20px;
+  font-weight: 700;
   margin: 5px 0 35px 0;
+}
+.sensdatasub2 {
+  font-family: 'Comic Neue', cursive;
+  font-size: 16px;
+  font-weight: 500px;
+  margin: 15px 0 5px 0;
 }
 
 .field {
