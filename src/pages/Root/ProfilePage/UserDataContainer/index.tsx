@@ -132,6 +132,7 @@ const UserDataContainer = () => {
             }`}
             type="text"
             id="locationfield"
+            maxLength={30}
           />
         </div>
         <button
