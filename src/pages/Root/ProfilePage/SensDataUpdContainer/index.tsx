@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable react/jsx-props-no-spreading,jsx-a11y/label-has-associated-control */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../store';
@@ -17,9 +17,13 @@ import {
 const SensDataUpdContainer = () => {
   const navigate = useNavigate();
   const { id } = useAppSelector((state) => state.userReducer);
+  const { userMsg } = useAppSelector((state) => state.userReducer);
+  const { memoirMsg } = useAppSelector((state) => state.memoirReducer);
+  const { statsMsg } = useAppSelector((state) => state.statsReducer);
   const dispatchApp = useAppDispatch();
   const [newEmailRdy, setNewEmailRdy] = useState(false);
   const [newPassRdy, setNewPassRdy] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const callbackUpdateUser = useCallback(
     async (userUpdData: userTypes.TUpdUserReq) => {
       await dispatchApp(updateUser(userUpdData));
@@ -32,6 +36,23 @@ const SensDataUpdContainer = () => {
   const updateBody: userTypes.TUpdUserReq = {
     id,
   };
+  useEffect(() => {
+    if (
+      userMsg === 'Loading'
+      || memoirMsg === 'Loading'
+      || statsMsg === 'Loading'
+    ) {
+      setIsLoading(true);
+      return;
+    }
+    if (
+      userMsg !== 'Loading'
+      && memoirMsg !== 'Loading'
+      && statsMsg !== 'Loading'
+    ) {
+      setIsLoading(false);
+    }
+  }, [userMsg, memoirMsg, statsMsg]);
 
   return (
     <div className={styles.sensdatablock}>
@@ -60,6 +81,7 @@ const SensDataUpdContainer = () => {
           newEmailRdy ? '' : styles.btn_inactive
         }`}
         onClick={async () => {
+          if (isLoading) return;
           if (!setNewEmailRdy) return;
           storeNewEmail(updateBody);
           await callbackUpdateUser(updateBody);
@@ -105,6 +127,7 @@ const SensDataUpdContainer = () => {
         }`}
         type="button"
         onClick={async () => {
+          if (isLoading) return;
           if (!newPassRdy) return;
           storeNewPassword(updateBody);
           await callbackUpdateUser(updateBody);
@@ -120,6 +143,7 @@ const SensDataUpdContainer = () => {
         }`}
         type="button"
         onClick={async () => {
+          if (isLoading) return;
           if (!newPassRdy || !newEmailRdy) return;
           storeNewPassword(updateBody);
           storeNewEmail(updateBody);
