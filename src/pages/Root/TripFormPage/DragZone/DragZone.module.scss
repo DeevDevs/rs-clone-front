@@ -1,0 +1,119 @@
+@use "../../../../sass/index";
+
+.file {
+  &_upload {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: index.$light-blue;
+    border-radius: 5px;
+    border: 2px solid index.$very-dark-blue;
+  }
+  &_dropArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed index.$purple;
+    height: 200px;
+    cursor: grab;
+    & label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      @include index.font(normal, bold, 16px, inherit);
+      color: index.$purple; 
+      text-transform: uppercase;
+      text-align: center;
+    }
+    & input {
+      display: none;
+    }
+    &.highLight {
+      border-color: index.$very-dark-blue;
+    }
+    &.highLight label {
+      color: index.$very-dark-blue;
+    }
+  }
+  &_preview {
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    min-height: 120px;
+    margin-top: 14px;
+    gap: 10px;
+    &::-webkit-scrollbar {
+      height: 8px;
+      background-color: index.$very-dark-blue;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: index.$dark-blue;
+      border-radius: 9em;
+    }
+    & .prev_img {
+      min-width: 100px;
+      width: 100px;
+      min-height: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+      & img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+      &:hover button {
+        display: flex;
+      }
+      &:hover::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+    & button {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: index.$very-dark-blue;
+      font-size: 14px;
+      width: 20px;
+      height: 20px;
+      background-color: index.$purple;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      border-color: index.$very-dark-blue;
+      cursor: pointer;
+      z-index: 2;
+    }
+  }
+}
+.forbidden {
+  border: 4px solid #ff0033;
+}
+.size_error {
+  font-size: 20px;
+  color: #ff0033;
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+  &__active {
+    visibility: visible;
+  }
+}
+

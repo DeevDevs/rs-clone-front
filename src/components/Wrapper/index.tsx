@@ -1,7 +1,7 @@
 import React from 'react';
 import { WrapperProps } from '../../types';
 
-import './wrapper.scss';
+import './Wrapper.scss';
 
 const Wrapper = ({ children }: WrapperProps) => (
   <div className="wrapper">{children}</div>

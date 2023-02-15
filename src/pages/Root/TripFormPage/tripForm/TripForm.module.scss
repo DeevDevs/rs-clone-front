@@ -1,0 +1,161 @@
+@use "../../../../sass/index";
+
+.form {
+  @include index.font(normal, 400, 32px, 37px);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  &_leftSide {
+    max-width: 746px;
+    &>div:nth-child(5) {
+      position: relative;
+      &>button {
+        font-family: inherit;
+        font-weight: 700;
+        position: absolute;
+        right: 13px;
+        top: 13px;
+        width: 50px;
+        height: 35px;
+        border-radius: 10px;
+        border-color: index.$very-dark-blue;
+        text-transform: uppercase;
+        background-color: index.$light-blue;
+        cursor: pointer;
+        &:hover {
+          background-color: index.$purple;
+          border-width: 3px;
+        }
+      }
+      &>label>input {
+        padding-right: 65px;
+      }
+    }
+  }
+  &_rightSide {
+    max-width: 708px;
+  }
+  &_rightSide,
+  &_leftSide {
+    width: 100%;
+  }
+  &>div>div>label {
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 5px;
+  }
+  &_inputError {
+    height: 40px;
+    text-align: right;
+    padding-right: 10px;
+    font-size: 20px;
+  }
+  &>div>div>label>input {
+    max-width: 440px;
+    @include index.font(inherit, inherit, inherit, inherit);
+    font-family: inherit;
+    border: 2px solid index.$very-dark-blue;
+    border-radius: 10px; 
+    width: 100%;
+    padding: 0 10px 10px 10px;
+    &::placeholder {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+    }
+  }
+  &_mapTitle {
+    font-family: inherit;
+    @include index.font(inherit, inherit, inherit, inherit);
+    padding-top: 66px;
+    padding-bottom: 30px;
+  }
+  &_date {
+    padding-top: 30px;
+    padding-bottom: 80px;
+    &>div {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    &>div>div>div {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+  &_statistic {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 70px;
+    &>div {
+      width: initial;
+    }
+    &>div>span {
+      font-weight: 400;
+      font-family: inherit;
+    }
+    &>select {
+      font-family: inherit;
+      font-weight: 700;
+      height: 60px;
+      max-width: 80px;
+      width: 100%;
+      border-radius: 10px;
+      border: 4px solid index.$purple;
+      font-size: 30px;
+      padding-left: 5px;
+      &>option {
+        font-family: inherit;
+        font-weight: 700;
+      }
+    }
+  }
+  &_area {
+    font-family: inherit;
+    height: 400px;
+    width: 100%;
+    background-color: index.$light-blue;
+    border: 2px solid index.$very-dark-blue;
+    border-radius: 10px;
+    resize: none;
+    @include index.font(normal, 400, 25px, 37px);
+    padding: 5px;
+  }
+  &_submit {
+    max-width: 320px;
+    width: 100%;
+    height: 60px;
+    font-family: 'Finger Paint';
+    @include index.font(normal, 400, 24px, 35px);
+    color: #FFF;
+    background: index.$button-gradient;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    border-color: index.$very-dark-blue;
+    cursor: pointer;
+  }
+}
+.map {
+  max-width: 746px;
+  height: 313px;
+  border: 2px solid index.$very-dark-blue;
+  border-radius: 10px;
+  overflow: hidden;
+}
+input[type="date" i] {
+  appearance: none;
+  width: 200px;
+  border: 2px solid index.$very-dark-blue;
+  border-radius: 10px;
+  font-family: "Comic Neue";
+  letter-spacing: 2px;
+  @include index.font(normal, 400, 25px, 37px);
+  padding: 0 5px 0 5px;
+}
+.error {
+  color: #ff0033;
+}

@@ -105,6 +105,15 @@ export enum ValidationTypes {
   Pattern = 'pattern',
 }
 
+export enum TripErrorMessages {
+  Field = 'please, fill in the field',
+  StartDate = 'please, fill in start date',
+  EndDate = 'please, fill in end date',
+  FieldMinLength = 'description must be at least 50 characters',
+  FieldMaxLength = 'description must be no more than 500 characters',
+  MaxFileLength = 'max file size is 2MB! Please, delete the highlighted file(s)',
+}
+
 export enum StatisticsItemsText {
   Places = 'Places visited',
   Satisfaction = 'Satisfaction level',

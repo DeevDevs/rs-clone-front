@@ -1,0 +1,11 @@
+@use "../../../sass/index";
+
+.tripPage {
+  padding-bottom: 63px;
+}
+.tripPageTitle {
+  font-family: 'Finger Paint';
+  @include index.font(normal, 400, 60px, 88px);
+  padding-bottom: 35px;
+  text-align: center;
+}
