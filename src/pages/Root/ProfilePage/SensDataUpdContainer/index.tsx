@@ -2,9 +2,10 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable react/jsx-props-no-spreading,jsx-a11y/label-has-associated-control */
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../store';
-import { updateUser } from '../../../../store/user/userThunks';
+import { updateUser, logout } from '../../../../store/user/userThunks';
 import * as userTypes from '../../../../store/user/userTypes';
 import {
   validateEmail,
@@ -14,6 +15,7 @@ import {
 } from '../../../../data/ProfilePageStore';
 
 const SensDataUpdContainer = () => {
+  const navigate = useNavigate();
   const { id } = useAppSelector((state) => state.userReducer);
   const dispatchApp = useAppDispatch();
   const [newEmailRdy, setNewEmailRdy] = useState(false);
@@ -24,6 +26,9 @@ const SensDataUpdContainer = () => {
     },
     []
   );
+  const callbackLogout = useCallback(async () => {
+    await dispatchApp(logout());
+  }, []);
   const updateBody: userTypes.TUpdUserReq = {
     id,
   };
@@ -58,6 +63,8 @@ const SensDataUpdContainer = () => {
           if (!setNewEmailRdy) return;
           storeNewEmail(updateBody);
           await callbackUpdateUser(updateBody);
+          await callbackLogout();
+          navigate('/');
         }}
       >
         Update Email
@@ -97,6 +104,8 @@ const SensDataUpdContainer = () => {
           if (!newPassRdy) return;
           storeNewPassword(updateBody);
           await callbackUpdateUser(updateBody);
+          await callbackLogout();
+          navigate('/');
         }}
       >
         Update Password
@@ -111,6 +120,8 @@ const SensDataUpdContainer = () => {
           storeNewPassword(updateBody);
           storeNewEmail(updateBody);
           await callbackUpdateUser(updateBody);
+          await callbackLogout();
+          navigate('/');
         }}
       >
         Update Email and Password
