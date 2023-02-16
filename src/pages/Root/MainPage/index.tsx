@@ -4,6 +4,7 @@ import Statistics from './Statistics';
 import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { isLoggedIn } from '../../../store/user/userThunks';
+import MainMap from './MainMap';
 
 const MainPage = () => {
   const { id } = useAppSelector((state) => state.userReducer);
@@ -16,7 +17,7 @@ const MainPage = () => {
   }, []);
   return (
     <main className={styles.main}>
-      This is map
+      <MainMap />
       {!id ? <SignUpLoginContainer /> : <Statistics />}
     </main>
   );
