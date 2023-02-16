@@ -1,0 +1,18 @@
+.trip {
+  &_title {
+    font-size: 60px;
+    line-height: 88px;
+    padding-bottom: 70px;
+  }
+  &_desc,
+  &_details {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 50px;
+  }
+  &_story {
+    width: 500pх;
+    height: 400px;
+  }
+}

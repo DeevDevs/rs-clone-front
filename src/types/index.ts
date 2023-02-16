@@ -40,3 +40,5 @@ export type TripSitesProp = {
   sites: string[],
   handleDelete: React.Dispatch<React.SetStateAction<string[]>>,
 };
+
+export type ClassNameProps = { className: string };
