@@ -42,3 +42,9 @@ export type TripSitesProp = {
 };
 
 export type ClassNameProps = { className: string };
+
+export type ButtonProps =
+  React.PropsWithChildren<{
+    className: string
+  }>
+  & React.ButtonHTMLAttributes<HTMLButtonElement>;
