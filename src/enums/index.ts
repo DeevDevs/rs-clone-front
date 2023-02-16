@@ -93,9 +93,10 @@ export enum PatternMessages {
   Name = 'Name must contain letters only',
   Email = 'Email must match email format',
   Password = `Password must contain at least: 
-  1 lowercase alphabetical character, 
-  1 uppercase alphabetical character, 
-  1 numeric character`,
+  1 lowercase character, 
+  1 uppercase character, 
+  1 numeric character
+  1 special character`,
 }
 
 export enum ValidationTypes {
@@ -124,4 +125,9 @@ export enum StatisticsItemsKeys {
   StatisticsItem1 = 'statisticsItem1',
   StatisticsItem2 = 'statisticsItem2',
   StatisticsItem3 = 'statisticsItem3',
+}
+
+export enum UserErrorMessages {
+  SignUp = 'User with such email already exists',
+  Login = 'Email or Password is incorrect',
 }
