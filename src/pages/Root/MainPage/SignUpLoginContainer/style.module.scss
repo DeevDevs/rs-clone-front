@@ -1,12 +1,13 @@
 @use "src/sass/index" as basics;
 
 .form {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   width: 50%;
-  height: 600px;
+  height: 700px;
   border-radius: 10px;
   border: 2px solid basics.$very-dark-blue;
   padding: 30px 5%;
