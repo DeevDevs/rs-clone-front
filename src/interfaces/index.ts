@@ -55,3 +55,14 @@ export interface PlacesInterface {
   continents: StatsArrays[],
   countries: StatsArrays[],
 }
+
+export interface OfferInterface {
+  header: string,
+  info: string,
+  img: string,
+  rating: number,
+}
+
+export interface OfferProps {
+  tours: OfferInterface[],
+}

@@ -5,7 +5,7 @@ import styles from './style.module.scss';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const StatisticItem = ({ text, maximum, mark }: StatisticsItemInterface) => (
-  <div className={styles.container}>
+  <div className={text ? styles.container : `${styles.container} ${styles.zeroText}`}>
     <svg
       viewBox="0 0 400 400"
       width="100px"
@@ -35,9 +35,14 @@ const StatisticItem = ({ text, maximum, mark }: StatisticsItemInterface) => (
       <circle cx="200" cy="200" r="100" fill="none" stroke="#8860d0" strokeWidth={15} />
       <circle cx="200" cy="200" r="155" fill="none" stroke="#8860d0" strokeWidth={15} />
     </svg>
-    <span className={styles.text}>
-      {text}
-    </span>
+    {text
+      ? (
+        <span className={styles.text}>
+          {text}
+        </span>
+      )
+      : null}
+
   </div>
 );
 

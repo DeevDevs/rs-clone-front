@@ -119,6 +119,13 @@ export enum StatisticsItemsText {
   Places = 'Places visited',
   Satisfaction = 'Satisfaction level',
   Sites = 'Sites seen',
+  None = '',
+}
+
+export enum ContinentNames {
+  Asia = 'Asia',
+  Europe = 'Europe',
+  Africa = 'Africa',
 }
 
 export enum StatisticsItemsKeys {
@@ -130,4 +137,9 @@ export enum StatisticsItemsKeys {
 export enum UserErrorMessages {
   SignUp = 'User with such email already exists',
   Login = 'Email or Password is incorrect',
+}
+
+export enum OffersImgAlts {
+  MainImg = 'main-img',
+  Plane = 'plane',
 }
