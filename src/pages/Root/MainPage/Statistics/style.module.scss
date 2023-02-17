@@ -1,4 +1,4 @@
-@use "src/sass" as *;
+@use 'src/sass' as *;
 
 .statistics {
   width: 100%;
@@ -6,8 +6,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 64px;
-  height: 380px;
+  padding-top: 120px;
+  // margin-top: 64px;
+  height: 620px;
   position: relative;
 }
 
