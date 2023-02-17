@@ -44,7 +44,7 @@ export type TNewMemoirReq = {
   userID: string;
   tripName: string;
   destinationName: string;
-  longLat: number[];
+  longLat: [number, number];
   countryName: string;
   continentName: string;
   whereFromLongLat: number[];
@@ -68,7 +68,7 @@ export type TUpdMemoirReq = {
   id: string;
   tripName?: string;
   destinationName?: string;
-  longLat?: number[];
+  longLat?: [number, number];
   countryName?: string;
   continentName?: string;
   whereFromLongLat?: number[];
@@ -91,4 +91,10 @@ export type TMemoirPreview = {
 export type TPreviewsResp = {
   status: string;
   data: TMemoirPreview[];
+};
+
+export type TMapClickData = {
+  longLat: [number, number];
+  destinationName?: string;
+  countryName?: string;
 };

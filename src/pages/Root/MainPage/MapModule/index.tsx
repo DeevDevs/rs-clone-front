@@ -1,13 +1,36 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @typescript-eslint/comma-dangle */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './mapModule.scss';
-import { useAppSelector } from '../../../../store/index';
+import { useAppSelector, useAppDispatch } from '../../../../store/index';
 import { toggleModuleOverlay } from '../../../../data/MainPageMap/helperFns';
+import { mapboxActions } from '../../../../store/mapbox';
 
 const MapModule = () => {
-  const { mapboxModuleMsg } = useAppSelector((state) => state.mapboxReducer);
+  const dispatchApp = useAppDispatch();
+  const { mapboxModuleMsg, clickedMemoirID } = useAppSelector(
+    (state) => state.mapboxReducer
+  );
+  const { previews, countryName } = useAppSelector((state) => state.memoirReducer);
+  const cbStoreChosenMemoirID = (data: string): void => {
+    dispatchApp(mapboxActions.storeChosenMemoirID(data));
+  };
+  const [moduleMessage, setModuleMessage] = useState(mapboxModuleMsg);
+  const [btnText, setBtnText] = useState('Write new memoir');
+
+  useEffect(() => {
+    const memoirName = previews.find(
+      (memoir) => memoir.memoirID === clickedMemoirID
+    )?.memoirName;
+    setModuleMessage(`${memoirName}`);
+    setBtnText('Read this memoir');
+  }, [clickedMemoirID]);
+
+  useEffect(() => {
+    setModuleMessage(`Do you want to write about a trip in ${countryName}?`);
+    setBtnText('Write new memoir');
+  }, [countryName]);
 
   return (
     <div
@@ -16,20 +39,23 @@ const MapModule = () => {
         const target = e.target as HTMLElement;
         if (target.classList.contains('mapDialogue')) return;
         toggleModuleOverlay();
+        cbStoreChosenMemoirID('');
       }}
     >
       <div className="mapDialogue dissolved hidden">
         <button
           className="mapDialogue_close"
           type="button"
-          onClick={() => toggleModuleOverlay()}
+          onClick={() => {
+            toggleModuleOverlay();
+            cbStoreChosenMemoirID('');
+          }}
         >
           {' '}
         </button>
-        <p className="mapDialogue_message">Message here</p>
+        <p className="mapDialogue_message">{moduleMessage}</p>
         <button type="button" className="mapDialogue_open">
-          mapboxModuleMsg
-          {mapboxModuleMsg}
+          {btnText}
         </button>
       </div>
     </div>

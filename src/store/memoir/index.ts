@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
 import { createSlice } from '@reduxjs/toolkit';
@@ -26,7 +27,13 @@ const initialState: memoirTypes.TMemoir = {
 export const memoirSlice = createSlice({
   name: 'memoir',
   initialState,
-  reducers: {},
+  reducers: {
+    addDataFromMapClick(state, { payload }) {
+      state.longLat = state.longLat.map((value, index) => payload.longLat[index]);
+      if (payload.destinationName) state.destinationName = payload.destinationName;
+      if (payload.countryName) state.countryName = payload.countryName;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(memoirThunks.createNewMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;

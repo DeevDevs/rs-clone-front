@@ -8,7 +8,9 @@ import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loade
 import { useAppDispatch, useAppSelector } from '../../../../store/index';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { mapboxActions } from '../../../../store/mapbox';
+import { memoirActions } from '../../../../store/memoir';
 import './mainmap.scss';
+import * as memoirTypes from '../../../../store/memoir/memoirTypes';
 import { getLocationData } from '../../../../store/mapbox/mapboxThunks';
 import {
   addMarkerCurLocation,
@@ -26,18 +28,30 @@ const MainMap = () => {
   const getCurrentUserLocation = (location: number[]): void => {
     dispatchApp(mapboxActions.recordUserLocation(location));
   };
+  const saveDataFromClick = (data: memoirTypes.TMapClickData): void => {
+    dispatchApp(memoirActions.addDataFromMapClick(data));
+  };
+  const cbDetermineClickTarget = (data: string): void => {
+    dispatchApp(mapboxActions.determineClickTarget(data));
+  };
+  const cbStoreChosenMemoirID = (data: string): void => {
+    dispatchApp(mapboxActions.storeChosenMemoirID(data));
+  };
   const callbackGetLocationData = useCallback(async (clickLoc: number[]) => {
     await dispatchApp(getLocationData(clickLoc));
   }, []);
   // eslint-disable-next-line operator-linebreak
-  const { userLocation, mapboxMsg, clickLong, clickLat, place, country } =
-    useAppSelector((state) => state.mapboxReducer);
+  const {
+    userLocation,
+    mapboxMsg,
+    clickLong,
+    clickLat,
+    place,
+    country,
+  } = useAppSelector((state) => state.mapboxReducer);
   const { previews } = useAppSelector((state) => state.memoirReducer);
   const mapContainer = useRef(null);
   const map = React.useRef<mapboxgl.Map | null>(null);
-  // const [lng, setLng] = useState(-70.9);
-  // const [lat, setLat] = useState(42.35);
-  // const [zoom, setZoom] = useState(9);
   const [clickLocation, setClickLocation] = useState([0, 0]);
 
   useEffect(() => {
@@ -60,8 +74,21 @@ const MainMap = () => {
   });
 
   useEffect(() => {
-    console.log([clickLong, clickLat], place, country);
-  }, [clickLong]);
+    if (mapboxMsg !== 'data received') return;
+    const data = {
+      longLat: [clickLong, clickLat],
+      destinationName: place,
+      countryName: country,
+    } as memoirTypes.TMapClickData;
+    saveDataFromClick(data);
+    cbDetermineClickTarget('map');
+    toggleModuleOverlay();
+  }, [mapboxMsg]);
+
+  useEffect(() => {
+    if (clickLocation[0] === 0 && clickLocation[1] === 0) return;
+    callbackGetLocationData(clickLocation);
+  }, [clickLocation]);
 
   useEffect(() => {
     if (userLocation[0] === 0 && userLocation[1] === 0) return;
@@ -76,7 +103,6 @@ const MainMap = () => {
       ],
       zoom: 5,
     });
-    console.log(previews);
     addMarkerCurLocation(map, userLocation);
 
     map.current.on('click', (e: mapboxgl.MapMouseEvent) => {
@@ -92,18 +118,6 @@ const MainMap = () => {
     previews.forEach((preview) => addMarkerMemoir(map, preview));
   }, [previews]);
 
-  useEffect(() => {
-    if (clickLocation[0] === 0 && clickLocation[1] === 0) return;
-    callbackGetLocationData(clickLocation);
-  }, [clickLocation]);
-
-  // useEffect(() => {
-  //   if (userLocation.length > 0) return;
-  //   if (!map.current) return;
-  //   setLng(Number(userLocation[0].toFixed(4)));
-  //   setLat(Number(userLocation[1].toFixed(4)));
-  // }, [userLocation]);
-
   return (
     <div className="mapBlock">
       <MapModule />
@@ -113,7 +127,9 @@ const MainMap = () => {
         onClick={(e) => {
           const element = e.target as HTMLElement;
           if (element && element.id !== 'memoirpin') return;
-          console.log(element.id);
+          const memoirID = element.dataset.id as string;
+          cbDetermineClickTarget('memoir');
+          cbStoreChosenMemoirID(memoirID);
           toggleModuleOverlay();
         }}
       />
@@ -122,19 +138,3 @@ const MainMap = () => {
 };
 
 export default MainMap;
-
-//   new mapboxgl.Marker({
-//     element: el,
-//     anchor: 'bottom'
-//   })
-//     .setLngLat(loc.coordinates)
-//     .addTo(map);
-//   // add popup (добавляет сообщение над маркером)
-//   new mapboxgl.Popup({
-//     offset: 30
-//   })
-//     .setLngLat(loc.coordinates)
-//     .setHTML(`<p>Day ${loc.day}: ${loc.description}</p>`)
-//     .addTo(map);
-//   bounds.extend(loc.coordinates);
-// });

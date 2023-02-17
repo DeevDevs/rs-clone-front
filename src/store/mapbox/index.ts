@@ -14,6 +14,7 @@ const initialState: mapboxTypes.TMapbox = {
   mapboxMsg: '',
   clickedMemoirID: '',
   mapboxModuleMsg: '',
+  clickTarget: 'map',
 };
 
 export const mapboxSlice = createSlice({
@@ -22,6 +23,12 @@ export const mapboxSlice = createSlice({
   reducers: {
     recordUserLocation(state, { payload }) {
       state.userLocation = [payload[0], payload[1]];
+    },
+    determineClickTarget(state, { payload }) {
+      state.clickTarget = payload;
+    },
+    storeChosenMemoirID(state, { payload }) {
+      state.clickedMemoirID = payload;
     }
   },
   extraReducers: (builder) => {
@@ -36,6 +43,7 @@ export const mapboxSlice = createSlice({
         state.clickLong = payload.query[0];
         // eslint-disable-next-line prefer-destructuring
         state.clickLat = payload.query[1];
+        state.mapboxMsg = 'data received';
       }
     );
     builder.addCase(

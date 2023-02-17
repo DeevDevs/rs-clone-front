@@ -44,7 +44,7 @@ export function addMarkerMemoir(
     closeOnClick: false,
   })
     .setLngLat(memoirData.memoirLocation)
-    .setHTML(`<p id="memoirpin">${memoirData.memoirName}</p>`)
+    .setHTML(`<p id="memoirpin" data-id=${memoirData.memoirID}>${memoirData.memoirName}</p>`)
     .addTo(map.current);
 }
 
