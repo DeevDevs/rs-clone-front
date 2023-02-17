@@ -42,6 +42,7 @@ export function addMarkerMemoir(
   new mapboxgl.Popup({
     offset: 30,
     closeOnClick: false,
+    closeButton: false,
   })
     .setLngLat(memoirData.memoirLocation)
     .setHTML(`<p id="memoirpin" data-id=${memoirData.memoirID}>${memoirData.memoirName}</p>`)

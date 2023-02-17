@@ -1,21 +1,30 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @typescript-eslint/comma-dangle */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './mapModule.scss';
 import { useAppSelector, useAppDispatch } from '../../../../store/index';
 import { toggleModuleOverlay } from '../../../../data/MainPageMap/helperFns';
 import { mapboxActions } from '../../../../store/mapbox';
+import { getMemoir } from '../../../../store/memoir/memoirThunks';
 
 const MapModule = () => {
+  const navigate = useNavigate();
   const dispatchApp = useAppDispatch();
   const { mapboxModuleMsg, clickedMemoirID } = useAppSelector(
     (state) => state.mapboxReducer
   );
-  const { previews, countryName } = useAppSelector((state) => state.memoirReducer);
+  const { id } = useAppSelector((state) => state.userReducer);
+  const { previews, countryName } = useAppSelector(
+    (state) => state.memoirReducer
+  );
   const cbStoreChosenMemoirID = (data: string): void => {
     dispatchApp(mapboxActions.storeChosenMemoirID(data));
   };
+  const callbackGetMemoir = useCallback(async (memoirId: string) => {
+    await dispatchApp(getMemoir(memoirId));
+  }, []);
   const [moduleMessage, setModuleMessage] = useState(mapboxModuleMsg);
   const [btnText, setBtnText] = useState('Write new memoir');
 
@@ -28,8 +37,15 @@ const MapModule = () => {
   }, [clickedMemoirID]);
 
   useEffect(() => {
-    setModuleMessage(`Do you want to write about a trip in ${countryName}?`);
-    setBtnText('Write new memoir');
+    if (id) {
+      setModuleMessage(
+        `Do you want to write about your trip to ${countryName}?`
+      );
+      setBtnText('Write new memoir');
+      return;
+    }
+    setModuleMessage('You should login/signup, to write memoirs.');
+    setBtnText('Login / Signup');
   }, [countryName]);
 
   return (
@@ -37,7 +53,7 @@ const MapModule = () => {
       className="mapOverlay dissolved hidden"
       onClick={(e) => {
         const target = e.target as HTMLElement;
-        if (target.classList.contains('mapDialogue')) return;
+        if (!target.classList.contains('mapOverlay')) return;
         toggleModuleOverlay();
         cbStoreChosenMemoirID('');
       }}
@@ -54,7 +70,27 @@ const MapModule = () => {
           {' '}
         </button>
         <p className="mapDialogue_message">{moduleMessage}</p>
-        <button type="button" className="mapDialogue_open">
+        <button
+          type="button"
+          className="mapDialogue_open"
+          onClick={async () => {
+            if (!id) {
+              window.scrollTo(0, document.body.scrollHeight);
+              toggleModuleOverlay();
+              return;
+            }
+            if (id) {
+              if (clickedMemoirID) {
+                await callbackGetMemoir(clickedMemoirID);
+                toggleModuleOverlay();
+                navigate(`trip/${clickedMemoirID}`);
+                return;
+              }
+              toggleModuleOverlay();
+              navigate('trip');
+            }
+          }}
+        >
           {btnText}
         </button>
       </div>
