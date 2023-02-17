@@ -13,7 +13,9 @@ import { getLocationData } from '../../../../store/mapbox/mapboxThunks';
 import {
   addMarkerCurLocation,
   addMarkerMemoir,
+  toggleModuleOverlay,
 } from '../../../../data/MainPageMap/helperFns';
+import MapModule from '../MapModule';
 // import pin from '../../../../data/MainPageMap/marker.png';
 // eslint-disable-next-line operator-linebreak
 mapboxgl.accessToken =
@@ -103,15 +105,19 @@ const MainMap = () => {
   // }, [userLocation]);
 
   return (
-    <div
-      ref={mapContainer}
-      className="mapContainer"
-      onClick={(e) => {
-        const element = e.target as HTMLElement;
-        if (element && element.id !== 'homepin') return;
-        console.log(element.id);
-      }}
-    />
+    <div className="mapBlock">
+      <MapModule />
+      <div
+        ref={mapContainer}
+        className="mapContainer"
+        onClick={(e) => {
+          const element = e.target as HTMLElement;
+          if (element && element.id !== 'memoirpin') return;
+          console.log(element.id);
+          toggleModuleOverlay();
+        }}
+      />
+    </div>
   );
 };
 

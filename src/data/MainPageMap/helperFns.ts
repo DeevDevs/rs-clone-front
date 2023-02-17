@@ -47,3 +47,23 @@ export function addMarkerMemoir(
     .setHTML(`<p id="memoirpin">${memoirData.memoirName}</p>`)
     .addTo(map.current);
 }
+
+export function toggleModuleOverlay() {
+  const overlay = document.querySelector('.mapOverlay') as HTMLElement;
+  const module = document.querySelector('.mapDialogue') as HTMLElement;
+  if (overlay.classList.contains('hidden')) {
+    overlay.classList.remove('hidden');
+    module.classList.remove('hidden');
+    setTimeout(() => {
+      overlay.classList.remove('dissolved');
+      module.classList.remove('dissolved');
+    }, 20);
+  } else {
+    overlay.classList.add('dissolved');
+    module.classList.add('dissolved');
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+      module.classList.add('hidden');
+    }, 200);
+  }
+}

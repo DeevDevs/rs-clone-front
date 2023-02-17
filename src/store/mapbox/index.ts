@@ -12,6 +12,8 @@ const initialState: mapboxTypes.TMapbox = {
   country: '',
   place: '',
   mapboxMsg: '',
+  clickedMemoirID: '',
+  mapboxModuleMsg: '',
 };
 
 export const mapboxSlice = createSlice({

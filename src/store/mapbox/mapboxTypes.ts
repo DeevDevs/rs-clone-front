@@ -5,6 +5,8 @@ export type TMapbox = {
   mapboxMsg: string;
   place: string;
   country: string;
+  clickedMemoirID: string;
+  mapboxModuleMsg: string;
 };
 
 export type TMapboxMsg = {
