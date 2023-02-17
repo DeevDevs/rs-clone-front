@@ -45,7 +45,9 @@ export function addMarkerMemoir(
     closeButton: false,
   })
     .setLngLat(memoirData.memoirLocation)
-    .setHTML(`<p id="memoirpin" data-id=${memoirData.memoirID}>${memoirData.memoirName}</p>`)
+    .setHTML(
+      `<p id="memoirpin" data-id=${memoirData.memoirID}>${memoirData.memoirName}</p>`
+    )
     .addTo(map.current);
 }
 
@@ -65,6 +67,24 @@ export function toggleModuleOverlay() {
     setTimeout(() => {
       overlay.classList.add('hidden');
       module.classList.add('hidden');
+    }, 200);
+  }
+}
+
+export function hideDisplayLogo(toDo: string) {
+  const logoBox = document.querySelector('.mapLogo') as HTMLElement;
+  if (toDo === 'show') {
+    if (!logoBox.classList.contains('hidden')) return;
+    logoBox.classList.remove('hidden');
+    setTimeout(() => {
+      logoBox.classList.remove('dissolved');
+    }, 20);
+  }
+  if (toDo === 'hide') {
+    if (logoBox.classList.contains('hidden')) return;
+    logoBox.classList.add('dissolved');
+    setTimeout(() => {
+      logoBox.classList.add('hidden');
     }, 200);
   }
 }

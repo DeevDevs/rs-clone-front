@@ -16,6 +16,7 @@ import {
   addMarkerCurLocation,
   addMarkerMemoir,
   toggleModuleOverlay,
+  hideDisplayLogo,
 } from '../../../../data/MainPageMap/helperFns';
 import MapModule from '../MapModule';
 // import pin from '../../../../data/MainPageMap/marker.png';
@@ -41,14 +42,8 @@ const MainMap = () => {
     await dispatchApp(getLocationData(clickLoc));
   }, []);
   // eslint-disable-next-line operator-linebreak
-  const {
-    userLocation,
-    mapboxMsg,
-    clickLong,
-    clickLat,
-    place,
-    country,
-  } = useAppSelector((state) => state.mapboxReducer);
+  const { userLocation, mapboxMsg, clickLong, clickLat, place, country } =
+    useAppSelector((state) => state.mapboxReducer);
   const { previews } = useAppSelector((state) => state.memoirReducer);
   const mapContainer = useRef(null);
   const map = React.useRef<mapboxgl.Map | null>(null);
@@ -119,8 +114,20 @@ const MainMap = () => {
   }, [previews]);
 
   return (
-    <div className="mapBlock">
+    <div
+      className="mapBlock"
+      onMouseMove={(e) => {
+        const mapBox = e.target as HTMLElement;
+        const rect = mapBox.getBoundingClientRect();
+        // Mouse position
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        if (x < 240 && y < 170) hideDisplayLogo('hide');
+        if (x > 240 && y > 170) hideDisplayLogo('show');
+      }}
+    >
       <MapModule />
+      <div className="mapLogo" />
       <div
         ref={mapContainer}
         className="mapContainer"
