@@ -8,7 +8,7 @@ const initialState: userTypes.TUser = {
   id: '',
   name: 'Whatever',
   email: '',
-  photo: '',
+  photo: 'https://i.ibb.co/420YqnY/sloth.jpg',
   age: 0,
   from: '',
   bio: '',
@@ -66,7 +66,7 @@ export const userSlice = createSlice({
     builder.addCase(userThunks.logout.fulfilled, (state) => {
       state.name = '';
       state.email = '';
-      state.photo = '';
+      state.photo = 'https://i.ibb.co/420YqnY/sloth.jpg';
       state.age = 0;
       state.from = '';
       state.bio = '';
@@ -132,7 +132,7 @@ export const userSlice = createSlice({
     builder.addCase(userThunks.deleteUser.fulfilled, (state) => {
       state.name = '';
       state.email = '';
-      state.photo = '';
+      state.photo = 'https://i.ibb.co/420YqnY/sloth.jpg';
       state.age = 0;
       state.from = '';
       state.bio = 'Please, tell us about yourself a little.';

@@ -5,13 +5,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 126px;
+  height: 100px;
+  z-index: 4;
 }
 
 .header__text {
   color: $black;
   @include font(normal, 400, 42px, 49px);
   font-family: 'Julee', cursive;
+  margin-left: 30px;
 }
 
 .links {
@@ -27,7 +29,8 @@
   text-decoration: none;
   color: $white;
   @include font(normal, 400, 24px, 35px);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 0 12px;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.25);
   border-radius: 14px;
   display: flex;
   justify-content: center;
@@ -38,6 +41,7 @@
 .button_active {
   border: 3px solid $very-dark-blue;
   color: $very-dark-blue;
+  box-shadow: none;
 }
 
 .user {
