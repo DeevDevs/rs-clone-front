@@ -1,0 +1,59 @@
+@use "src/sass/index" as basics;
+
+.container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10%;
+}
+
+.content {
+  position: relative;
+  width: 80%;
+  height: 558px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: basics.$light-blue;
+  margin-left: 10%;
+}
+
+.header {
+  font-family: 'Julee', cursive;
+  font-size: 42px;
+  line-height: 49px;
+  color: basics.$black;
+  width: 40%;
+  text-align: center;
+  height: 110px;
+  margin-top: 10px;
+}
+
+.text {
+  font-family: 'Comic Neue', cursive;
+  font-size: 18px;
+  line-height: 25px;
+  color: basics.$black;
+  width: 40%;
+  text-align: justify;
+}
+
+.mainImg {
+  position: absolute;
+  left: 8%;
+  width: 30%;
+  height: 444px;
+  border: 2px solid basics.$very-dark-blue;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 2px;
+  transform: rotate(-4.28deg);
+  z-index: 2;
+}
+
+.plane {
+  position: absolute;
+  transform: rotate(7.59deg);
+  top: 0;
+  right: 0;
+}
