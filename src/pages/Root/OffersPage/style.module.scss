@@ -1,0 +1,31 @@
+@use "src/sass/index" as basics;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.header {
+  font-family: 'Finger Paint', cursive;
+  font-size: 36px;
+  line-height: 120%;
+  color: basics.$black;
+  text-align: center;
+  width: 60%;
+}
+
+.swiperContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.continentHeader {
+  font-family: 'Julee', cursive;
+  font-size: 42px;
+  line-height: 49px;
+  color: basics.$black;
+}

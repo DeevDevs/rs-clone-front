@@ -1,0 +1,13 @@
+@use "src/sass/index" as basics;
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: basics.$black;
+  font-family: 'Finger Paint', cursive;
+  font-size: 50px;
+  text-align: center;
+}
