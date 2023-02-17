@@ -157,13 +157,6 @@ const UserDataContainer = () => {
         <p className={styles.datablock_name}>Email:</p>
         <div className={styles.datablock_fieldbox}>
           <p className={styles.field_content}>{email}</p>
-          <input
-            className={`${styles.field_input} ${
-              nameUpdate ? '' : styles.hidden
-            }`}
-            type="text"
-            id="emailfield"
-          />
         </div>
       </div>
       <div className={styles.datablockbio}>
