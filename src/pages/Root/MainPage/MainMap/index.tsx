@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-unsafe-optional-chaining */
@@ -6,8 +8,12 @@ import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loade
 import { useAppDispatch, useAppSelector } from '../../../../store/index';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { mapboxActions } from '../../../../store/mapbox';
-import styles from './style.module.scss';
+import './mainmap.scss';
 import { getLocationData } from '../../../../store/mapbox/mapboxThunks';
+import {
+  addMarkerCurLocation,
+  addMarkerMemoir,
+} from '../../../../data/MainPageMap/helperFns';
 // import pin from '../../../../data/MainPageMap/marker.png';
 // eslint-disable-next-line operator-linebreak
 mapboxgl.accessToken =
@@ -24,6 +30,7 @@ const MainMap = () => {
   // eslint-disable-next-line operator-linebreak
   const { userLocation, mapboxMsg, clickLong, clickLat, place, country } =
     useAppSelector((state) => state.mapboxReducer);
+  const { previews } = useAppSelector((state) => state.memoirReducer);
   const mapContainer = useRef(null);
   const map = React.useRef<mapboxgl.Map | null>(null);
   // const [lng, setLng] = useState(-70.9);
@@ -67,22 +74,8 @@ const MainMap = () => {
       ],
       zoom: 5,
     });
-
-    const el = document.createElement('div');
-    el.className = `${styles.marker}`;
-    new mapboxgl.Marker({
-      element: el,
-      anchor: 'bottom',
-    })
-      .setLngLat(userLocation)
-      .addTo(map.current);
-
-    new mapboxgl.Popup({
-      offset: 30,
-    })
-      .setLngLat(userLocation)
-      .setHTML('<p>You are here</p>')
-      .addTo(map.current);
+    console.log(previews);
+    addMarkerCurLocation(map, userLocation);
 
     map.current.on('click', (e: mapboxgl.MapMouseEvent) => {
       const clickLongitude = e.lngLat.lng;
@@ -92,15 +85,10 @@ const MainMap = () => {
     });
   });
 
-  // useEffect(() => {
-  //   if (!map.current) return;
-  //   map.current.on('move', () => {
-  //     if (!map.current) return;
-  //     setLng(+map.current.getCenter().lng.toFixed(4));
-  //     setLat(+map.current.getCenter().lat.toFixed(4));
-  //     setZoom(+map.current.getZoom().toFixed(2));
-  //   });
-  // });
+  useEffect(() => {
+    if (!map.current) return;
+    previews.forEach((preview) => addMarkerMemoir(map, preview));
+  }, [previews]);
 
   useEffect(() => {
     if (clickLocation[0] === 0 && clickLocation[1] === 0) return;
@@ -114,7 +102,17 @@ const MainMap = () => {
   //   setLat(Number(userLocation[1].toFixed(4)));
   // }, [userLocation]);
 
-  return <div ref={mapContainer} className={styles.mapContainer} />;
+  return (
+    <div
+      ref={mapContainer}
+      className="mapContainer"
+      onClick={(e) => {
+        const element = e.target as HTMLElement;
+        if (element && element.id !== 'homepin') return;
+        console.log(element.id);
+      }}
+    />
+  );
 };
 
 export default MainMap;

@@ -5,6 +5,7 @@ import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { isLoggedIn } from '../../../store/user/userThunks';
 import MainMap from './MainMap';
+import { getMemoirPreviews } from '../../../store/memoir/memoirThunks';
 
 const MainPage = () => {
   const { id } = useAppSelector((state) => state.userReducer);
@@ -12,9 +13,19 @@ const MainPage = () => {
   const callbackIsLoggedIn = useCallback(async () => {
     await dispatchApp(isLoggedIn());
   }, []);
+  const callbackGetMemoirPreviews = useCallback(async () => {
+    await dispatchApp(getMemoirPreviews());
+  }, []);
+
   useEffect(() => {
     callbackIsLoggedIn();
   }, []);
+
+  useEffect(() => {
+    if (!id) return;
+    callbackGetMemoirPreviews();
+  }, [id]);
+
   return (
     <main className={styles.main}>
       <MainMap />

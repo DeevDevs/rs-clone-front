@@ -84,7 +84,7 @@ export type TUpdMemoirReq = {
 
 export type TMemoirPreview = {
   memoirID: string;
-  memoirLocation: number[];
+  memoirLocation: [number, number];
   memoirName: string;
 };
 
