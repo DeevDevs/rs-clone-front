@@ -123,7 +123,7 @@ const MainMap = () => {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         if (x < 240 && y < 170) hideDisplayLogo('hide');
-        if (x > 240 && y > 170) hideDisplayLogo('show');
+        if (x > 240 || y > 170) hideDisplayLogo('show');
       }}
     >
       <MapModule />
