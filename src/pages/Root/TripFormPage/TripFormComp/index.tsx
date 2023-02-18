@@ -19,7 +19,7 @@ const initialFormValues = {
   memoir: '',
   destination: '',
   country: '',
-  continent: '',
+  'Part of the world': '',
   sites: '',
 };
 
@@ -44,10 +44,14 @@ const TripForm = () => {
     handleSubmit,
     reset,
     getValues,
+    setValue,
   } = useForm<FormInputItems>({ mode: 'all' });
 
   const dispatchApp = useAppDispatch();
   const { id } = useAppSelector((state) => state.userReducer);
+  const {
+    clickLong, clickLat, country, place,
+  } = useAppSelector((state) => state.mapboxReducer);
 
   const tempNewMemoirData = {
     userID: id,
@@ -68,6 +72,7 @@ const TripForm = () => {
   const callbackCreateMemoir = useCallback(async (memoirData: TNewMemoirReq) => {
     await dispatchApp(createNewMemoir(memoirData));
   }, []);
+
   const addFieldsFromForm = (formData:FormInputItems): void => {
     const dateTo = new Date(formData.dateTo);
     const dateFrom = new Date(formData.dateFrom);
@@ -155,9 +160,10 @@ const TripForm = () => {
   const { name: nameDateTo, ref: refDateTo, onChange: onChangeDateTo } = register('dateTo', {
     required: TripErrorMessages.EndDate,
   });
-  const { clickLong, clickLat } = useAppSelector((state) => state.mapboxReducer);
+
   useEffect(() => {
-    console.log('clickTarget RENDER', clickLong, clickLat);
+    if (country) setValue('country', country);
+    if (place) setValue('destination', place);
   }, []);
 
   const newMap: MapProps = {
