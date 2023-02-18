@@ -1,14 +1,16 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import MapComponent from '../../../../components/MapComponent';
 import StatisticItem from '../../../../components/StatisticItem';
 import { StatisticsItemsText, TripErrorMessages } from '../../../../enums';
 import { getFile } from '../../../../functions';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { createNewMemoir } from '../../../../store/memoir/memoirThunks';
 import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
-import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
+import {
+  FileTransferObj, FormInputItems, MapProps, ValuesKey,
+} from '../../../../types';
 import Drag from '../DragZone';
-import TripMap from '../TripMapComp';
 import TripSelect from '../TripSelect/TripSelect';
 import TripSitesBox from '../TripSitesBox';
 import style from './TripForm.module.scss';
@@ -46,14 +48,15 @@ const TripForm = () => {
 
   const dispatchApp = useAppDispatch();
   const { id } = useAppSelector((state) => state.userReducer);
+
   const tempNewMemoirData = {
     userID: id,
     tripName: 'Lonesome October',
     destinationName: 'Tashkent',
-    longLat: [23.090029, 105.399203],
+    longLat: [23.090029, 60.399203],
     countryName: 'Uzb',
     continentName: 'Asia',
-    whereFromLongLat: [23.090029, 100.399203],
+    whereFromLongLat: [23.090029, 60.399203],
     distance: 239,
     description: 'Whatever is here',
     memoirPhotos: [],
@@ -152,6 +155,15 @@ const TripForm = () => {
   const { name: nameDateTo, ref: refDateTo, onChange: onChangeDateTo } = register('dateTo', {
     required: TripErrorMessages.EndDate,
   });
+  const { clickLong, clickLat } = useAppSelector((state) => state.mapboxReducer);
+  useEffect(() => {
+    console.log('clickTarget RENDER', clickLong, clickLat);
+  }, []);
+
+  const newMap: MapProps = {
+    newLocation: [clickLong, clickLat],
+    markerName: 'Trip here',
+  };
 
   return (
     <form id="tripForm" className={style.form} onSubmit={handleSubmit(onSubmit)}>
@@ -160,7 +172,7 @@ const TripForm = () => {
         <TripSitesBox sites={sites} handleDelete={setSites} />
         <h2 className={style.form_mapTitle}>Show us where you arrived from</h2>
         <div className={style.map}>
-          <TripMap />
+          <MapComponent newMapInfo={newMap} />
         </div>
         <div className={style.form_date}>
           <div>

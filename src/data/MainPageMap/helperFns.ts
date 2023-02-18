@@ -54,6 +54,7 @@ export function addMarkerMemoir(
 export function addMarker(
   map: React.MutableRefObject<mapboxgl.Map | null>,
   coordinates: [number, number],
+  markerName: string,
 ) {
   if (!map || !map.current) return;
   const el = document.createElement('div');
@@ -72,7 +73,7 @@ export function addMarker(
   })
     .setLngLat(coordinates)
     .setHTML(
-      '<p>makerName</p>'
+      `<p>${markerName}</p>`
     )
     .addTo(map.current);
 }

@@ -145,6 +145,9 @@
   border: 2px solid index.$very-dark-blue;
   border-radius: 10px;
   overflow: hidden;
+  &>div {
+    height: 100%;
+  }
 }
 input[type="date" i] {
   appearance: none;

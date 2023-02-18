@@ -48,3 +48,8 @@ export type ButtonProps =
     className: string
   }>
   & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+export type MapProps = {
+  newLocation: [number, number];
+  markerName: string;
+};

@@ -2,12 +2,14 @@ import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { addMarker } from '../../data/MainPageMap/helperFns';
+import { MapProps } from '../../types';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGVldmRldnMiLCJhIjoiY2xkdWpvZnlyMDZqdzNzcmYwcmhoNTVyZSJ9.TL4fwGpN6YdtqRKZpqOaAQ';
 
-const MapComponent = () => {
+const MapComponent = ({ newMapInfo } : { newMapInfo: MapProps }) => {
   const mapContainer = useRef(null);
   const map = React.useRef<mapboxgl.Map | null>(null);
+  const { newLocation, markerName } = newMapInfo;
 
   useEffect(() => {
     if (map.current) return;
@@ -15,10 +17,10 @@ const MapComponent = () => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [46.0802, 51.8668],
+      center: [...newLocation],
       zoom: 5,
     });
-    addMarker(map, [46.0802, 51.8668]);
+    addMarker(map, newLocation, markerName);
     map.current.on('click', (e: mapboxgl.MapMouseEvent) => {
       const clickLongitude = e.lngLat.lng;
       const clickLatitude = e.lngLat.lat;
