@@ -51,6 +51,32 @@ export function addMarkerMemoir(
     .addTo(map.current);
 }
 
+export function addMarker(
+  map: React.MutableRefObject<mapboxgl.Map | null>,
+  coordinates: [number, number],
+) {
+  if (!map || !map.current) return;
+  const el = document.createElement('div');
+  el.className = 'marker';
+  new mapboxgl.Marker({
+    element: el,
+    anchor: 'bottom',
+  })
+    .setLngLat(coordinates)
+    .addTo(map.current);
+
+  new mapboxgl.Popup({
+    offset: 30,
+    closeOnClick: false,
+    closeButton: false,
+  })
+    .setLngLat(coordinates)
+    .setHTML(
+      '<p>makerName</p>'
+    )
+    .addTo(map.current);
+}
+
 export function toggleModuleOverlay() {
   const overlay = document.querySelector('.mapOverlay') as HTMLElement;
   const module = document.querySelector('.mapDialogue') as HTMLElement;
