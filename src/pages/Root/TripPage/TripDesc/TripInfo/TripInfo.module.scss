@@ -22,7 +22,6 @@
     line-height: 155%;
   }
   & p:nth-child(6) {
-    max-width: 320px;
     @include index.font(normal, 400, 28px, 155%);
   }
 }

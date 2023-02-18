@@ -5,6 +5,7 @@
     max-width: 600px;
     width: 100%;
     height: 400px;
+    overflow: hidden;
     &>h3 {
       @include index.font(normal, 700, 36px, 41px);
       padding-bottom: 53px;
