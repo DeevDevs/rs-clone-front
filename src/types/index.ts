@@ -49,7 +49,9 @@ export type ButtonProps =
   }>
   & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
+export type Location = [number, number];
+
 export type MapProps = {
-  newLocation: [number, number];
+  newLocation: Location;
   markerName: string;
 };
