@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import React, {
   useRef,
   useEffect,
@@ -22,9 +21,7 @@ import {
 } from '../../../../data/MainPageMap/helperFns';
 import MapModule from '../MapModule';
 // import pin from '../../../../data/MainPageMap/marker.png';
-// eslint-disable-next-line operator-linebreak
-mapboxgl.accessToken =
-  'pk.eyJ1IjoiZGVldmRldnMiLCJhIjoiY2xkdWpvZnlyMDZqdzNzcmYwcmhoNTVyZSJ9.TL4fwGpN6YdtqRKZpqOaAQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGVldmRldnMiLCJhIjoiY2xkdWpvZnlyMDZqdzNzcmYwcmhoNTVyZSJ9.TL4fwGpN6YdtqRKZpqOaAQ';
 
 const MainMap = () => {
   const dispatchApp = useAppDispatch();
@@ -46,7 +43,6 @@ const MainMap = () => {
   const callbackGetLocationData = useCallback(async (clickLoc: number[]) => {
     await dispatchApp(getLocationData(clickLoc));
   }, []);
-  // eslint-disable-next-line operator-linebreak
   const {
     userLocation,
     mapboxMsg,
@@ -75,7 +71,7 @@ const MainMap = () => {
       },
       (error) => {
         console.log(error);
-      }
+      },
     );
   });
 
@@ -139,7 +135,6 @@ const MainMap = () => {
   }, [previews]);
 
   return (
-    // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
     <div
       className="mapBlock"
       onMouseMove={(e) => {

@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-underscore-dangle */
 import { createSlice } from '@reduxjs/toolkit';
 import * as userTypes from './userTypes';
 import * as userThunks from './userThunks';
@@ -152,7 +150,6 @@ export const userSlice = createSlice({
       userThunks.addProfileImage.fulfilled,
       (state, { payload }) => {
         const userUpdateData = payload.data;
-        console.log(userUpdateData);
         state.name = userUpdateData.name;
         state.email = userUpdateData.email;
         state.photo = userUpdateData.photo;

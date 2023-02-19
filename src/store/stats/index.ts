@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-underscore-dangle */
 import { createSlice } from '@reduxjs/toolkit';
 import * as statsTypes from './statsTypes';
 import * as statsThunks from './statsThunks';

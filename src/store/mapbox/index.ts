@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-underscore-dangle */
 import { createSlice } from '@reduxjs/toolkit';
 import * as mapboxThunks from './mapboxThunks';
 import * as mapboxTypes from './mapboxTypes';
@@ -33,13 +30,13 @@ export const mapboxSlice = createSlice({
     },
     storeMarker(state, { payload }) {
       const allMarkers = payload.filter(
-        (markerPopup: mapboxTypes.TMarkerPopup | undefined) => markerPopup
+        (markerPopup: mapboxTypes.TMarkerPopup | undefined) => markerPopup,
       );
       state.mainMapMarkers = [...state.mainMapMarkers, ...allMarkers];
     },
     emptyMarkers(state) {
       state.mainMapMarkers = [];
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -54,13 +51,13 @@ export const mapboxSlice = createSlice({
         // eslint-disable-next-line prefer-destructuring
         state.clickLat = payload.query[1];
         state.mapboxMsg = 'data received';
-      }
+      },
     );
     builder.addCase(
       mapboxThunks.getLocationData.rejected,
       (state, { payload }) => {
         if (payload) state.mapboxMsg = payload.status;
-      }
+      },
     );
     builder.addCase(mapboxThunks.getLocationData.pending, (state) => {
       state.mapboxMsg = 'Loading';

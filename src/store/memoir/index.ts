@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-underscore-dangle */
 import { createSlice } from '@reduxjs/toolkit';
 import * as memoirTypes from './memoirTypes';
 import * as memoirThunks from './memoirThunks';
@@ -35,7 +32,7 @@ export const memoirSlice = createSlice({
     },
     emptyPreviews(state) {
       state.previews = [];
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(memoirThunks.createNewMemoir.fulfilled, (state, { payload }) => {
