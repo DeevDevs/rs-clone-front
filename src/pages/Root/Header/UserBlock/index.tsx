@@ -7,11 +7,20 @@ import styles from './style.module.scss';
 import { PagePath } from '../../../../enums';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { logout } from '../../../../store/user/userThunks';
+import { memoirActions } from '../../../../store/memoir';
+import { mapboxActions } from '../../../../store/mapbox';
 
 const UserBlock = () => {
   const navigate = useNavigate();
+  const { mainMapMarkers } = useAppSelector((state) => state.mapboxReducer);
   const { id, name, photo } = useAppSelector((state) => state.userReducer);
   const dispatchApp = useAppDispatch();
+  const emptyMemoirPreviews = () => {
+    dispatchApp(memoirActions.emptyPreviews());
+  };
+  const emptyMarkerPopupArray = () => {
+    dispatchApp(mapboxActions.emptyMarkers());
+  };
   const callbackLogout = useCallback(async () => {
     await dispatchApp(logout());
   }, []);
@@ -51,6 +60,12 @@ const UserBlock = () => {
           className={styles.dropdown_item}
           onClick={() => {
             if (!id) return;
+            emptyMemoirPreviews();
+            mainMapMarkers.forEach((markerPopup) => {
+              markerPopup.marker.remove();
+              markerPopup.popup.remove();
+            });
+            emptyMarkerPopupArray();
             callbackLogout();
           }}
         >

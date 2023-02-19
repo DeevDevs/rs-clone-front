@@ -11,6 +11,7 @@ import { mapboxActions } from '../../../../store/mapbox';
 import { memoirActions } from '../../../../store/memoir';
 import './mainmap.scss';
 import * as memoirTypes from '../../../../store/memoir/memoirTypes';
+import * as mapboxTypes from '../../../../store/mapbox/mapboxTypes';
 import { getLocationData } from '../../../../store/mapbox/mapboxThunks';
 import {
   addMarkerCurLocation,
@@ -34,6 +35,9 @@ const MainMap = () => {
   };
   const cbDetermineClickTarget = (data: string): void => {
     dispatchApp(mapboxActions.determineClickTarget(data));
+  };
+  const cdStoreMarker = (data: (mapboxTypes.TMarkerPopup | undefined)[]): void => {
+    dispatchApp(mapboxActions.storeMarker(data));
   };
   const cbStoreChosenMemoirID = (data: string): void => {
     dispatchApp(mapboxActions.storeChosenMemoirID(data));
@@ -97,7 +101,16 @@ const MainMap = () => {
         Number(userLocation[1].toFixed(4)),
       ],
       zoom: 5,
+      maxZoom: 9,
+      minZoom: 2,
+      projection: {
+        name: 'mercator',
+        center: [0, 30],
+        parallels: [30, 30],
+      },
     });
+    map.current.dragRotate.disable();
+
     addMarkerCurLocation(map, userLocation);
 
     map.current.on('click', (e: mapboxgl.MapMouseEvent) => {
@@ -110,10 +123,16 @@ const MainMap = () => {
 
   useEffect(() => {
     if (!map.current) return;
-    previews.forEach((preview) => addMarkerMemoir(map, preview));
+    console.log(previews);
+    const markersPopups = previews.map((preview) => {
+      const markerPopup = addMarkerMemoir(map, preview);
+      return markerPopup;
+    });
+    cdStoreMarker(markersPopups);
   }, [previews]);
 
   return (
+    // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
     <div
       className="mapBlock"
       onMouseMove={(e) => {
@@ -122,8 +141,8 @@ const MainMap = () => {
         // Mouse position
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        if (x < 240 && y < 170) hideDisplayLogo('hide');
-        if (x > 240 || y > 170) hideDisplayLogo('show');
+        if (x < 320 && y < 280 && mapBox.classList.contains('mapboxgl-canvas')) hideDisplayLogo('hide');
+        if ((x > 320 || y > 280) && mapBox.classList.contains('mapboxgl-canvas')) hideDisplayLogo('show');
       }}
     >
       <MapModule />

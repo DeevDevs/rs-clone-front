@@ -15,6 +15,7 @@ const initialState: mapboxTypes.TMapbox = {
   clickedMemoirID: '',
   mapboxModuleMsg: '',
   clickTarget: 'map',
+  mainMapMarkers: [],
 };
 
 export const mapboxSlice = createSlice({
@@ -29,6 +30,15 @@ export const mapboxSlice = createSlice({
     },
     storeChosenMemoirID(state, { payload }) {
       state.clickedMemoirID = payload;
+    },
+    storeMarker(state, { payload }) {
+      const allMarkers = payload.filter(
+        (markerPopup: mapboxTypes.TMarkerPopup | undefined) => markerPopup
+      );
+      state.mainMapMarkers = [...state.mainMapMarkers, ...allMarkers];
+    },
+    emptyMarkers(state) {
+      state.mainMapMarkers = [];
     }
   },
   extraReducers: (builder) => {

@@ -19,7 +19,7 @@ async function sendUploadImagesRequest(files: FileList) {
         const imageData: userTypes.TImgBBResp = await imgBBresponse.json();
         const imgURL: string = imageData.data.url;
         resolve(imgURL);
-      } else resolve('default.jpg');
+      } else resolve('https://i.ibb.co/XWyGkgv/default-trip-img.jpg');
     });
     return promise;
   });
@@ -33,11 +33,11 @@ export async function uploadMemoirImages(
 ) {
   if (update === false) {
     if (files.length === 0) {
-      return ['default.jpg'];
+      return ['https://i.ibb.co/XWyGkgv/default-trip-img.jpg'];
     }
     const uploadImgPromises = await sendUploadImagesRequest(files);
     const listOfResolutions = await Promise.allSettled(uploadImgPromises);
-    const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'default.jpg'));
+    const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg'));
     return listOfURLs;
   }
   if (files.length === 0 && listToRemove.length === 0) {
@@ -45,18 +45,19 @@ export async function uploadMemoirImages(
   }
   if (files.length === 0 && listToRemove.length > 0) {
     const listWithoutDeletedPhotos = originalList.filter(
-      (url) => listToRemove.indexOf(url) < 0 || url !== 'default.jpg',
+      (url) => listToRemove.indexOf(url) < 0
+      || url !== 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg',
     );
     return listWithoutDeletedPhotos.length > 0
       ? listWithoutDeletedPhotos
-      : ['default.jpg'];
+      : ['https://i.ibb.co/XWyGkgv/default-trip-img.jpg'];
   }
   const uploadImgPromises = await sendUploadImagesRequest(files);
   const listOfResolutions = await Promise.allSettled(uploadImgPromises);
-  const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'default.jpg'));
+  const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg'));
   const updatedList = [...originalList, ...listOfURLs] as string[];
   const listWithoutDeletedPhotos = updatedList.filter(
-    (url) => listToRemove.indexOf(url) < 0 || url !== 'default.jpg',
+    (url) => listToRemove.indexOf(url) < 0 || url !== 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg',
   );
   return listWithoutDeletedPhotos;
 }

@@ -6,7 +6,7 @@ import * as userThunks from './userThunks';
 
 const initialState: userTypes.TUser = {
   id: '',
-  name: 'Whatever',
+  name: 'Friendly Guest',
   email: '',
   photo: 'https://i.ibb.co/420YqnY/sloth.jpg',
   age: 0,

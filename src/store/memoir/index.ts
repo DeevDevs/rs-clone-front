@@ -18,7 +18,7 @@ const initialState: memoirTypes.TMemoir = {
   rateValue: 0,
   days: 0,
   sites: [],
-  memoirPhotos: ['default.jpg'],
+  memoirPhotos: ['https://i.ibb.co/XWyGkgv/default-trip-img.jpg'],
   description: '',
   memoirMsg: null,
   previews: [],
@@ -32,6 +32,9 @@ export const memoirSlice = createSlice({
       state.longLat = state.longLat.map((value, index) => payload.longLat[index]);
       if (payload.destinationName) state.destinationName = payload.destinationName;
       if (payload.countryName) state.countryName = payload.countryName;
+    },
+    emptyPreviews(state) {
+      state.previews = [];
     }
   },
   extraReducers: (builder) => {
@@ -96,7 +99,7 @@ export const memoirSlice = createSlice({
       state.rateValue = 0;
       state.days = 0;
       state.sites = [];
-      state.memoirPhotos = ['default.jpg'];
+      state.memoirPhotos = ['https://i.ibb.co/XWyGkgv/default-trip-img.jpg'];
       state.description = '';
       state.memoirMsg = 'Memoir was deleted';
     });
