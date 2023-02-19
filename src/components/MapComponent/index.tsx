@@ -19,7 +19,15 @@ const MapComponent = ({ newMapInfo } : { newMapInfo: MapProps }) => {
       style: 'mapbox://styles/mapbox/streets-v12',
       center: [...newLocation],
       zoom: 5,
+      maxZoom: 9,
+      minZoom: 2,
+      projection: {
+        name: 'mercator',
+        center: [0, 30],
+        parallels: [30, 30],
+      },
     });
+    map.current.dragRotate.disable();
     addMarker(map, newLocation, markerName);
     map.current.on('click', (e: mapboxgl.MapMouseEvent) => {
       const clickLongitude = e.lngLat.lng;
