@@ -123,3 +123,24 @@ export function storeNewPassword(updateBody: userTypes.TUpdUserReq) {
   ) as HTMLInputElement;
   updateBody.password = passElement.value;
 }
+
+export function emptyAllFields(fieldName: string) {
+  if (fieldName === 'email' || fieldName === 'both') {
+    const newEmailField = document.getElementById(
+      'newEmail'
+    ) as HTMLInputElement;
+    newEmailField.value = '';
+    newEmailField.style.borderColor = '#84ceeb';
+  } else if (fieldName === 'password' || fieldName === 'both') {
+    const passElement = document.getElementById(
+      'newPassword'
+    ) as HTMLInputElement;
+    const passCopy = document.getElementById(
+      'newPassConfirm'
+    ) as HTMLInputElement;
+    passElement.style.borderColor = '#84ceeb';
+    passCopy.style.borderColor = '#84ceeb';
+    passElement.value = '';
+    passCopy.value = '';
+  }
+}
