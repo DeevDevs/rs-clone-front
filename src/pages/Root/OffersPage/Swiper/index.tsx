@@ -6,6 +6,7 @@ import { OfferProps } from '../../../../interfaces';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import Offer from '../Offer';
+import keyGenerator from '../../../../functions/index';
 
 const SwiperComp: React.FC<OfferProps> = ({ tours }) => {
   return (
@@ -23,7 +24,7 @@ const SwiperComp: React.FC<OfferProps> = ({ tours }) => {
       {tours.map(({
         header, info, img, rating,
       }) => (
-        <SwiperSlide>
+        <SwiperSlide key={keyGenerator('SwiperSlide')}>
           <Offer
             header={header}
             info={info}
