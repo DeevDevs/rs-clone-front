@@ -1,9 +1,10 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-unsafe-optional-chaining */
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import { useAppDispatch, useAppSelector } from '../../../../store/index';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -46,8 +47,14 @@ const MainMap = () => {
     await dispatchApp(getLocationData(clickLoc));
   }, []);
   // eslint-disable-next-line operator-linebreak
-  const { userLocation, mapboxMsg, clickLong, clickLat, place, country } =
-    useAppSelector((state) => state.mapboxReducer);
+  const {
+    userLocation,
+    mapboxMsg,
+    clickLong,
+    clickLat,
+    place,
+    country,
+  } = useAppSelector((state) => state.mapboxReducer);
   const { previews } = useAppSelector((state) => state.memoirReducer);
   const mapContainer = useRef(null);
   const map = React.useRef<mapboxgl.Map | null>(null);
@@ -148,6 +155,7 @@ const MainMap = () => {
       <MapModule />
       <div className="mapLogo" />
       <div
+        role="presentation"
         ref={mapContainer}
         className="mapContainer"
         onClick={(e) => {

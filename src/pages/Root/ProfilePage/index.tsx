@@ -6,7 +6,6 @@ import SensDataUpdContainer from './SensDataUpdContainer';
 
 const ProfilePage = () => (
   <div className={styles.profpageparent}>
-    {/* <p>Profile page</p> */}
     <div>
       <UserImageContainer />
       <SensDataUpdContainer />

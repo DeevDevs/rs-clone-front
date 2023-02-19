@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-confusing-arrow */
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
@@ -34,6 +31,7 @@ const UserBlock = () => {
       }}
     >
       <span
+        role="presentation"
         className={styles.user__name}
         onClick={() => {
           if (!id) return;

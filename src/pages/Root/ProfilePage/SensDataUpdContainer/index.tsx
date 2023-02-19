@@ -1,6 +1,3 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable react/jsx-props-no-spreading,jsx-a11y/label-has-associated-control */
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../store';
@@ -27,7 +24,7 @@ const SensDataUpdContainer = () => {
     async (userUpdData: userTypes.TUpdUserReq) => {
       await dispatchApp(updateUser(userUpdData));
     },
-    []
+    [],
   );
   const updateBody: userTypes.TUpdUserReq = {
     id,
@@ -58,9 +55,9 @@ const SensDataUpdContainer = () => {
         have to login again.
       </p>
       <div className={styles.field}>
-        <label className={styles.field_label} htmlFor="newEmail">
+        <span className={styles.field_label}>
           New email:
-        </label>
+        </span>
         <input
           className={styles.field_input}
           type="text"
@@ -92,9 +89,9 @@ const SensDataUpdContainer = () => {
         letter, one digit and one special character.
       </p>
       <div className={styles.field}>
-        <label className={styles.field_label} htmlFor="newPassword">
+        <span className={styles.field_label}>
           New Password:
-        </label>
+        </span>
         <input
           className={styles.field_input}
           type="password"
@@ -105,9 +102,9 @@ const SensDataUpdContainer = () => {
         />
       </div>
       <div className={styles.field}>
-        <label className={styles.field_label} htmlFor="newPassConfirm">
+        <span className={styles.field_label}>
           Password Confirm:
-        </label>
+        </span>
         <input
           className={styles.field_input}
           type="password"
