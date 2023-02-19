@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable @typescript-eslint/comma-dangle */
 import * as userTypes from '../../store/user/userTypes';
 
 const LETTERS_REG_EXP = /^[A-Za-z ]*$/;
@@ -7,7 +5,7 @@ const EMAIL_REG_EXP = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_-]+)(\.[a-zA-Z]{2,5}){1,2
 const PASSWORD_REG_EXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
 function filterString(
   event: React.ChangeEvent<HTMLInputElement>,
-  regExp: RegExp
+  regExp: RegExp,
 ): string {
   return event.target.value
     .split('')
@@ -30,12 +28,12 @@ export function saveDataToObject(
   nameUpdate: boolean,
   ageUpdate: boolean,
   locationUpdate: boolean,
-  bioUpdate: boolean
+  bioUpdate: boolean,
 ) {
   const updatedAge = document.getElementById('agefield') as HTMLElement;
   const updatedName = document.getElementById('namefield') as HTMLInputElement;
   const updatedLocation = document.getElementById(
-    'locationfield'
+    'locationfield',
   ) as HTMLInputElement;
   const updatedBio = document.getElementById('biofield') as HTMLInputElement;
   if (nameUpdate) updateObject.name = updatedName.value;
@@ -58,21 +56,21 @@ export function validateEmail(event: React.ChangeEvent<HTMLInputElement>) {
     return false;
   }
   if (!EMAIL_REG_EXP.test(enteredEmail)) {
-    event.target.style.borderColor = 'red';
+    event.target.style.borderColor = '#e74c3c';
     return false;
   }
-  event.target.style.borderColor = 'green';
+  event.target.style.borderColor = '#07bc0c';
   return true;
 }
 
 export function validatePasswords(
-  setNewPassRdy: React.Dispatch<React.SetStateAction<boolean>>
+  setNewPassRdy: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
   const passElement = document.getElementById(
-    'newPassword'
+    'newPassword',
   ) as HTMLInputElement;
   const passCopy = document.getElementById(
-    'newPassConfirm'
+    'newPassConfirm',
   ) as HTMLInputElement;
   const enteredPassCopy = passCopy.value;
   const enteredPassword = passElement.value;
@@ -81,12 +79,12 @@ export function validatePasswords(
       passElement.style.borderColor = '#84ceeb';
     }
     if (enteredPassword.length > 0) {
-      passElement.style.borderColor = 'red';
+      passElement.style.borderColor = '#e74c3c';
     }
     setNewPassRdy(false);
   }
   if (PASSWORD_REG_EXP.test(enteredPassword) && enteredPassword.length >= 8) {
-    passElement.style.borderColor = 'green';
+    passElement.style.borderColor = '#07bc0c';
   }
 
   if (enteredPassword !== enteredPassCopy) {
@@ -94,7 +92,7 @@ export function validatePasswords(
       passCopy.style.borderColor = '#84ceeb';
     }
     if (enteredPassCopy.length > 0) {
-      passCopy.style.borderColor = 'red';
+      passCopy.style.borderColor = '#e74c3c';
     }
     setNewPassRdy(false);
   }
@@ -102,7 +100,7 @@ export function validatePasswords(
     enteredPassword === enteredPassCopy
     && enteredPassCopy.length > 0
   ) {
-    passCopy.style.borderColor = 'green';
+    passCopy.style.borderColor = '#07bc0c';
   }
   if (
     PASSWORD_REG_EXP.test(enteredPassword)
@@ -119,7 +117,7 @@ export function storeNewEmail(updateBody: userTypes.TUpdUserReq) {
 
 export function storeNewPassword(updateBody: userTypes.TUpdUserReq) {
   const passElement = document.getElementById(
-    'newPassword'
+    'newPassword',
   ) as HTMLInputElement;
   updateBody.password = passElement.value;
 }
@@ -127,16 +125,17 @@ export function storeNewPassword(updateBody: userTypes.TUpdUserReq) {
 export function emptyAllFields(fieldName: string) {
   if (fieldName === 'email' || fieldName === 'both') {
     const newEmailField = document.getElementById(
-      'newEmail'
+      'newEmail',
     ) as HTMLInputElement;
     newEmailField.value = '';
     newEmailField.style.borderColor = '#84ceeb';
-  } else if (fieldName === 'password' || fieldName === 'both') {
+  }
+  if (fieldName === 'password' || fieldName === 'both') {
     const passElement = document.getElementById(
-      'newPassword'
+      'newPassword',
     ) as HTMLInputElement;
     const passCopy = document.getElementById(
-      'newPassConfirm'
+      'newPassConfirm',
     ) as HTMLInputElement;
     passElement.style.borderColor = '#84ceeb';
     passCopy.style.borderColor = '#84ceeb';
