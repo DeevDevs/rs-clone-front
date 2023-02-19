@@ -19,7 +19,7 @@ const initialFormValues = {
   memoir: '',
   destination: '',
   country: '',
-  'Part of the world': '',
+  continent: '',
   sites: '',
 };
 
@@ -79,14 +79,16 @@ const TripForm = () => {
     const diffHours = +new Date(+dateTo - +dateFrom) / 36e5;
     const duration = Math.floor(diffHours / 24);
 
+    tempNewMemoirData.longLat = [clickLong, clickLat];
     tempNewMemoirData.tripName = formData.memoir;
     tempNewMemoirData.destinationName = formData.destination;
     tempNewMemoirData.countryName = formData.country;
     tempNewMemoirData.continentName = formData.continent;
-    tempNewMemoirData.sites = sites.length ? sites : getValues('sites').split(' ');
+    tempNewMemoirData.description = formData.description;
     tempNewMemoirData.date = formData.dateFrom;
     tempNewMemoirData.rateValue = rateValue;
     tempNewMemoirData.days = duration;
+    tempNewMemoirData.sites = sites.length ? sites : getValues('sites').split(' ');
   };
 
   const onSubmit: SubmitHandler<FormInputItems> = (async (data) => {
