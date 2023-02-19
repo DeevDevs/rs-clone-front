@@ -12,7 +12,7 @@ import { getMemoir } from '../../../../store/memoir/memoirThunks';
 const MapModule = () => {
   const navigate = useNavigate();
   const dispatchApp = useAppDispatch();
-  const { mapboxModuleMsg, clickedMemoirID } = useAppSelector(
+  const { mapboxModuleMsg, clickedMemoirID, clickTarget } = useAppSelector(
     (state) => state.mapboxReducer
   );
   const { id } = useAppSelector((state) => state.userReducer);
@@ -80,7 +80,7 @@ const MapModule = () => {
               return;
             }
             if (id) {
-              if (clickedMemoirID) {
+              if (clickTarget === 'memoir') {
                 await callbackGetMemoir(clickedMemoirID);
                 toggleModuleOverlay();
                 navigate(`trip/${clickedMemoirID}`);
