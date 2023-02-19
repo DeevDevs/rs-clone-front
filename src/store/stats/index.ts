@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import toastSettings from '../constants';
 import * as statsTypes from './statsTypes';
 import * as statsThunks from './statsThunks';
 
@@ -35,6 +37,7 @@ export const statsSlice = createSlice({
     });
     builder.addCase(statsThunks.getStats.rejected, (state, { payload }) => {
       if (payload) state.statsError = payload.status;
+      toast.error(`${state.statsError}. Please, try again later.`, { ...toastSettings });
     });
     builder.addCase(statsThunks.getStats.pending, (state) => {
       state.statsLoading = true;

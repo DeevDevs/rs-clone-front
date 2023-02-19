@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import toastSettings from '../constants';
 import getLocationData from './mapboxThunks';
 import * as mapboxTypes from './mapboxTypes';
 
@@ -59,6 +61,7 @@ export const mapboxSlice = createSlice({
       getLocationData.rejected,
       (state, { payload }) => {
         if (payload) state.mapError = payload.status;
+        toast.error(`${state.mapError}`, { ...toastSettings });
       },
     );
     builder.addCase(getLocationData.pending, (state) => {

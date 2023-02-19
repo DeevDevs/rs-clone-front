@@ -35,6 +35,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userThunks.signup.rejected, (state, { payload }) => {
       if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.signup.pending, (state) => {
       state.userLoading = true;
@@ -48,6 +49,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userThunks.login.rejected, (state, { payload }) => {
       if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.login.pending, (state) => {
       state.userLoading = true;
@@ -60,6 +62,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userThunks.logout.rejected, (state, { payload }) => {
       if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.logout.pending, (state) => {
       state.userLoading = true;
@@ -72,6 +75,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userThunks.isLoggedIn.rejected, (state, { payload }) => {
       if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.isLoggedIn.pending, (state) => {
       state.userLoading = true;
@@ -81,6 +85,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userThunks.getUser.rejected, (state, { payload }) => {
       if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.getUser.pending, (state) => {
       state.userLoading = true;
@@ -93,6 +98,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userThunks.updateUser.rejected, (state, { payload }) => {
       if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.updateUser.pending, (state) => {
       state.userLoading = true;
@@ -105,6 +111,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userThunks.deleteUser.rejected, (state, { payload }) => {
       if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.deleteUser.pending, (state) => {
       state.userLoading = true;
@@ -122,6 +129,7 @@ export const userSlice = createSlice({
       userThunks.addProfileImage.rejected,
       (state, { payload }) => {
         if (payload) state.userError = payload.status;
+        toast.error(`${state.userError}`, { ...toastSettings });
       },
     );
     builder.addCase(userThunks.addProfileImage.pending, (state) => {
