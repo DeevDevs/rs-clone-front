@@ -1,6 +1,5 @@
 /* eslint-disable no-confusing-arrow */
 import React, { useEffect, useCallback } from 'react';
-import { toast } from 'react-toastify';
 import { NavLink } from 'react-router-dom';
 import styles from './style.module.scss';
 import { PagePath } from '../../../enums';
@@ -10,7 +9,7 @@ import { getMemoirPreviews } from '../../../store/memoir/memoirThunks';
 import UserBlock from './UserBlock';
 
 const Header = () => {
-  const { id, name } = useAppSelector((state) => state.userReducer);
+  const { id } = useAppSelector((state) => state.userReducer);
   const dispatchApp = useAppDispatch();
   const callbackIsLoggedIn = useCallback(async () => {
     await dispatchApp(isLoggedIn());
@@ -25,17 +24,6 @@ const Header = () => {
 
   useEffect(() => {
     if (!id) return;
-    toast.info(`Welcome back, ${name}!`, {
-      position: 'top-right',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: 'light',
-      className: 'toast-class',
-    });
     callbackGetMemoirPreviews();
   }, [id]);
 

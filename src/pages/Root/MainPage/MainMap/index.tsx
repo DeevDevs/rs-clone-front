@@ -12,7 +12,7 @@ import { memoirActions } from '../../../../store/memoir';
 import './mainmap.scss';
 import * as memoirTypes from '../../../../store/memoir/memoirTypes';
 import * as mapboxTypes from '../../../../store/mapbox/mapboxTypes';
-import { getLocationData } from '../../../../store/mapbox/mapboxThunks';
+import getLocationData from '../../../../store/mapbox/mapboxThunks';
 import {
   addMarkerCurLocation,
   addMarkerMemoir,
@@ -45,7 +45,7 @@ const MainMap = () => {
   }, []);
   const {
     userLocation,
-    mapboxMsg,
+    mapLoading,
     clickLong,
     clickLat,
     place,
@@ -55,10 +55,6 @@ const MainMap = () => {
   const mapContainer = useRef(null);
   const map = React.useRef<mapboxgl.Map | null>(null);
   const [clickLocation, setClickLocation] = useState([0, 0]);
-
-  useEffect(() => {
-    console.log(mapboxMsg);
-  }, [mapboxMsg]);
 
   useEffect(() => {
     if (userLocation[0] !== 0 && userLocation[0] !== 0) return;
@@ -76,16 +72,17 @@ const MainMap = () => {
   });
 
   useEffect(() => {
-    if (mapboxMsg !== 'data received') return;
-    const data = {
-      longLat: [clickLong, clickLat],
-      destinationName: place,
-      countryName: country,
-    } as memoirTypes.TMapClickData;
-    saveDataFromClick(data);
-    cbDetermineClickTarget('map');
-    toggleModuleOverlay();
-  }, [mapboxMsg]);
+    if (!mapLoading && clickLong !== 0 && clickLat !== 0) {
+      const data = {
+        longLat: [clickLong, clickLat],
+        destinationName: place,
+        countryName: country,
+      } as memoirTypes.TMapClickData;
+      saveDataFromClick(data);
+      cbDetermineClickTarget('map');
+      toggleModuleOverlay();
+    }
+  }, [mapLoading]);
 
   useEffect(() => {
     if (clickLocation[0] === 0 && clickLocation[1] === 0) return;

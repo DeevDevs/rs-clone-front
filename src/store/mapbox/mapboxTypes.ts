@@ -11,6 +11,8 @@ export type TMapbox = {
   mapboxModuleMsg: string;
   clickTarget: 'map' | 'memoir';
   mainMapMarkers: TMarkerPopup[];
+  mapLoading: boolean;
+  mapError: string;
 };
 
 export type TMarkerPopup = {

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { updateUser } from '../../../../store/user/userThunks';
@@ -81,17 +80,6 @@ const SensDataUpdContainer = () => {
           await callbackUpdateUser(updateBody);
           emptyAllFields('email');
           setNewEmailRdy(false);
-          toast.success('You have successfully updated your email', {
-            position: 'top-right',
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: 'light',
-            className: 'toast-class',
-          });
         }}
       >
         Update Email
@@ -138,17 +126,6 @@ const SensDataUpdContainer = () => {
           await callbackUpdateUser(updateBody);
           emptyAllFields('password');
           setNewPassRdy(false);
-          toast.success('You have successfully updated your password', {
-            position: 'top-right',
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: 'light',
-            className: 'toast-class',
-          });
         }}
       >
         Update Password
@@ -167,17 +144,6 @@ const SensDataUpdContainer = () => {
           emptyAllFields('both');
           setNewEmailRdy(false);
           setNewPassRdy(false);
-          toast.success('You have successfully updated your email and password', {
-            position: 'top-right',
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: 'light',
-            className: 'toast-class',
-          });
         }}
       >
         Update Email and Password

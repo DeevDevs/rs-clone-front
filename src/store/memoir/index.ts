@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import toastSettings from '../constants';
 import * as memoirTypes from './memoirTypes';
 import * as memoirThunks from './memoirThunks';
+import { updateMemoirState, emptyMemoirState } from './memoirHelpFns';
 
 const initialState: memoirTypes.TMemoir = {
   id: '',
@@ -19,6 +22,8 @@ const initialState: memoirTypes.TMemoir = {
   description: '',
   memoirMsg: null,
   previews: [],
+  memoirLoading: false,
+  memoirError: '',
 };
 
 export const memoirSlice = createSlice({
@@ -37,109 +42,60 @@ export const memoirSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(memoirThunks.createNewMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
-      state.id = newMemoir._id;
-      state.tripName = newMemoir.tripName;
-      state.destinationName = newMemoir.destinationName;
-      state.longLat = newMemoir.longLat;
-      state.countryName = newMemoir.countryName;
-      state.continentName = newMemoir.continentName;
-      state.whereFromLongLat = newMemoir.whereFromLongLat;
-      state.distance = newMemoir.distance;
-      state.date = newMemoir.date;
-      state.rateValue = newMemoir.rateValue;
-      state.days = newMemoir.days;
-      state.sites = newMemoir.sites;
-      state.memoirPhotos = newMemoir.memoirPhotos;
-      state.description = newMemoir.description;
-      state.memoirMsg = 'New Memoir was created';
+      updateMemoirState(state, newMemoir);
+      state.memoirLoading = false;
+      toast.info('Great, we have a new memoir!', { ...toastSettings });
     });
     builder.addCase(memoirThunks.createNewMemoir.rejected, (state, { payload }) => {
-      if (payload) state.memoirMsg = payload.status;
+      if (payload) state.memoirError = payload.status;
     });
     builder.addCase(memoirThunks.createNewMemoir.pending, (state) => {
-      state.memoirMsg = 'Loading';
+      state.memoirLoading = true;
     });
     builder.addCase(memoirThunks.getMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
-      state.id = newMemoir._id;
-      state.tripName = newMemoir.tripName;
-      state.destinationName = newMemoir.destinationName;
-      state.longLat = newMemoir.longLat;
-      state.countryName = newMemoir.countryName;
-      state.continentName = newMemoir.continentName;
-      state.whereFromLongLat = newMemoir.whereFromLongLat;
-      state.distance = newMemoir.distance;
-      state.date = newMemoir.date;
-      state.rateValue = newMemoir.rateValue;
-      state.days = newMemoir.days;
-      state.sites = newMemoir.sites;
-      state.memoirPhotos = newMemoir.memoirPhotos;
-      state.description = newMemoir.description;
-      state.memoirMsg = 'A Memoir was retrieved';
+      updateMemoirState(state, newMemoir);
+      state.memoirLoading = false;
     });
     builder.addCase(memoirThunks.getMemoir.rejected, (state, { payload }) => {
-      if (payload) state.memoirMsg = payload.status;
+      if (payload) state.memoirError = payload.status;
     });
     builder.addCase(memoirThunks.getMemoir.pending, (state) => {
-      state.memoirMsg = 'Loading';
+      state.memoirLoading = true;
     });
     builder.addCase(memoirThunks.deleteMemoir.fulfilled, (state) => {
-      state.id = '';
-      state.tripName = '';
-      state.destinationName = '';
-      state.longLat = [];
-      state.countryName = '';
-      state.continentName = '';
-      state.whereFromLongLat = [];
-      state.distance = 0;
-      state.date = '';
-      state.rateValue = 0;
-      state.days = 0;
-      state.sites = [];
-      state.memoirPhotos = ['https://i.ibb.co/XWyGkgv/default-trip-img.jpg'];
-      state.description = '';
-      state.memoirMsg = 'Memoir was deleted';
+      emptyMemoirState(state);
+      state.memoirLoading = false;
+      toast.info('You have deleted a memoir!', { ...toastSettings });
     });
     builder.addCase(memoirThunks.deleteMemoir.rejected, (state, { payload }) => {
-      if (payload) state.memoirMsg = payload.status;
+      if (payload) state.memoirError = payload.status;
     });
     builder.addCase(memoirThunks.deleteMemoir.pending, (state) => {
-      state.memoirMsg = 'Loading';
+      state.memoirLoading = true;
     });
     builder.addCase(memoirThunks.updateMemoir.fulfilled, (state, { payload }) => {
       const newMemoir: memoirTypes.TDBMemoir = payload.data;
-      state.id = newMemoir._id;
-      state.tripName = newMemoir.tripName;
-      state.destinationName = newMemoir.destinationName;
-      state.longLat = newMemoir.longLat;
-      state.countryName = newMemoir.countryName;
-      state.continentName = newMemoir.continentName;
-      state.whereFromLongLat = newMemoir.whereFromLongLat;
-      state.distance = newMemoir.distance;
-      state.date = newMemoir.date;
-      state.rateValue = newMemoir.rateValue;
-      state.days = newMemoir.days;
-      state.sites = newMemoir.sites;
-      state.memoirPhotos = newMemoir.memoirPhotos;
-      state.description = newMemoir.description;
-      state.memoirMsg = 'A Memoir was updated';
+      updateMemoirState(state, newMemoir);
+      state.memoirLoading = false;
+      toast.info('You have updated a memoir!', { ...toastSettings });
     });
     builder.addCase(memoirThunks.updateMemoir.rejected, (state, { payload }) => {
-      if (payload) state.memoirMsg = payload.status;
+      if (payload) state.memoirError = payload.status;
     });
     builder.addCase(memoirThunks.updateMemoir.pending, (state) => {
-      state.memoirMsg = 'Loading';
+      state.memoirLoading = true;
     });
     builder.addCase(memoirThunks.getMemoirPreviews.fulfilled, (state, { payload }) => {
       const previews: memoirTypes.TMemoirPreview[] = payload.data;
       state.previews = previews;
-      state.memoirMsg = 'Previews were retrieved';
+      state.memoirLoading = false;
     });
     builder.addCase(memoirThunks.getMemoirPreviews.rejected, (state, { payload }) => {
-      if (payload) state.memoirMsg = payload.status;
+      if (payload) state.memoirError = payload.status;
     });
     builder.addCase(memoirThunks.getMemoirPreviews.pending, (state) => {
-      state.memoirMsg = 'Loading';
+      state.memoirLoading = true;
     });
   },
 });

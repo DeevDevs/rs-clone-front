@@ -1,4 +1,5 @@
 // import * as memoirTypes from './memoirTypes';
+import * as memoirTypes from './memoirTypes';
 import * as userTypes from '../user/userTypes';
 
 async function sendUploadImagesRequest(files: FileList) {
@@ -73,4 +74,38 @@ export function allFilesImages(files: FileList) {
     )
   ) return false;
   return true;
+}
+
+export function updateMemoirState(state: memoirTypes.TMemoir, newMemoir: memoirTypes.TDBMemoir) {
+  state.id = newMemoir._id;
+  state.tripName = newMemoir.tripName;
+  state.destinationName = newMemoir.destinationName;
+  state.longLat = newMemoir.longLat;
+  state.countryName = newMemoir.countryName;
+  state.continentName = newMemoir.continentName;
+  state.whereFromLongLat = newMemoir.whereFromLongLat;
+  state.distance = newMemoir.distance;
+  state.date = newMemoir.date;
+  state.rateValue = newMemoir.rateValue;
+  state.days = newMemoir.days;
+  state.sites = newMemoir.sites;
+  state.memoirPhotos = newMemoir.memoirPhotos;
+  state.description = newMemoir.description;
+}
+
+export function emptyMemoirState(state: memoirTypes.TMemoir) {
+  state.id = '';
+  state.tripName = '';
+  state.destinationName = '';
+  state.longLat = [];
+  state.countryName = '';
+  state.continentName = '';
+  state.whereFromLongLat = [];
+  state.distance = 0;
+  state.date = '';
+  state.rateValue = 0;
+  state.days = 0;
+  state.sites = [];
+  state.memoirPhotos = ['https://i.ibb.co/XWyGkgv/default-trip-img.jpg'];
+  state.description = '';
 }

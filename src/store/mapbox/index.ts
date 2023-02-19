@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import * as mapboxThunks from './mapboxThunks';
+import getLocationData from './mapboxThunks';
 import * as mapboxTypes from './mapboxTypes';
 
 const initialState: mapboxTypes.TMapbox = {
@@ -13,6 +13,8 @@ const initialState: mapboxTypes.TMapbox = {
   mapboxModuleMsg: '',
   clickTarget: 'map',
   mainMapMarkers: [],
+  mapLoading: false,
+  mapError: '',
 };
 
 export const mapboxSlice = createSlice({
@@ -40,7 +42,7 @@ export const mapboxSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(
-      mapboxThunks.getLocationData.fulfilled,
+      getLocationData.fulfilled,
       (state, { payload }) => {
         const country = payload.features.find((feature) => feature.place_type.includes('country'));
         state.country = country ? country.text : 'this area';
@@ -50,17 +52,17 @@ export const mapboxSlice = createSlice({
         state.clickLong = payload.query[0];
         // eslint-disable-next-line prefer-destructuring
         state.clickLat = payload.query[1];
-        state.mapboxMsg = 'data received';
+        state.mapLoading = false;
       },
     );
     builder.addCase(
-      mapboxThunks.getLocationData.rejected,
+      getLocationData.rejected,
       (state, { payload }) => {
-        if (payload) state.mapboxMsg = payload.status;
+        if (payload) state.mapError = payload.status;
       },
     );
-    builder.addCase(mapboxThunks.getLocationData.pending, (state) => {
-      state.mapboxMsg = 'Loading';
+    builder.addCase(getLocationData.pending, (state) => {
+      state.mapLoading = true;
     });
   },
 });
