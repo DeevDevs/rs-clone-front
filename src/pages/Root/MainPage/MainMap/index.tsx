@@ -5,6 +5,8 @@ import React, {
   useCallback,
 } from 'react';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import { toast } from 'react-toastify';
+import toastSettings from '../../../../store/constants';
 import { useAppDispatch, useAppSelector } from '../../../../store/index';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { mapboxActions } from '../../../../store/mapbox';
@@ -65,11 +67,11 @@ const MainMap = () => {
           position.coords.latitude,
         ]);
       },
-      (error) => {
-        console.log(error);
+      () => {
+        toast.error("Unfortunately, we couldn't retrieve your location.", { ...toastSettings });
       },
     );
-  });
+  }, []);
 
   useEffect(() => {
     if (!mapLoading && clickLong !== 0 && clickLat !== 0) {
@@ -90,6 +92,7 @@ const MainMap = () => {
   }, [clickLocation]);
 
   useEffect(() => {
+    console.log(userLocation[0], userLocation[1]);
     if (userLocation[0] === 0 && userLocation[1] === 0) return;
     if (map.current) return;
     if (!mapContainer.current) return;
@@ -119,17 +122,16 @@ const MainMap = () => {
       if (+clickLongitude === 0 && +clickLatitude === 0) return;
       setClickLocation([+clickLongitude.toFixed(4), +clickLatitude.toFixed(4)]);
     });
-  });
+  }, [userLocation[0], userLocation[1]]);
 
   useEffect(() => {
     if (!map.current) return;
-    console.log(previews);
     const markersPopups = previews.map((preview) => {
       const markerPopup = addMarkerMemoir(map, preview);
       return markerPopup;
     });
     cdStoreMarker(markersPopups);
-  }, [previews]);
+  }, [previews, userLocation[0], userLocation[1]]);
 
   return (
     <div
