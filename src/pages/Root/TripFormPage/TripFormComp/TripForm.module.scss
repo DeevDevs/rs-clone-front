@@ -130,10 +130,20 @@
     width: 100%;
     background-color: index.$light-blue;
     border: 2px solid index.$very-dark-blue;
-    border-radius: 10px;
+    border-radius: 7px;
     resize: none;
     @include index.font(normal, 400, 25px, 37px);
     padding: 5px;
+    cursor: pointer;
+    &::-webkit-scrollbar {
+      background-color: index.$very-dark-blue;
+      border-radius: 3px;
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: index.$dark-blue;
+      border-radius: 7px;
+    }
   }
   &_submit {
     max-width: 320px;
