@@ -126,12 +126,13 @@ const MainMap = () => {
 
   useEffect(() => {
     if (!map.current) return;
+    console.log('I AM RUN ONCE ONLY');
     const markersPopups = previews.map((preview) => {
       const markerPopup = addMarkerMemoir(map, preview);
       return markerPopup;
     });
     cdStoreMarker(markersPopups);
-  }, [previews, userLocation[0], userLocation[1]]);
+  }, [previews]);
 
   return (
     <div
