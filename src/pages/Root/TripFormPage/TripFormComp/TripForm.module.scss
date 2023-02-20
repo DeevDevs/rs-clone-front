@@ -85,6 +85,16 @@
       display: flex;
       justify-content: flex-start;
     }
+    & input[type="date"] {
+      appearance: none;
+      width: 200px;
+      border-radius: 6px;
+      font-family: "Comic Neue", cursive;
+      @include index.font(normal, 400, 22px, 37px);
+      padding: 0 5px 0 8px;
+      border: 1px solid index.$light-blue;
+      border-left: 8px solid index.$light-blue;
+    }
   }
   &_statistic {
     display: flex;
@@ -148,16 +158,6 @@
   &>div {
     height: 100%;
   }
-}
-input[type="date" i] {
-  appearance: none;
-  width: 200px;
-  border: 2px solid index.$very-dark-blue;
-  border-radius: 10px;
-  font-family: "Comic Neue";
-  letter-spacing: 2px;
-  @include index.font(normal, 400, 25px, 37px);
-  padding: 0 5px 0 5px;
 }
 .error {
   color: #ff0033;
