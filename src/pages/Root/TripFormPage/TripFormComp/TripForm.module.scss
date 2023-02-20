@@ -98,9 +98,9 @@
   }
   &_statistic {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    padding-top: 70px;
+    padding: 70px 70px 0 70px;
     &>div {
       width: initial;
     }
@@ -122,6 +122,10 @@
         font-family: inherit;
         font-weight: 700;
       }
+    }
+    & tspan {
+      font-family: 'Comic Neue', cursive !important;
+      font-weight: 700;
     }
   }
   &_area {

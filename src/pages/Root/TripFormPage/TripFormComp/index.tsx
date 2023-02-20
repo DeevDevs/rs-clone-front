@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import MapComponent from '../../../../components/MapComponent';
 import StatisticItem from '../../../../components/StatisticItem';
 import { StatisticsItemsText, TripErrorMessages } from '../../../../enums';
-import { getFile } from '../../../../functions';
+import { getFile, getGradeText } from '../../../../functions';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { createNewMemoir } from '../../../../store/memoir/memoirThunks';
 import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
@@ -25,7 +25,7 @@ const initialFormValues = {
 
 const satisfaction = {
   maximum: 10,
-  text: StatisticsItemsText.Satisfaction,
+  text: getGradeText(5),
 };
 
 const initialSites: string[] = [];
@@ -209,7 +209,7 @@ const TripForm = () => {
           <StatisticItem
             mark={rateValue}
             maximum={satisfaction.maximum}
-            text={satisfaction.text}
+            text={getGradeText(rateValue)}
           />
           <TripSelect
             values={[...new Array(10)].map((el, idx) => String(idx + 1))}

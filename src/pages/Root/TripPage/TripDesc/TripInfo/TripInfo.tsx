@@ -5,6 +5,7 @@ import { StatisticsItemsText } from '../../../../../enums';
 import { useAppDispatch, useAppSelector } from '../../../../../store';
 import { getMemoir } from '../../../../../store/memoir/memoirThunks';
 import months from '../../../../../constants/tripPage';
+import { getGradeText } from '../../../../../functions';
 
 const TripInfo = () => {
   const satisfaction = {
@@ -45,7 +46,7 @@ const TripInfo = () => {
       <StatisticItem
         mark={rateValue}
         maximum={satisfaction.maximum}
-        text={satisfaction.text}
+        text={getGradeText(rateValue)}
       />
       <p>Sites</p>
       <p>{sites.join(', ')}</p>
