@@ -4,6 +4,13 @@
 // font-family: 'Finger Paint', cursive;
 // font-family: 'Julee', cursive;
 
+.profPage{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .profpageparent {
   display: flex;
   flex-direction: row-reverse;

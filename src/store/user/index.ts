@@ -1,12 +1,13 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-underscore-dangle */
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import toastSettings from '../constants';
 import * as userTypes from './userTypes';
 import * as userThunks from './userThunks';
+import { updateUserState, emptyUserState } from './helperFns';
 
 const initialState: userTypes.TUser = {
   id: '',
-  name: 'Whatever',
+  name: 'Friendly Guest',
   email: '',
   photo: 'https://i.ibb.co/420YqnY/sloth.jpg',
   age: 0,
@@ -16,6 +17,8 @@ const initialState: userTypes.TUser = {
   memoirIDs: [],
   userMsg: null,
   token: '',
+  userLoading: false,
+  userError: '',
 };
 
 export const userSlice = createSlice({
@@ -25,154 +28,112 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(userThunks.signup.fulfilled, (state, { payload }) => {
       const newUser = payload.data.user;
-      state.name = newUser.name;
-      state.email = newUser.email;
-      state.photo = newUser.photo;
-      state.age = newUser.age;
-      state.from = newUser.from;
-      state.bio = newUser.bio;
-      state.statsID = newUser.statsID;
-      state.id = newUser._id;
-      state.memoirIDs = newUser.memoirIDs.slice();
+      updateUserState(state, newUser);
       state.token = payload.token;
-      state.userMsg = 'User signed up';
+      state.userLoading = false;
+      toast.info(`Welcome back, ${state.name}!`, { ...toastSettings });
     });
     builder.addCase(userThunks.signup.rejected, (state, { payload }) => {
-      if (payload) state.userMsg = payload.status;
+      if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.signup.pending, (state) => {
-      state.userMsg = 'Loading';
+      state.userLoading = true;
     });
     builder.addCase(userThunks.login.fulfilled, (state, { payload }) => {
       const newUser = payload.data.user;
-      state.name = newUser.name;
-      state.email = newUser.email;
-      state.photo = newUser.photo;
-      state.age = newUser.age;
-      state.from = newUser.from;
-      state.bio = newUser.bio;
-      state.statsID = newUser.statsID;
-      state.id = newUser._id;
-      state.memoirIDs = newUser.memoirIDs.slice();
+      updateUserState(state, newUser);
       state.token = payload.token;
-      state.userMsg = 'User logged in';
+      state.userLoading = false;
+      toast.info(`Welcome back, ${state.name}!`, { ...toastSettings });
     });
     builder.addCase(userThunks.login.rejected, (state, { payload }) => {
-      if (payload) state.userMsg = payload.status;
+      if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.login.pending, (state) => {
-      state.userMsg = 'Loading';
+      state.userLoading = true;
     });
     builder.addCase(userThunks.logout.fulfilled, (state) => {
-      state.name = '';
-      state.email = '';
-      state.photo = 'https://i.ibb.co/420YqnY/sloth.jpg';
-      state.age = 0;
-      state.from = '';
-      state.bio = '';
-      state.statsID = '';
-      state.id = '';
-      state.memoirIDs = [];
+      emptyUserState(state);
       state.token = '';
-      state.userMsg = 'User logged out';
+      state.userLoading = false;
+      toast.info('You have logged out successfully!', { ...toastSettings });
     });
     builder.addCase(userThunks.logout.rejected, (state, { payload }) => {
-      if (payload) state.userMsg = payload.status;
+      if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.logout.pending, (state) => {
-      state.userMsg = 'Loading';
+      state.userLoading = true;
     });
     builder.addCase(userThunks.isLoggedIn.fulfilled, (state, { payload }) => {
       const newUser = payload.data;
-      state.name = newUser.name;
-      state.email = newUser.email;
-      state.photo = newUser.photo;
-      state.age = newUser.age;
-      state.from = newUser.from;
-      state.bio = newUser.bio;
-      state.statsID = newUser.statsID;
-      state.id = newUser._id;
-      state.memoirIDs = newUser.memoirIDs.slice();
-      state.userMsg = 'User logged in';
+      updateUserState(state, newUser);
+      state.userLoading = false;
+      toast.info(`Welcome back, ${state.name}!`, { ...toastSettings });
     });
     builder.addCase(userThunks.isLoggedIn.rejected, (state, { payload }) => {
-      if (payload) state.userMsg = payload.status;
+      if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.isLoggedIn.pending, (state) => {
-      state.userMsg = 'Loading';
+      state.userLoading = true;
     });
     builder.addCase(userThunks.getUser.fulfilled, (state) => {
       state.userMsg = 'User data received';
     });
     builder.addCase(userThunks.getUser.rejected, (state, { payload }) => {
-      if (payload) state.userMsg = payload.status;
+      if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.getUser.pending, (state) => {
-      state.userMsg = 'Loading';
+      state.userLoading = true;
     });
     builder.addCase(userThunks.updateUser.fulfilled, (state, { payload }) => {
       const userUpdateData = payload.data;
-      state.name = userUpdateData.name;
-      state.email = userUpdateData.email;
-      state.photo = userUpdateData.photo;
-      state.age = userUpdateData.age;
-      state.from = userUpdateData.from;
-      state.bio = userUpdateData.bio;
-      state.statsID = userUpdateData.statsID;
-      state.id = userUpdateData._id;
-      state.memoirIDs = userUpdateData.memoirIDs.slice();
-      state.userMsg = 'User updated';
+      updateUserState(state, userUpdateData);
+      state.userLoading = false;
+      toast.info(`${state.name}, your profile data has been updated!`, { ...toastSettings });
     });
     builder.addCase(userThunks.updateUser.rejected, (state, { payload }) => {
-      if (payload) state.userMsg = payload.status;
+      if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.updateUser.pending, (state) => {
-      state.userMsg = 'Loading';
+      state.userLoading = true;
     });
     builder.addCase(userThunks.deleteUser.fulfilled, (state) => {
-      state.name = '';
-      state.email = '';
-      state.photo = 'https://i.ibb.co/420YqnY/sloth.jpg';
-      state.age = 0;
-      state.from = '';
-      state.bio = 'Please, tell us about yourself a little.';
-      state.statsID = '';
-      state.id = '';
-      state.memoirIDs = [];
+      emptyUserState(state);
       state.token = '';
-      state.userMsg = 'Deleted a user';
+      state.userLoading = false;
+      toast.info('Your account has been deleted. Sad :( We hope to see you back soon!', { ...toastSettings });
     });
     builder.addCase(userThunks.deleteUser.rejected, (state, { payload }) => {
-      if (payload) state.userMsg = payload.status;
+      if (payload) state.userError = payload.status;
+      toast.error(`${state.userError}`, { ...toastSettings });
     });
     builder.addCase(userThunks.deleteUser.pending, (state) => {
-      state.userMsg = 'Loading';
+      state.userLoading = true;
     });
     builder.addCase(
       userThunks.addProfileImage.fulfilled,
       (state, { payload }) => {
         const userUpdateData = payload.data;
-        console.log(userUpdateData);
-        state.name = userUpdateData.name;
-        state.email = userUpdateData.email;
         state.photo = userUpdateData.photo;
-        state.age = userUpdateData.age;
-        state.from = userUpdateData.from;
-        state.bio = userUpdateData.bio;
-        state.statsID = userUpdateData.statsID;
-        state.id = userUpdateData._id;
-        state.memoirIDs = userUpdateData.memoirIDs.slice();
-        state.userMsg = 'Image Uploaded';
+        state.userLoading = false;
+        toast.info(`${state.name}, your profile image has been updated!`, { ...toastSettings });
       },
     );
     builder.addCase(
       userThunks.addProfileImage.rejected,
       (state, { payload }) => {
-        if (payload) state.userMsg = payload.status;
+        if (payload) state.userError = payload.status;
+        toast.error(`${state.userError}`, { ...toastSettings });
       },
     );
     builder.addCase(userThunks.addProfileImage.pending, (state) => {
-      state.userMsg = 'Loading';
+      state.userLoading = true;
     });
   },
 });

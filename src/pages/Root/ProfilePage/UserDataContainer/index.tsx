@@ -1,6 +1,3 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable react/jsx-props-no-spreading,jsx-a11y/label-has-associated-control */
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../store';
@@ -10,14 +7,21 @@ import { countAge, saveDataToObject } from '../../../../data/ProfilePageStore';
 
 const UserDataContainer = () => {
   const dispatchApp = useAppDispatch();
-  const { id, name, age, from, bio, email } = useAppSelector(
-    (state) => state.userReducer
+  const {
+    id,
+    name,
+    age,
+    from,
+    bio,
+    email,
+  } = useAppSelector(
+    (state) => state.userReducer,
   );
   const callbackUpdateUser = useCallback(
     async (userUpdData: userTypes.TUpdUserReq) => {
       await dispatchApp(updateUser(userUpdData));
     },
-    []
+    [],
   );
   const [nameUpdate, setNameUpdate] = useState(false);
   const [ageUpdate, setAgeUpdate] = useState(false);
@@ -65,7 +69,7 @@ const UserDataContainer = () => {
               return;
             }
             const updatedName = document.getElementById(
-              'namefield'
+              'namefield',
             ) as HTMLInputElement;
             updatedName.value = name;
             setNameUpdate(true);
@@ -107,7 +111,7 @@ const UserDataContainer = () => {
               return;
             }
             const updatedAge = document.getElementById(
-              'agefield'
+              'agefield',
             ) as HTMLElement;
             updatedAge.textContent = `${age}`;
             setAgeUpdate(true);
@@ -144,7 +148,7 @@ const UserDataContainer = () => {
               return;
             }
             const updatedLocation = document.getElementById(
-              'locationfield'
+              'locationfield',
             ) as HTMLInputElement;
             updatedLocation.value = from;
             setLocationUpdate(true);
@@ -186,7 +190,7 @@ const UserDataContainer = () => {
               return;
             }
             const updatedBio = document.getElementById(
-              'biofield'
+              'biofield',
             ) as HTMLInputElement;
             updatedBio.value = bio;
             setBioUpdate(true);
@@ -208,7 +212,7 @@ const UserDataContainer = () => {
               nameUpdate,
               ageUpdate,
               locationUpdate,
-              bioUpdate
+              bioUpdate,
             );
             await callbackUpdateUser(updateObject);
             setHaveChanges(false);

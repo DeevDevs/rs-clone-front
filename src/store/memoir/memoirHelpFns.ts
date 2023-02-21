@@ -1,4 +1,5 @@
 // import * as memoirTypes from './memoirTypes';
+import * as memoirTypes from './memoirTypes';
 import * as userTypes from '../user/userTypes';
 
 async function sendUploadImagesRequest(files: FileList) {
@@ -19,7 +20,7 @@ async function sendUploadImagesRequest(files: FileList) {
         const imageData: userTypes.TImgBBResp = await imgBBresponse.json();
         const imgURL: string = imageData.data.url;
         resolve(imgURL);
-      } else resolve('default.jpg');
+      } else resolve('https://i.ibb.co/XWyGkgv/default-trip-img.jpg');
     });
     return promise;
   });
@@ -33,11 +34,11 @@ export async function uploadMemoirImages(
 ) {
   if (update === false) {
     if (files.length === 0) {
-      return ['default.jpg'];
+      return ['https://i.ibb.co/XWyGkgv/default-trip-img.jpg'];
     }
     const uploadImgPromises = await sendUploadImagesRequest(files);
     const listOfResolutions = await Promise.allSettled(uploadImgPromises);
-    const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'default.jpg'));
+    const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg'));
     return listOfURLs;
   }
   if (files.length === 0 && listToRemove.length === 0) {
@@ -45,18 +46,19 @@ export async function uploadMemoirImages(
   }
   if (files.length === 0 && listToRemove.length > 0) {
     const listWithoutDeletedPhotos = originalList.filter(
-      (url) => listToRemove.indexOf(url) < 0 || url !== 'default.jpg',
+      (url) => listToRemove.indexOf(url) < 0
+      || url !== 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg',
     );
     return listWithoutDeletedPhotos.length > 0
       ? listWithoutDeletedPhotos
-      : ['default.jpg'];
+      : ['https://i.ibb.co/XWyGkgv/default-trip-img.jpg'];
   }
   const uploadImgPromises = await sendUploadImagesRequest(files);
   const listOfResolutions = await Promise.allSettled(uploadImgPromises);
-  const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'default.jpg'));
+  const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg'));
   const updatedList = [...originalList, ...listOfURLs] as string[];
   const listWithoutDeletedPhotos = updatedList.filter(
-    (url) => listToRemove.indexOf(url) < 0 || url !== 'default.jpg',
+    (url) => listToRemove.indexOf(url) < 0 || url !== 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg',
   );
   return listWithoutDeletedPhotos;
 }
@@ -72,4 +74,38 @@ export function allFilesImages(files: FileList) {
     )
   ) return false;
   return true;
+}
+
+export function updateMemoirState(state: memoirTypes.TMemoir, newMemoir: memoirTypes.TDBMemoir) {
+  state.id = newMemoir._id;
+  state.tripName = newMemoir.tripName;
+  state.destinationName = newMemoir.destinationName;
+  state.longLat = newMemoir.longLat;
+  state.countryName = newMemoir.countryName;
+  state.continentName = newMemoir.continentName;
+  state.whereFromLongLat = newMemoir.whereFromLongLat;
+  state.distance = newMemoir.distance;
+  state.date = newMemoir.date;
+  state.rateValue = newMemoir.rateValue;
+  state.days = newMemoir.days;
+  state.sites = newMemoir.sites;
+  state.memoirPhotos = newMemoir.memoirPhotos;
+  state.description = newMemoir.description;
+}
+
+export function emptyMemoirState(state: memoirTypes.TMemoir) {
+  state.id = '';
+  state.tripName = '';
+  state.destinationName = '';
+  state.longLat = [];
+  state.countryName = '';
+  state.continentName = '';
+  state.whereFromLongLat = [];
+  state.distance = 0;
+  state.date = '';
+  state.rateValue = 0;
+  state.days = 0;
+  state.sites = [];
+  state.memoirPhotos = ['https://i.ibb.co/XWyGkgv/default-trip-img.jpg'];
+  state.description = '';
 }

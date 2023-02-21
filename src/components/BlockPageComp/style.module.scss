@@ -1,0 +1,15 @@
+@use "src/sass/index" as basics;
+
+.container {
+  width: 100%;
+  height: calc(100vh - 391px);
+  max-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__text {
+      font-size: 42px;
+      text-align: center;
+    }
+}

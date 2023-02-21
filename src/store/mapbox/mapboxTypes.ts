@@ -1,3 +1,5 @@
+import mapboxgl from 'mapbox-gl';
+
 export type TMapbox = {
   userLocation: [number, number];
   clickLat: number;
@@ -8,6 +10,14 @@ export type TMapbox = {
   clickedMemoirID: string;
   mapboxModuleMsg: string;
   clickTarget: 'map' | 'memoir';
+  mainMapMarkers: TMarkerPopup[];
+  mapLoading: boolean;
+  mapError: string;
+};
+
+export type TMarkerPopup = {
+  marker: mapboxgl.Marker;
+  popup: mapboxgl.Popup;
 };
 
 export type TMapboxMsg = {

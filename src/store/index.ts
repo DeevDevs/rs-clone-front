@@ -14,7 +14,12 @@ export const rootReducer = combineReducers({
   mapboxReducer,
 });
 
-export const store = () => configureStore({ reducer: rootReducer });
+export const store = () => configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false,
+  }),
+});
 
 export type TRootReducer = ReturnType<typeof rootReducer>;
 export type TAppStore = ReturnType<typeof store>;

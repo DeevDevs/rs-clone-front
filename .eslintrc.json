@@ -27,6 +27,8 @@
         "unnamedComponents": "arrow-function"
       }
     ],
+    "no-param-reassign": ["error", { "props": false }],
+    "no-underscore-dangle": 0,
     "@typescript-eslint/no-explicit-any": 2
   }
 }

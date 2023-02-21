@@ -1,17 +1,20 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-unsafe-optional-chaining */
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import { toast } from 'react-toastify';
+import toastSettings from '../../../../store/constants';
 import { useAppDispatch, useAppSelector } from '../../../../store/index';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { mapboxActions } from '../../../../store/mapbox';
 import { memoirActions } from '../../../../store/memoir';
 import './mainmap.scss';
 import * as memoirTypes from '../../../../store/memoir/memoirTypes';
-import { getLocationData } from '../../../../store/mapbox/mapboxThunks';
+import * as mapboxTypes from '../../../../store/mapbox/mapboxTypes';
+import getLocationData from '../../../../store/mapbox/mapboxThunks';
 import {
   addMarkerCurLocation,
   addMarkerMemoir,
@@ -20,9 +23,7 @@ import {
 } from '../../../../data/MainPageMap/helperFns';
 import MapModule from '../MapModule';
 // import pin from '../../../../data/MainPageMap/marker.png';
-// eslint-disable-next-line operator-linebreak
-mapboxgl.accessToken =
-  'pk.eyJ1IjoiZGVldmRldnMiLCJhIjoiY2xkdWpvZnlyMDZqdzNzcmYwcmhoNTVyZSJ9.TL4fwGpN6YdtqRKZpqOaAQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGVldmRldnMiLCJhIjoiY2xkdWpvZnlyMDZqdzNzcmYwcmhoNTVyZSJ9.TL4fwGpN6YdtqRKZpqOaAQ';
 
 const MainMap = () => {
   const dispatchApp = useAppDispatch();
@@ -35,23 +36,28 @@ const MainMap = () => {
   const cbDetermineClickTarget = (data: string): void => {
     dispatchApp(mapboxActions.determineClickTarget(data));
   };
+  const cdStoreMarker = (data: (mapboxTypes.TMarkerPopup | undefined)[]): void => {
+    dispatchApp(mapboxActions.storeMarker(data));
+  };
   const cbStoreChosenMemoirID = (data: string): void => {
     dispatchApp(mapboxActions.storeChosenMemoirID(data));
   };
   const callbackGetLocationData = useCallback(async (clickLoc: number[]) => {
     await dispatchApp(getLocationData(clickLoc));
   }, []);
-  // eslint-disable-next-line operator-linebreak
-  const { userLocation, mapboxMsg, clickLong, clickLat, place, country } =
-    useAppSelector((state) => state.mapboxReducer);
+  const {
+    userLocation,
+    mapLoading,
+    clickLong,
+    clickLat,
+    place,
+    country,
+  } = useAppSelector((state) => state.mapboxReducer);
   const { previews } = useAppSelector((state) => state.memoirReducer);
   const mapContainer = useRef(null);
   const map = React.useRef<mapboxgl.Map | null>(null);
   const [clickLocation, setClickLocation] = useState([0, 0]);
-
-  useEffect(() => {
-    console.log(mapboxMsg);
-  }, [mapboxMsg]);
+  const [placedMarkers, setPlacedMarkers] = useState(false);
 
   useEffect(() => {
     if (userLocation[0] !== 0 && userLocation[0] !== 0) return;
@@ -62,23 +68,24 @@ const MainMap = () => {
           position.coords.latitude,
         ]);
       },
-      (error) => {
-        console.log(error);
-      }
+      () => {
+        toast.error("Unfortunately, we couldn't retrieve your location.", { ...toastSettings });
+      },
     );
-  });
+  }, []);
 
   useEffect(() => {
-    if (mapboxMsg !== 'data received') return;
-    const data = {
-      longLat: [clickLong, clickLat],
-      destinationName: place,
-      countryName: country,
-    } as memoirTypes.TMapClickData;
-    saveDataFromClick(data);
-    cbDetermineClickTarget('map');
-    toggleModuleOverlay();
-  }, [mapboxMsg]);
+    if (!mapLoading && clickLong !== 0 && clickLat !== 0) {
+      const data = {
+        longLat: [clickLong, clickLat],
+        destinationName: place,
+        countryName: country,
+      } as memoirTypes.TMapClickData;
+      saveDataFromClick(data);
+      cbDetermineClickTarget('map');
+      toggleModuleOverlay();
+    }
+  }, [mapLoading]);
 
   useEffect(() => {
     if (clickLocation[0] === 0 && clickLocation[1] === 0) return;
@@ -97,7 +104,16 @@ const MainMap = () => {
         Number(userLocation[1].toFixed(4)),
       ],
       zoom: 5,
+      maxZoom: 9,
+      minZoom: 2,
+      projection: {
+        name: 'mercator',
+        center: [0, 30],
+        parallels: [30, 30],
+      },
     });
+    map.current.dragRotate.disable();
+
     addMarkerCurLocation(map, userLocation);
 
     map.current.on('click', (e: mapboxgl.MapMouseEvent) => {
@@ -106,12 +122,19 @@ const MainMap = () => {
       if (+clickLongitude === 0 && +clickLatitude === 0) return;
       setClickLocation([+clickLongitude.toFixed(4), +clickLatitude.toFixed(4)]);
     });
-  });
+  }, [userLocation[0], userLocation[1]]);
 
   useEffect(() => {
     if (!map.current) return;
-    previews.forEach((preview) => addMarkerMemoir(map, preview));
-  }, [previews]);
+    if (!previews.length) return;
+    if (placedMarkers) return;
+    const markersPopups = previews.map((preview) => {
+      const markerPopup = addMarkerMemoir(map, preview);
+      return markerPopup;
+    });
+    cdStoreMarker(markersPopups);
+    setPlacedMarkers(true);
+  }, [previews, map.current]);
 
   return (
     <div
@@ -122,13 +145,14 @@ const MainMap = () => {
         // Mouse position
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        if (x < 240 && y < 170) hideDisplayLogo('hide');
-        if (x > 240 || y > 170) hideDisplayLogo('show');
+        if (x < 320 && y < 280 && mapBox.classList.contains('mapboxgl-canvas')) hideDisplayLogo('hide');
+        if ((x > 320 || y > 280) && mapBox.classList.contains('mapboxgl-canvas')) hideDisplayLogo('show');
       }}
     >
       <MapModule />
       <div className="mapLogo" />
       <div
+        role="presentation"
         ref={mapContainer}
         className="mapContainer"
         onClick={(e) => {

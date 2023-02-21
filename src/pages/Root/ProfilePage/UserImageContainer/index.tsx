@@ -1,7 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable object-curly-newline */
-/* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable react/jsx-props-no-spreading,jsx-a11y/label-has-associated-control */
 import React, { useCallback, useState } from 'react';
 import styles from './style.module.scss';
 import { useAppSelector, useAppDispatch } from '../../../../store';
@@ -16,7 +12,7 @@ const UserImageContainer = () => {
     async (updData: userTypes.TUploadImgReq) => {
       await dispatchApp(addProfileImage(updData));
     },
-    []
+    [],
   );
   return (
     <div className={styles.userimgblock}>
@@ -33,7 +29,7 @@ const UserImageContainer = () => {
           onClick={async () => {
             if (!isImgAdded) return;
             const inputField = document.getElementById(
-              'img-upload'
+              'img-upload',
             ) as HTMLInputElement;
             if (inputField.files) {
               const updBody = {
