@@ -1,15 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { addMarker } from '../../data/MainPageMap/helperFns';
-import { MapProps } from '../../types';
+import { addPoint } from '../../data/MainPageMap/helperFns';
+import { MapPoint, MapProps } from '../../types';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGVldmRldnMiLCJhIjoiY2xkdWpvZnlyMDZqdzNzcmYwcmhoNTVyZSJ9.TL4fwGpN6YdtqRKZpqOaAQ';
 
-const MapComponent = ({ newMapInfo } : { newMapInfo: MapProps }) => {
+const MapComponent = (props : MapProps) => {
+  const { pointTo, pointFrom, onChangeLocation } = props;
+  const { baseLocation: baseLocationTo, popupName: popupNameTo } = pointTo;
   const mapContainer = useRef(null);
   const map = React.useRef<mapboxgl.Map | null>(null);
-  const { newLocation, markerName } = newMapInfo;
 
   useEffect(() => {
     if (map.current) return;
@@ -17,7 +18,7 @@ const MapComponent = ({ newMapInfo } : { newMapInfo: MapProps }) => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [...newLocation],
+      center: [...baseLocationTo],
       zoom: 5,
       maxZoom: 9,
       minZoom: 2,
@@ -27,14 +28,28 @@ const MapComponent = ({ newMapInfo } : { newMapInfo: MapProps }) => {
         parallels: [30, 30],
       },
     });
+
     map.current.dragRotate.disable();
-    addMarker(map, newLocation, markerName);
-    map.current.on('click', (e: mapboxgl.MapMouseEvent) => {
-      const clickLongitude = e.lngLat.lng;
-      const clickLatitude = e.lngLat.lat;
-      if (+clickLongitude === 0 && +clickLatitude === 0) return;
-      console.log([+clickLongitude.toFixed(4), +clickLatitude.toFixed(4)]);
-    });
+    addPoint(map, baseLocationTo, popupNameTo);
+    if (pointFrom) {
+      const { baseLocation: baseLocationFrom, popupName: popupNameFrom } = pointFrom;
+      addPoint(map, baseLocationFrom, popupNameFrom);
+    }
+    let mapPoint: MapPoint | null = null;
+
+    if (onChangeLocation) {
+      map.current.on('click', (e: mapboxgl.MapMouseEvent) => {
+        const clickLongitude = e.lngLat.lng;
+        const clickLatitude = e.lngLat.lat;
+        if (mapPoint) {
+          mapPoint.marker.remove();
+          mapPoint.popup.remove();
+        }
+        if (+clickLongitude === 0 && +clickLatitude === 0) return;
+        onChangeLocation([+clickLongitude.toFixed(4), +clickLatitude.toFixed(4)]);
+        mapPoint = addPoint(map, [+clickLongitude.toFixed(4), +clickLatitude.toFixed(4)], 'Journey started here');
+      });
+    }
   });
 
   return (

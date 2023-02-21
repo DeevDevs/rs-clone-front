@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import MapComponent from '../../../../components/MapComponent';
 import StatisticItem from '../../../../components/StatisticItem';
-import { StatisticsItemsText, TripErrorMessages } from '../../../../enums';
+import { TripErrorMessages } from '../../../../enums';
 import { getFile, getGradeText } from '../../../../functions';
 import { useAppDispatch, useAppSelector } from '../../../../store';
-import { createNewMemoir } from '../../../../store/memoir/memoirThunks';
+import { createNewMemoir, getMemoirPreviews } from '../../../../store/memoir/memoirThunks';
 import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
 import {
   FileTransferObj, FormInputItems, MapProps, ValuesKey,
@@ -31,10 +32,12 @@ const satisfaction = {
 const initialSites: string[] = [];
 
 const TripForm = () => {
+  const navigate = useNavigate();
   const initialPhotos: FileTransferObj[] = [];
   const [photos, setPhotos] = useState(initialPhotos);
   const [rateValue, setRateValue] = useState(5);
   const [sites, setSites] = useState(initialSites);
+  const [clickLocation, setClickLocation] = useState([0, 0]);
 
   const {
     register,
@@ -49,6 +52,8 @@ const TripForm = () => {
 
   const dispatchApp = useAppDispatch();
   const { id } = useAppSelector((state) => state.userReducer);
+  const { id: memoirId } = useAppSelector((state) => state.memoirReducer);
+
   const {
     clickLong, clickLat, country, place,
   } = useAppSelector((state) => state.mapboxReducer);
@@ -79,6 +84,7 @@ const TripForm = () => {
     const diffHours = +new Date(+dateTo - +dateFrom) / 36e5;
     const duration = Math.floor(diffHours / 24);
 
+    tempNewMemoirData.whereFromLongLat = clickLocation;
     tempNewMemoirData.longLat = [clickLong, clickLat];
     tempNewMemoirData.tripName = formData.memoir;
     tempNewMemoirData.destinationName = formData.destination;
@@ -163,15 +169,28 @@ const TripForm = () => {
     required: TripErrorMessages.EndDate,
   });
 
+  const newMap: MapProps = {
+    pointTo: {
+      baseLocation: [clickLong, clickLat],
+      popupName: `Go to ${place}`,
+    },
+  };
+
+  const callbackGetMemoirPreviews = useCallback(async () => {
+    await dispatchApp(getMemoirPreviews());
+  }, []);
+
   useEffect(() => {
     if (country) setValue('country', country);
     if (place) setValue('destination', place);
   }, []);
 
-  const newMap: MapProps = {
-    newLocation: [clickLong, clickLat],
-    markerName: 'Trip here',
-  };
+  useEffect(() => {
+    callbackGetMemoirPreviews();
+    if (memoirId) {
+      navigate(`${memoirId}`);
+    }
+  }, [memoirId]);
 
   return (
     <form id="tripForm" className={style.form} onSubmit={handleSubmit(onSubmit)}>
@@ -180,7 +199,10 @@ const TripForm = () => {
         <TripSitesBox sites={sites} handleDelete={setSites} />
         <h2 className={style.form_mapTitle}>Show us where you arrived from</h2>
         <div className={style.map}>
-          <MapComponent newMapInfo={newMap} />
+          <MapComponent
+            pointTo={newMap.pointTo}
+            onChangeLocation={setClickLocation}
+          />
         </div>
         <div className={style.form_date}>
           <div>

@@ -1,3 +1,4 @@
+import mapboxgl from 'mapbox-gl';
 import React from 'react';
 
 export type WrapperProps = {
@@ -50,8 +51,18 @@ export type ButtonProps =
   & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export type Location = [number, number];
+export type LocationData = {
+  baseLocation: Location;
+  popupName: string;
+};
 
 export type MapProps = {
-  newLocation: Location;
-  markerName: string;
+  pointTo: LocationData;
+  pointFrom?: LocationData;
+  onChangeLocation?: React.Dispatch<React.SetStateAction<number[]>>;
+};
+
+export type MapPoint = {
+  marker: mapboxgl.Marker;
+  popup: mapboxgl.Popup;
 };
