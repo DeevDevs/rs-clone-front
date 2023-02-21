@@ -57,6 +57,7 @@ const MainMap = () => {
   const mapContainer = useRef(null);
   const map = React.useRef<mapboxgl.Map | null>(null);
   const [clickLocation, setClickLocation] = useState([0, 0]);
+  const [placedMarkers, setPlacedMarkers] = useState(false);
 
   useEffect(() => {
     if (userLocation[0] !== 0 && userLocation[0] !== 0) return;
@@ -92,7 +93,6 @@ const MainMap = () => {
   }, [clickLocation]);
 
   useEffect(() => {
-    console.log(userLocation[0], userLocation[1]);
     if (userLocation[0] === 0 && userLocation[1] === 0) return;
     if (map.current) return;
     if (!mapContainer.current) return;
@@ -126,13 +126,15 @@ const MainMap = () => {
 
   useEffect(() => {
     if (!map.current) return;
-    console.log('I AM RUN ONCE ONLY');
+    if (!previews.length) return;
+    if (placedMarkers) return;
     const markersPopups = previews.map((preview) => {
       const markerPopup = addMarkerMemoir(map, preview);
       return markerPopup;
     });
     cdStoreMarker(markersPopups);
-  }, [previews]);
+    setPlacedMarkers(true);
+  }, [previews, map.current]);
 
   return (
     <div
