@@ -4,6 +4,13 @@
 // font-family: 'Finger Paint', cursive;
 // font-family: 'Julee', cursive;
 
+:root {
+  --toastify-color-info: #8D60CC !important;
+  --toastify-color-success: #07bc0c;
+  --toastify-color-warning: #f1c40f;
+  --toastify-color-error: #e74c3c;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -26,4 +33,8 @@ body {
 .hiddenMenu {
   display: none !important;
   transform: translateY(-30px) !important;
+}
+
+.toast-class {
+  margin-top: 40px;
 }

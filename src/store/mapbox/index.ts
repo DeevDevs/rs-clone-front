@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-underscore-dangle */
 import { createSlice } from '@reduxjs/toolkit';
-import * as mapboxThunks from './mapboxThunks';
+import { toast } from 'react-toastify';
+import toastSettings from '../constants';
+import getLocationData from './mapboxThunks';
 import * as mapboxTypes from './mapboxTypes';
 
 const initialState: mapboxTypes.TMapbox = {
@@ -15,6 +14,9 @@ const initialState: mapboxTypes.TMapbox = {
   clickedMemoirID: '',
   mapboxModuleMsg: '',
   clickTarget: 'map',
+  mainMapMarkers: [],
+  mapLoading: false,
+  mapError: '',
 };
 
 export const mapboxSlice = createSlice({
@@ -29,11 +31,20 @@ export const mapboxSlice = createSlice({
     },
     storeChosenMemoirID(state, { payload }) {
       state.clickedMemoirID = payload;
-    }
+    },
+    storeMarker(state, { payload }) {
+      const allMarkers = payload.filter(
+        (markerPopup: mapboxTypes.TMarkerPopup | undefined) => markerPopup,
+      );
+      state.mainMapMarkers = [...state.mainMapMarkers, ...allMarkers];
+    },
+    emptyMarkers(state) {
+      state.mainMapMarkers = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
-      mapboxThunks.getLocationData.fulfilled,
+      getLocationData.fulfilled,
       (state, { payload }) => {
         const country = payload.features.find((feature) => feature.place_type.includes('country'));
         state.country = country ? country.text : 'this area';
@@ -43,17 +54,18 @@ export const mapboxSlice = createSlice({
         state.clickLong = payload.query[0];
         // eslint-disable-next-line prefer-destructuring
         state.clickLat = payload.query[1];
-        state.mapboxMsg = 'data received';
-      }
+        state.mapLoading = false;
+      },
     );
     builder.addCase(
-      mapboxThunks.getLocationData.rejected,
+      getLocationData.rejected,
       (state, { payload }) => {
-        if (payload) state.mapboxMsg = payload.status;
-      }
+        if (payload) state.mapError = payload.status;
+        toast.error(`${state.mapError}`, { ...toastSettings });
+      },
     );
-    builder.addCase(mapboxThunks.getLocationData.pending, (state) => {
-      state.mapboxMsg = 'Loading';
+    builder.addCase(getLocationData.pending, (state) => {
+      state.mapLoading = true;
     });
   },
 });

@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable @typescript-eslint/comma-dangle */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './mapModule.scss';
@@ -12,12 +9,12 @@ import { getMemoir } from '../../../../store/memoir/memoirThunks';
 const MapModule = () => {
   const navigate = useNavigate();
   const dispatchApp = useAppDispatch();
-  const { mapboxModuleMsg, clickedMemoirID } = useAppSelector(
-    (state) => state.mapboxReducer
+  const { mapboxModuleMsg, clickedMemoirID, clickTarget } = useAppSelector(
+    (state) => state.mapboxReducer,
   );
   const { id } = useAppSelector((state) => state.userReducer);
   const { previews, countryName } = useAppSelector(
-    (state) => state.memoirReducer
+    (state) => state.memoirReducer,
   );
   const cbStoreChosenMemoirID = (data: string): void => {
     dispatchApp(mapboxActions.storeChosenMemoirID(data));
@@ -30,7 +27,7 @@ const MapModule = () => {
 
   useEffect(() => {
     const memoirName = previews.find(
-      (memoir) => memoir.memoirID === clickedMemoirID
+      (memoir) => memoir.memoirID === clickedMemoirID,
     )?.memoirName;
     setModuleMessage(`${memoirName}`);
     setBtnText('Read this memoir');
@@ -39,7 +36,7 @@ const MapModule = () => {
   useEffect(() => {
     if (id) {
       setModuleMessage(
-        `Do you want to write about your trip to ${countryName}?`
+        `Do you want to write about your trip to ${countryName}?`,
       );
       setBtnText('Write new memoir');
       return;
@@ -50,6 +47,7 @@ const MapModule = () => {
 
   return (
     <div
+      role="presentation"
       className="mapOverlay dissolved hidden"
       onClick={(e) => {
         const target = e.target as HTMLElement;
@@ -80,7 +78,7 @@ const MapModule = () => {
               return;
             }
             if (id) {
-              if (clickedMemoirID) {
+              if (clickTarget === 'memoir') {
                 await callbackGetMemoir(clickedMemoirID);
                 toggleModuleOverlay();
                 navigate(`trip/${clickedMemoirID}`);

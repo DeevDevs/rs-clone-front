@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import * as memoirTypes from '../../store/memoir/memoirTypes';
+import * as mapboxTypes from '../../store/mapbox/mapboxTypes';
 
 export function addMarkerCurLocation(
   map: React.MutableRefObject<mapboxgl.Map | null>,
@@ -28,18 +29,18 @@ export function addMarkerCurLocation(
 export function addMarkerMemoir(
   map: React.MutableRefObject<mapboxgl.Map | null>,
   memoirData: memoirTypes.TMemoirPreview
-) {
+): mapboxTypes.TMarkerPopup | undefined {
   if (!map || !map.current) return;
   const el = document.createElement('div');
   el.className = 'marker';
-  new mapboxgl.Marker({
+  const marker: mapboxgl.Marker = new mapboxgl.Marker({
     element: el,
     anchor: 'bottom',
   })
     .setLngLat(memoirData.memoirLocation)
     .addTo(map.current);
 
-  new mapboxgl.Popup({
+  const popup: mapboxgl.Popup = new mapboxgl.Popup({
     offset: 30,
     closeOnClick: false,
     closeButton: false,
@@ -49,6 +50,13 @@ export function addMarkerMemoir(
       `<p id="memoirpin" data-id=${memoirData.memoirID}>${memoirData.memoirName}</p>`
     )
     .addTo(map.current);
+
+  const markerPopup = {
+    marker,
+    popup,
+  };
+  // eslint-disable-next-line consistent-return
+  return markerPopup;
 }
 
 export function toggleModuleOverlay() {
@@ -78,13 +86,13 @@ export function hideDisplayLogo(toDo: string) {
     logoBox.classList.remove('hidden');
     setTimeout(() => {
       logoBox.classList.remove('dissolved');
-    }, 20);
+    }, 10);
   }
   if (toDo === 'hide') {
     if (logoBox.classList.contains('hidden')) return;
     logoBox.classList.add('dissolved');
     setTimeout(() => {
       logoBox.classList.add('hidden');
-    }, 200);
+    }, 150);
   }
 }

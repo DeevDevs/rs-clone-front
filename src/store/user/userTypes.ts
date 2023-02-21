@@ -31,6 +31,8 @@ export type TUser = {
   memoirIDs: string[];
   userMsg: null | string;
   token: string;
+  userLoading: boolean;
+  userError: string;
 };
 
 // Signup Data Objects

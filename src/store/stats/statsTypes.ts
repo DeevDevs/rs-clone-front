@@ -25,6 +25,8 @@ export type TStats = {
   countries: StatsArrays[];
   continents: StatsArrays[];
   statsMsg: string | null;
+  statsLoading: boolean;
+  statsError: string;
 };
 
 // Update Data Objects

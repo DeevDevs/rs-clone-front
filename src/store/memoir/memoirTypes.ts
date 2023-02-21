@@ -36,6 +36,8 @@ export type TMemoir = {
   description: string;
   memoirMsg: string | null;
   previews: TMemoirPreview[];
+  memoirLoading: boolean;
+  memoirError: string;
 };
 
 // Signup Data Objects
