@@ -17,11 +17,11 @@ const TripDetailsMap = () => {
   const newMapData: MapProps = {
     pointTo: {
       baseLocation: [longTo, latTo],
-      popupName: 'Journey started here',
+      popupName: `Go to ${destinationName}`,
     },
     pointFrom: {
       baseLocation: [longFrom, latFrom],
-      popupName: `Go to ${destinationName}`,
+      popupName: 'Journey started here',
     },
   };
   return (
