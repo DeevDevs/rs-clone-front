@@ -53,6 +53,7 @@ const TripForm = () => {
   const dispatchApp = useAppDispatch();
   const { id } = useAppSelector((state) => state.userReducer);
   const { id: memoirId } = useAppSelector((state) => state.memoirReducer);
+  const { clickTarget } = useAppSelector((state) => state.mapboxReducer);
 
   const {
     clickLong, clickLat, country, place,
@@ -76,6 +77,9 @@ const TripForm = () => {
   } as TNewMemoirReq;
   const callbackCreateMemoir = useCallback(async (memoirData: TNewMemoirReq) => {
     await dispatchApp(createNewMemoir(memoirData));
+  }, []);
+  const callbackGetMemoirPreviews = useCallback(async () => {
+    await dispatchApp(getMemoirPreviews());
   }, []);
 
   const addFieldsFromForm = (formData:FormInputItems): void => {
@@ -105,11 +109,13 @@ const TripForm = () => {
     });
     tempNewMemoirData.memoirPhotos = dt.files;
     addFieldsFromForm(data);
-    callbackCreateMemoir(tempNewMemoirData);
+    await callbackCreateMemoir(tempNewMemoirData);
+    await callbackGetMemoirPreviews();
     reset();
     setPhotos([]);
     setRateValue(5);
     setSites([]);
+    navigate(`${memoirId}`);
   });
 
   const handleSites = () => {
@@ -176,18 +182,13 @@ const TripForm = () => {
     },
   };
 
-  const callbackGetMemoirPreviews = useCallback(async () => {
-    await dispatchApp(getMemoirPreviews());
-  }, []);
-
   useEffect(() => {
     if (country) setValue('country', country);
     if (place) setValue('destination', place);
   }, []);
 
   useEffect(() => {
-    callbackGetMemoirPreviews();
-    if (memoirId) {
+    if (clickTarget === 'memoir') {
       navigate(`${memoirId}`);
     }
   }, [memoirId]);
