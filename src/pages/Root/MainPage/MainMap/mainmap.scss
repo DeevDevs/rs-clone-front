@@ -43,6 +43,14 @@
   background-repeat: no-repeat;
 }
 
+.up {
+  background-image: url('../../../../data/MainPageMap/plane-up.png');
+}
+
+.down {
+  background-image: url('../../../../data/MainPageMap/plane-down.png');
+}
+
 .mapboxgl-popup-content {
   min-width: 60px;
   max-width: 200px;
