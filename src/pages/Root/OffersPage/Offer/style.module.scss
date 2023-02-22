@@ -14,6 +14,7 @@
   height: 558px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: basics.$light-blue;
   margin-left: 10%;
@@ -56,4 +57,27 @@
   transform: rotate(7.59deg);
   top: 0;
   right: 0;
+}
+
+.button {
+  width: 25%;
+  height: 7vh;
+  background: basics.$button-gradient;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4vh;
+  font-family: 'Finger Paint', cursive;
+  cursor: pointer;
+  color: basics.$white;
+  border-radius: 15px;
+  text-decoration: none;
+  padding: 0 12px;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 10px;
+}
+
+.button:hover {
+  transform: rotate(360deg);
+  transform: scale(1.11);
 }

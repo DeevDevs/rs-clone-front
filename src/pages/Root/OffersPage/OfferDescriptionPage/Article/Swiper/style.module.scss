@@ -1,0 +1,16 @@
+@use "src/sass/index" as basics;
+
+.swiper {
+  width: 100%;
+  height: 40vh;
+  border: 10px solid basics.$black;
+}
+
+.slide {
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 40vh;
+}
