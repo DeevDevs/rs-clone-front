@@ -339,7 +339,7 @@ const toursStore = [
       observing these endearing creatures. This soul-stirring adventure won’t soon be forgotten.`,
         images: [
           'https://www.intrepidtravel.com/sites/intrepid/files/styles/640w/public/elements/product/hero/YGPU_Nkuringo-bwindi-gorilla-lodge-1100x735.jpg',
-          'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/YGPU_Nkuringo-bwindi-gorilla-lodge-1100x735.jpg',
+          'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/YGPU_Intrepid%20Travel-Uganda-Gorilla-up-close-and-personal-1100x735.jpg',
           'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/YGPU_Feature-Stay-nkuringo-bwindi-lodge-1100x735.jpg',
           'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/YGPU_Uganda-Feature-Stay-Cottage-room-1100x735.jpg',
         ],
