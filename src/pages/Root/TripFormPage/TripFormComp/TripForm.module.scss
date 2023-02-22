@@ -61,6 +61,7 @@
     border-radius: 10px; 
     width: 100%;
     padding: 0 10px 10px 10px;
+    border-left-width: 10px;
     &::placeholder {
       font-size: 20px;
       display: flex;
@@ -92,8 +93,8 @@
       font-family: "Comic Neue", cursive;
       @include index.font(normal, 400, 22px, 37px);
       padding: 0 5px 0 8px;
-      border: 1px solid index.$light-blue;
-      border-left: 8px solid index.$light-blue;
+      border: 1px solid index.$very-dark-blue;
+      border-left-width: 8px;
     }
   }
   &_statistic {
