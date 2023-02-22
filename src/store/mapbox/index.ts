@@ -41,6 +41,11 @@ export const mapboxSlice = createSlice({
     emptyMarkers(state) {
       state.mainMapMarkers = [];
     },
+    cleanUpState(state) {
+      state.clickTarget = '';
+      state.clickLat = 0;
+      state.clickLong = 0;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(

@@ -9,7 +9,7 @@ export type TMapbox = {
   country: string;
   clickedMemoirID: string;
   mapboxModuleMsg: string;
-  clickTarget: 'map' | 'memoir';
+  clickTarget: 'map' | 'memoir' | '';
   mainMapMarkers: TMarkerPopup[];
   mapLoading: boolean;
   mapError: string;

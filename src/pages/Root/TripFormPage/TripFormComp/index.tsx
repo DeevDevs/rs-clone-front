@@ -6,6 +6,7 @@ import StatisticItem from '../../../../components/StatisticItem';
 import { TripErrorMessages } from '../../../../enums';
 import { getFile, getGradeText, getTripDist } from '../../../../functions';
 import { useAppDispatch, useAppSelector } from '../../../../store';
+import { mapboxActions } from '../../../../store/mapbox';
 import { createNewMemoir, getMemoirPreviews } from '../../../../store/memoir/memoirThunks';
 import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
 import {
@@ -82,6 +83,10 @@ const TripForm = () => {
     await dispatchApp(getMemoirPreviews());
   }, []);
 
+  const cbCleanUpMapboxState = (): void => {
+    dispatchApp(mapboxActions.cleanUpState());
+  };
+
   const addFieldsFromForm = (formData:FormInputItems): void => {
     const dateTo = new Date(formData.dateTo);
     const dateFrom = new Date(formData.dateFrom);
@@ -110,13 +115,13 @@ const TripForm = () => {
     });
     tempNewMemoirData.memoirPhotos = dt.files;
     addFieldsFromForm(data);
+    cbCleanUpMapboxState();
     await callbackCreateMemoir(tempNewMemoirData);
     await callbackGetMemoirPreviews();
     reset();
     setPhotos([]);
     setRateValue(5);
     setSites([]);
-    navigate(`${memoirId}`);
   });
 
   const handleSites = () => {
@@ -189,7 +194,7 @@ const TripForm = () => {
   }, []);
 
   useEffect(() => {
-    if (clickTarget === 'memoir') {
+    if (clickTarget === 'memoir' || clickTarget === '') {
       navigate(`${memoirId}`);
     }
   }, [memoirId]);
