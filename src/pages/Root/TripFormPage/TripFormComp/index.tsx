@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import MapComponent from '../../../../components/MapComponent';
 import StatisticItem from '../../../../components/StatisticItem';
 import { TripErrorMessages } from '../../../../enums';
-import { getFile, getGradeText } from '../../../../functions';
+import { getFile, getGradeText, getTripDist } from '../../../../functions';
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { createNewMemoir, getMemoirPreviews } from '../../../../store/memoir/memoirThunks';
 import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
@@ -89,6 +89,7 @@ const TripForm = () => {
     const duration = Math.floor(diffHours / 24);
 
     tempNewMemoirData.whereFromLongLat = clickLocation;
+    tempNewMemoirData.distance = getTripDist(clickLocation, [clickLong, clickLat]);
     tempNewMemoirData.longLat = [clickLong, clickLat];
     tempNewMemoirData.tripName = formData.memoir;
     tempNewMemoirData.destinationName = formData.destination;

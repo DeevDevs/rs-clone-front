@@ -1,3 +1,4 @@
+import { getDistance } from 'geolib';
 import { FileTransferObj } from '../types';
 import { StatisticsItemsText } from '../enums';
 
@@ -30,4 +31,14 @@ export const getGradeText = (grade: number) => {
     default:
       return StatisticsItemsText.Ok;
   }
+};
+
+export const getTripDist = (pointFrom: number[], pointTo: number[]) => {
+  const [longFrom, latFrom] = pointFrom;
+  const [longTo, latTo] = pointTo;
+
+  const from = { latitude: latFrom, longitude: longFrom };
+  const to = { latitude: latTo, longitude: longTo };
+  const distance = getDistance(from, to);
+  return Number((distance / 1000).toFixed());
 };
