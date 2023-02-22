@@ -12,7 +12,7 @@ const OfferDescriptionPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!data) {
-      navigate(PagePath.ErrorRedirect);
+      navigate(`/${PagePath.ErrorRedirect}`);
     }
   }, []);
   return (

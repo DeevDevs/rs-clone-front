@@ -15,7 +15,9 @@
 }
 
 .button {
-  width: 100%;
+  width: 70%;
+  line-height: 4vh;
+  height: 8vh;
   margin-top: 10vh;
   background: basics.$button-gradient;
   color: basics.$white;
@@ -24,6 +26,7 @@
   cursor: pointer;
   border: none;
   font-family: 'Finger Paint', cursive;
+  align-self: flex-start;
 }
 
 .button:hover {

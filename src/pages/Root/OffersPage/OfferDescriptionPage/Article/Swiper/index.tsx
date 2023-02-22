@@ -13,7 +13,7 @@ const OfferImagesSwiper = ({ images }: { images: string[] | undefined }) => (
     freeMode
     allowTouchMove={false}
     initialSlide={0}
-    spaceBetween={100}
+    spaceBetween={30}
     modules={[Navigation, Autoplay]}
     autoplay={{
       delay: 3000,

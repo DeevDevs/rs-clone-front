@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 import SvgAndText from '../../../../../components/SvgAndTextComponent';
 import StatisticItem from '../../../../../components/StatisticItem';
-import { StatisticsItemsText } from '../../../../../enums';
+import { PagePath, StatisticsItemsText } from '../../../../../enums';
 import goBackImg from '../../../../../assets/svg/backButton.svg';
 import descriptionAsideStore from '../../../../../data/DescriptionAsideStore';
 import { SingleOfferOnPageInterface } from '../../../../../interfaces';
@@ -30,7 +30,7 @@ const Aside = ({ data }: { data: SingleOfferOnPageInterface | null | undefined }
       />
       <button
         className={styles.button}
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(`/${PagePath.Offers}`)}
         type="button"
       >
         <SvgAndText

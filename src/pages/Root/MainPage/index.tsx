@@ -8,7 +8,6 @@ import MainMap from './MainMap';
 
 const MainPage = () => {
   const { id } = useAppSelector((state) => state.userReducer);
-
   return (
     <main className={styles.main}>
       <MainMap />
