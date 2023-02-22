@@ -4,6 +4,11 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { addPoint } from '../../data/MainPageMap/helperFns';
 import { MapPoint, MapProps } from '../../types';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax, @typescript-eslint/no-var-requires
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGVldmRldnMiLCJhIjoiY2xkdWpvZnlyMDZqdzNzcmYwcmhoNTVyZSJ9.TL4fwGpN6YdtqRKZpqOaAQ';
 
 const MapComponent = (props : MapProps) => {
