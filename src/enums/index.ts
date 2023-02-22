@@ -6,6 +6,7 @@ export enum PagePath {
   OfferDescription = 'offers/:offerId',
   Profile = 'profile',
   Error = '*',
+  ErrorRedirect = 'error',
 }
 
 export enum FooterImgAlts {
@@ -119,6 +120,7 @@ export enum StatisticsItemsText {
   Places = 'Places visited',
   Satisfaction = 'Satisfaction level',
   Sites = 'Sites seen',
+  Rating = 'Rating',
   None = '',
 }
 
@@ -142,4 +144,59 @@ export enum UserErrorMessages {
 export enum OffersImgAlts {
   MainImg = 'main-img',
   Plane = 'plane',
+}
+
+export enum OffersId {
+  Asia1 = 1,
+  Asia2,
+  Asia3,
+  Asia4,
+  Asia5,
+  Europe1,
+  Europe2,
+  Europe3,
+  Europe4,
+  Europe5,
+  Africa1,
+  Africa2,
+  Africa3,
+  Africa4,
+  Africa5,
+}
+
+export enum TravelTheme {
+  Explorer = 'explorer',
+  WalkingAndTrekking = 'Walking & Trekking',
+  Wildlife = 'Wildlife',
+  OverlandAndWildlife = 'Overland, Wildlife',
+}
+
+export enum Countries {
+  SriLanka = 'Sri Lanka',
+  Nepal = 'Nepal',
+  India = 'India',
+  Indonesia = 'Indonesia',
+  Vietnam = 'Vietnam',
+  Iceland = 'Iceland',
+  Greece = 'Greece',
+  Italy = 'Italy',
+  UnitedKingdom = 'United Kingdom',
+  Malta = 'Malta',
+  Rwanda = 'Rwanda',
+  Morocco = 'Morocco',
+  Botswana = 'Botswana',
+  Uganda = 'Uganda',
+  Kenya = 'Kenya',
+}
+
+export enum TravelStyle {
+  Premium = 'Premium',
+  Original = 'Original',
+  Basics = 'Basics',
+}
+
+export enum AsideText {
+  Destination = 'destination',
+  Style = 'style',
+  Theme = 'theme',
 }
