@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getOfferById } from '../../../../functions';
 import { PagePath } from '../../../../enums';
@@ -8,13 +8,13 @@ import Article from './Article';
 
 const OfferDescriptionPage = () => {
   const { offerId } = useParams();
-  const [data] = useState(getOfferById(offerId));
+  const data = getOfferById(offerId);
   const navigate = useNavigate();
   useEffect(() => {
     if (!data) {
       navigate(PagePath.ErrorRedirect);
     }
-  });
+  }, []);
   return (
     <main className={styles.main}>
       <h2
@@ -28,8 +28,12 @@ const OfferDescriptionPage = () => {
       >
         {data ? data.header : null}
       </h2>
-      <Aside data={data} />
-      <Article data={data} />
+      {data ? (
+        <>
+          <Aside data={data} />
+          <Article data={data} />
+        </>
+      ) : null}
     </main>
   );
 };
