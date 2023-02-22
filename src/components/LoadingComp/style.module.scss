@@ -1,7 +1,100 @@
 @use "src/sass/index" as basics;
 
 .container {
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  background-color: #f2f9ff45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
 }
 
-.text {
+.container__gone {
+  display: none;
+}
+
+.earth {
+  width: 140px;
+  height: 140px;
+  margin: 60px;
+  background-image: url('../../assets/png/earth.png');
+  background-position: center;
+  background-size: 85%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.plane {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  background-image: url('../../assets/png/plane.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  // top: 25%;
+  // left: 15%;
+  // transform: translate(-50%, -50%) rotateZ(315deg);
+  // z-index: 0;
+  animation: flyaround 1s linear infinite forwards;
+}
+
+
+@keyframes flyaround {
+  0%{
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  13% {
+    top: 25%;
+    left: 80%;
+    transform: translate(-50%, -50%) rotateZ(45deg);
+  }
+  25%{
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%) rotateZ(90deg);
+    z-index: 0;
+  }
+  38% {
+    top: 80%;
+    left: 80%;
+    transform: translate(-50%, -50%) rotateZ(135deg);
+    z-index: -1;
+  }
+  50% {
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateZ(180deg);
+    z-index: -1;
+  }
+  63% {
+    top: 80%;
+    left: 25%;
+    transform: translate(-50%, -50%) rotateZ(225deg);
+    z-index: -1;
+  }
+  75% {
+    top: 50%;
+    left: 15%;
+    transform: translate(-50%, -50%) rotateZ(270deg);
+    z-index: 0;
+  }
+  87% {
+    top: 25%;
+    left: 20%;
+    transform: translate(-50%, -50%) rotateZ(315deg);
+    z-index: 0;
+  }
+  100% {
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateZ(360deg);
+    z-index: 0;
+  }
 }
