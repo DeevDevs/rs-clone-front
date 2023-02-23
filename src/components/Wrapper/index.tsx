@@ -2,11 +2,11 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { WrapperProps } from '../../types';
 import 'react-toastify/dist/ReactToastify.css';
-import './WrapperComp.scss';
+import style from './Wrapper.module.scss';
 
 const Wrapper = ({ children }: WrapperProps) => (
   <>
-    <div className="wrapper">{children}</div>
+    <div className={style.wrapper}>{children}</div>
     <ToastContainer
       position="top-right"
       autoClose={3000}
