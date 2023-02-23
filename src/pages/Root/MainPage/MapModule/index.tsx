@@ -13,7 +13,7 @@ const MapModule = () => {
     (state) => state.mapboxReducer,
   );
   const { id } = useAppSelector((state) => state.userReducer);
-  const { previews, countryName } = useAppSelector(
+  const { previews, countryName, longLat } = useAppSelector(
     (state) => state.memoirReducer,
   );
   const cbStoreChosenMemoirID = (data: string): void => {
@@ -39,11 +39,11 @@ const MapModule = () => {
         `Do you want to write about your trip to ${countryName}?`,
       );
       setBtnText('Write new memoir');
-      return;
+    } else {
+      setModuleMessage('You should login/signup, to write memoirs.');
+      setBtnText('Login / Signup');
     }
-    setModuleMessage('You should login/signup, to write memoirs.');
-    setBtnText('Login / Signup');
-  }, [countryName]);
+  }, [longLat]);
 
   return (
     <div
