@@ -89,7 +89,7 @@ const MainMap = () => {
       cbDetermineClickTarget('map');
       toggleModuleOverlay();
     }
-  }, [mapLoading]);
+  }, [mapLoading, clickLong, clickLat]);
 
   useEffect(() => {
     if (clickLocation[0] === 0 && clickLocation[1] === 0) return;
