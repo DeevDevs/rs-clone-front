@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../../../store';
 import { mapboxActions } from '../../../../store/mapbox';
 import { createNewMemoir, getMemoirPreviews } from '../../../../store/memoir/memoirThunks';
 import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
+import { getStats } from '../../../../store/stats/statsThunks';
 import {
   FileTransferObj, FormInputItems, MapProps, ValuesKey,
 } from '../../../../types';
@@ -52,7 +53,7 @@ const TripForm = () => {
   } = useForm<FormInputItems>({ mode: 'all' });
 
   const dispatchApp = useAppDispatch();
-  const { id } = useAppSelector((state) => state.userReducer);
+  const { id, statsID } = useAppSelector((state) => state.userReducer);
   const { id: memoirId } = useAppSelector((state) => state.memoirReducer);
   const { clickTarget } = useAppSelector((state) => state.mapboxReducer);
 
@@ -81,6 +82,9 @@ const TripForm = () => {
   }, []);
   const callbackGetMemoirPreviews = useCallback(async () => {
     await dispatchApp(getMemoirPreviews());
+  }, []);
+  const callbackGetStats = useCallback(async (userStatsID: string) => {
+    await dispatchApp(getStats(userStatsID));
   }, []);
 
   const cbCleanUpMapboxState = (): void => {
@@ -117,6 +121,7 @@ const TripForm = () => {
     addFieldsFromForm(data);
     cbCleanUpMapboxState();
     await callbackCreateMemoir(tempNewMemoirData);
+    await callbackGetStats(statsID);
     await callbackGetMemoirPreviews();
     reset();
     setPhotos([]);
