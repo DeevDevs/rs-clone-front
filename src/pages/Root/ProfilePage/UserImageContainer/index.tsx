@@ -6,6 +6,7 @@ import * as userTypes from '../../../../store/user/userTypes';
 
 const UserImageContainer = () => {
   const dispatchApp = useAppDispatch();
+  const [photoPreview, setPhotoPreview] = useState('');
   const { photo, id } = useAppSelector((state) => state.userReducer);
   const [isImgAdded, setIsImgAdded] = useState(false);
   const callbackAddProfImage = useCallback(
@@ -18,7 +19,7 @@ const UserImageContainer = () => {
     <div className={styles.userimgblock}>
       <div
         className={styles.userimg}
-        style={{ backgroundImage: `url(${photo})` }}
+        style={{ backgroundImage: `url(${photoPreview || photo})` }}
       />
       <div className={styles.toolbox}>
         <button
@@ -52,7 +53,17 @@ const UserImageContainer = () => {
           type="file"
           onChange={(e) => {
             const filelist = e.target.files as FileList;
-            if (filelist.length > 0) setIsImgAdded(true);
+            if (filelist.length > 0) {
+              const reader = new FileReader();
+              reader.readAsDataURL(filelist[0]);
+              reader.addEventListener('load', () => {
+                const { result } = reader;
+                if (typeof result === 'string') {
+                  setPhotoPreview(result);
+                }
+              });
+              setIsImgAdded(true);
+            }
           }}
         />
       </div>
