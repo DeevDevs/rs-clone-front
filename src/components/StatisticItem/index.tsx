@@ -3,13 +3,14 @@ import { VictoryLabel, VictoryPie } from 'victory';
 import { StatisticsItemInterface } from '../../interfaces';
 import styles from './style.module.scss';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const StatisticItem = ({ text, maximum, mark }: StatisticsItemInterface) => (
+const StatisticItem = ({
+  text, maximum, mark, size,
+}: StatisticsItemInterface) => (
   <div className={text ? styles.container : `${styles.container} ${styles.zeroText}`}>
     <svg
       viewBox="0 0 400 400"
-      width="100px"
-      height="100px"
+      width={size === 'medium' ? '22%' : '40%'}
+      height={size === 'medium' ? '9vh' : '15vh'}
     >
       <VictoryPie
         standalone={false}

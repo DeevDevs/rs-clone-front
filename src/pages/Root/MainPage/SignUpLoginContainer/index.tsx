@@ -1,22 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading,jsx-a11y/label-has-associated-control */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { signUpLoginContainerState } from '../../../../data/signUpLoginStore';
 import { SignUpFormData } from '../../../../interfaces';
 import styles from './style.module.scss';
 import {
   LengthMessages,
-  SignUpInputsNames, SignUpLabels, SignUpLogin, UserErrorMessages, ValidationTypes,
+  SignUpInputsNames, SignUpLabels, SignUpLogin, ValidationTypes,
 } from '../../../../enums';
-import { useAppDispatch, useAppSelector } from '../../../../store';
+import { useAppDispatch } from '../../../../store';
 import * as userTypes from '../../../../store/user/userTypes';
 import { login, signup } from '../../../../store/user/userThunks';
-import SignUpLoginError from './SignUpLoginError';
 
 const SignUpLoginContainer = () => {
-  const { userMsg } = useAppSelector((state) => state.userReducer);
   const [state] = useState(signUpLoginContainerState);
-  const [isError, setError] = useState(false);
   const [isSignUp, setSignUp] = useState(true);
   const dispatchApp = useAppDispatch();
   const callbackSignup = useCallback(async (userData: userTypes.TSignupReq) => {
@@ -26,7 +23,7 @@ const SignUpLoginContainer = () => {
     await dispatchApp(login(loginData));
   }, []);
   const {
-    handleSubmit, setValue, register, formState: { errors }, watch,
+    handleSubmit, register, formState: { errors }, watch,
   } = useForm<SignUpFormData>();
   const onSubmit: SubmitHandler<SignUpFormData> = ({
     Name,
@@ -52,26 +49,6 @@ const SignUpLoginContainer = () => {
       callbackLogin(userData);
     }
   };
-
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    if (userMsg === UserErrorMessages.Login) {
-      setError(true);
-      const timer = setTimeout(() => {
-        setError(false);
-      }, 3000);
-      state.loginInputs.forEach(({ name }) => setValue(name, ''));
-      return () => clearTimeout(timer);
-    }
-    if (userMsg === UserErrorMessages.SignUp) {
-      setError(true);
-      const timer = setTimeout(() => {
-        setError(false);
-      }, 3000);
-      state.signUpInputs.forEach(({ name }) => setValue(name, ''));
-      return () => clearTimeout(timer);
-    }
-  }, [userMsg]);
   const giveClassNames = (isSignup: boolean): string => (
     isSignup
       ? `${styles.selectButton} ${styles.selectButton_active} `
@@ -93,7 +70,6 @@ const SignUpLoginContainer = () => {
       onSubmit={handleSubmit(onSubmit)}
       className={styles.form}
     >
-      {isError ? <SignUpLoginError isSignUp={isSignUp} /> : null}
       <div className={styles.selectButtonsContainer}>
         <button
           type="button"

@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import Router from './Router';
 import Wrapper from './components/Wrapper';
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/swiper.min.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
