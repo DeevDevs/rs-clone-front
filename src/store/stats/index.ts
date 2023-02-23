@@ -38,6 +38,7 @@ export const statsSlice = createSlice({
     builder.addCase(statsThunks.getStats.rejected, (state, { payload }) => {
       if (payload) state.statsError = payload.status;
       toast.error(`${state.statsError}. Please, try again later.`, { ...toastSettings });
+      state.statsLoading = false;
     });
     builder.addCase(statsThunks.getStats.pending, (state) => {
       state.statsLoading = true;

@@ -49,6 +49,7 @@ export const memoirSlice = createSlice({
     builder.addCase(memoirThunks.createNewMemoir.rejected, (state, { payload }) => {
       if (payload) state.memoirError = payload.status;
       toast.error(`${state.memoirError}`, { ...toastSettings });
+      state.memoirLoading = false;
     });
     builder.addCase(memoirThunks.createNewMemoir.pending, (state) => {
       state.memoirLoading = true;
@@ -61,6 +62,7 @@ export const memoirSlice = createSlice({
     builder.addCase(memoirThunks.getMemoir.rejected, (state, { payload }) => {
       if (payload) state.memoirError = payload.status;
       toast.error(`${state.memoirError}`, { ...toastSettings });
+      state.memoirLoading = false;
     });
     builder.addCase(memoirThunks.getMemoir.pending, (state) => {
       state.memoirLoading = true;
@@ -73,6 +75,7 @@ export const memoirSlice = createSlice({
     builder.addCase(memoirThunks.deleteMemoir.rejected, (state, { payload }) => {
       if (payload) state.memoirError = payload.status;
       toast.error(`${state.memoirError}`, { ...toastSettings });
+      state.memoirLoading = false;
     });
     builder.addCase(memoirThunks.deleteMemoir.pending, (state) => {
       state.memoirLoading = true;
@@ -86,6 +89,7 @@ export const memoirSlice = createSlice({
     builder.addCase(memoirThunks.updateMemoir.rejected, (state, { payload }) => {
       if (payload) state.memoirError = payload.status;
       toast.error(`${state.memoirError}`, { ...toastSettings });
+      state.memoirLoading = false;
     });
     builder.addCase(memoirThunks.updateMemoir.pending, (state) => {
       state.memoirLoading = true;
@@ -98,6 +102,7 @@ export const memoirSlice = createSlice({
     builder.addCase(memoirThunks.getMemoirPreviews.rejected, (state, { payload }) => {
       if (payload) state.memoirError = payload.status;
       toast.error(`${state.memoirError}`, { ...toastSettings });
+      state.memoirLoading = false;
     });
     builder.addCase(memoirThunks.getMemoirPreviews.pending, (state) => {
       state.memoirLoading = true;
