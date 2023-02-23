@@ -4,8 +4,8 @@ import React, {
   useState,
   useCallback,
 } from 'react';
-import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import { toast } from 'react-toastify';
+import mapboxgl from 'mapbox-gl';
 import toastSettings from '../../../../store/constants';
 import { useAppDispatch, useAppSelector } from '../../../../store/index';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -21,7 +21,11 @@ import {
   toggleModuleOverlay,
   hideDisplayLogo,
 } from '../../../../data/MainPageMap/helperFns';
-import MapModule from '../MapModule';
+import MapModule from '../MapModule'; // eslint-disable-line import/no-webpack-loader-syntax
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax, @typescript-eslint/no-var-requires
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 // import pin from '../../../../data/MainPageMap/marker.png';
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGVldmRldnMiLCJhIjoiY2xkdWpvZnlyMDZqdzNzcmYwcmhoNTVyZSJ9.TL4fwGpN6YdtqRKZpqOaAQ';
 
@@ -126,7 +130,10 @@ const MainMap = () => {
 
   useEffect(() => {
     if (!map.current) return;
-    if (!previews.length) return;
+    if (!previews.length) {
+      setPlacedMarkers(false);
+      return;
+    }
     if (placedMarkers) return;
     const markersPopups = previews.map((preview) => {
       const markerPopup = addMarkerMemoir(map, preview);

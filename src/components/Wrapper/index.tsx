@@ -3,9 +3,10 @@ import { ToastContainer } from 'react-toastify';
 import { WrapperProps } from '../../types';
 import 'react-toastify/dist/ReactToastify.css';
 import style from './Wrapper.module.scss';
+import LoadingComp from '../LoadingComp';
 
 const Wrapper = ({ children }: WrapperProps) => (
-  <>
+  <div className="wrapperParent">
     <div className={style.wrapper}>{children}</div>
     <ToastContainer
       position="top-right"
@@ -19,7 +20,8 @@ const Wrapper = ({ children }: WrapperProps) => (
       pauseOnHover={false}
       theme="light"
     />
-  </>
+    <LoadingComp />
+  </div>
 );
 export default Wrapper;
 
