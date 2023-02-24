@@ -2,7 +2,8 @@ import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button';
 import { useAppDispatch, useAppSelector } from '../../../store';
-import { deleteMemoir, getMemoirPreviews } from '../../../store/memoir/memoirThunks';
+import { mapboxActions } from '../../../store/mapbox';
+import { deleteMemoir, getMemoir, getMemoirPreviews } from '../../../store/memoir/memoirThunks';
 import TripDesc from './TripDesc/TripDesc';
 import TripDetails from './TripDetails/TripDetails';
 import styles from './TripPage.module.scss';
@@ -22,8 +23,22 @@ const TripPage = () => {
     await dispatchApp(getMemoirPreviews());
   }, []);
 
-  const handleClick = () => {
+  const callbackGetMemoir = useCallback(async (newMemoirId: string) => {
+    await dispatchApp(getMemoir(newMemoirId));
+  }, []);
+
+  const cbChangeCallMapboxState = (): void => {
+    dispatchApp(mapboxActions.changeCallPage('trip'));
+  };
+
+  const handleEraseClick = () => {
     callbackDeleteMemoir(memoirIdURL as string);
+  };
+
+  const handleEditClick = async () => {
+    cbChangeCallMapboxState();
+    await callbackGetMemoir(memoirIdURL as string);
+    navigate('/trip');
   };
 
   useEffect(() => {
@@ -47,12 +62,13 @@ const TripPage = () => {
       <TripDetails className={styles.trip_details} />
       <Button
         className={styles.trip_btn}
-        onClick={handleClick}
+        onClick={handleEraseClick}
       >
         Erase this Memoir
       </Button>
       <Button
         className={styles.trip_btn}
+        onClick={handleEditClick}
       >
         Edit this Memoir
       </Button>
