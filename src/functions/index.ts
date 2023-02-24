@@ -42,3 +42,9 @@ export const getTripDist = (pointFrom: number[], pointTo: number[]) => {
   const distance = getDistance(from, to);
   return Number((distance / 1000).toFixed());
 };
+
+export const getDate = (date: string, duration: number) => {
+  const newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + duration);
+  return newDate.toISOString().slice(0, 10);
+};
