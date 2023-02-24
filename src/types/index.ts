@@ -6,10 +6,10 @@ export type WrapperProps = {
 };
 
 export type FormInputItems = {
-  memoir: string,
-  destination: string,
-  country: string,
-  continent: string,
+  tripName: string,
+  destinationName: string,
+  countryName: string,
+  continentName: string,
   sites: string,
   description: string,
   dateFrom: string;
