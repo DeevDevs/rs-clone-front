@@ -34,13 +34,14 @@ const MapComponent = (props : MapProps) => {
       },
     });
 
+    let mapPoint: MapPoint | null = null;
+
     map.current.dragRotate.disable();
     addPoint(map, baseLocationTo, popupNameTo);
     if (pointFrom) {
       const { baseLocation: baseLocationFrom, popupName: popupNameFrom } = pointFrom;
-      addPoint(map, baseLocationFrom, popupNameFrom);
+      mapPoint = addPoint(map, baseLocationFrom, popupNameFrom);
     }
-    let mapPoint: MapPoint | null = null;
 
     if (onChangeLocation) {
       map.current.on('click', (e: mapboxgl.MapMouseEvent) => {
