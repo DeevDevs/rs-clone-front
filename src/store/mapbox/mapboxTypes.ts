@@ -13,6 +13,7 @@ export type TMapbox = {
   mainMapMarkers: TMarkerPopup[];
   mapLoading: boolean;
   mapError: string;
+  callPage: string;
 };
 
 export type TMarkerPopup = {
