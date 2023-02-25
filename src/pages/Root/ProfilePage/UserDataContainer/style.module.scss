@@ -33,6 +33,8 @@
     border: none;
     font-weight: 600;
     font-size: 19px;
+    width: 95px;
+    text-align: left;
     background-color: transparent;
     height: 30px;
     margin: auto 0 auto 20px;
@@ -71,6 +73,8 @@
     border: none;
     font-weight: 600;
     font-size: 19px;
+    width: 95px;
+    text-align: left;
     background-color: transparent;
     height: 30px;
     margin: 5px 0 auto 20px;
@@ -84,6 +88,7 @@
   &_fieldbox {
     margin: 0 0 auto 0;
     max-height: 1000px;
+    width: 490px;
     transition: max-height 0.25s ease-in;
   }
 }
@@ -91,9 +96,13 @@
 .field_content {
   height: 30px;
   min-width: 450px;
+  max-width: 450px;
   font-family: 'Comic Neue', cursive;
   font-size: 22px;
   margin-left: 40px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .field_input {

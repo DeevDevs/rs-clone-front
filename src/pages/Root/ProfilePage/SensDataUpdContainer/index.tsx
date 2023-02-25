@@ -50,10 +50,6 @@ const SensDataUpdContainer = () => {
   return (
     <div className={styles.sensdatablock}>
       <p className={styles.sensdatahead}>Update Sensitive Data</p>
-      <p className={styles.sensdatasub}>
-        Careful: once you update your email or password successfully, you will
-        have to login again.
-      </p>
       <div className={styles.field}>
         <span className={styles.field_label}>
           New email:
