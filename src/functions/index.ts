@@ -35,6 +35,7 @@ export const getGradeText = (grade: number) => {
 };
 
 export const getTripDist = (pointFrom: number[], pointTo: number[]) => {
+  if (pointFrom.join('') === '00') return 0;
   const [longFrom, latFrom] = pointFrom;
   const [longTo, latTo] = pointTo;
 
