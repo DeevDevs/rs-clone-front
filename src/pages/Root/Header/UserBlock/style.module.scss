@@ -13,6 +13,11 @@
     @include font(normal, 700, 20px, 28px);
     color: $black;
     cursor: pointer;
+    width: 155px;
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
   }
 
   .user__img {
