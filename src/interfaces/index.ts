@@ -1,4 +1,6 @@
-import { FooterImgAlts, Links, StatisticsItemsText } from '../enums';
+import {
+  Countries, FooterImgAlts, Links, StatisticsItemsText, TravelStyle, TravelTheme,
+} from '../enums';
 import { StatsArrays } from '../store/stats/statsTypes';
 
 export interface SignUpLoginState {
@@ -45,6 +47,7 @@ export interface StatisticsItemInterface {
   mark: number,
   maximum: number,
   text: StatisticsItemsText,
+  size?: string,
 }
 
 export interface KilometersInterface {
@@ -59,8 +62,17 @@ export interface PlacesInterface {
 export interface OfferInterface {
   header: string,
   info: string,
-  img: string,
+  images: string[],
   rating: number,
+  id: number,
+}
+
+export interface SingleOfferOnPageInterface extends OfferInterface {
+  mainImg: string
+  subHeader: string,
+  theme: TravelTheme,
+  style: TravelStyle,
+  destination: Countries,
 }
 
 export interface OfferProps {

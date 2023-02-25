@@ -130,7 +130,10 @@ const MainMap = () => {
 
   useEffect(() => {
     if (!map.current) return;
-    if (!previews.length) return;
+    if (!previews.length) {
+      setPlacedMarkers(false);
+      return;
+    }
     if (placedMarkers) return;
     const markersPopups = previews.map((preview) => {
       const markerPopup = addMarkerMemoir(map, preview);

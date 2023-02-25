@@ -1,12 +1,13 @@
 import { getDistance } from 'geolib';
 import { FileTransferObj } from '../types';
 import { StatisticsItemsText } from '../enums';
+import ToursStore from '../data/toursStore';
 
-let id = 0;
+let key = 0;
 
 export default (prefix = 'uniqueId') => {
-  id += 1;
-  return `${prefix}${id}`;
+  key += 1;
+  return `${prefix}${key}`;
 };
 
 export const getFile = async (fileInfo: FileTransferObj) => {
@@ -47,4 +48,12 @@ export const getDate = (date: string, duration: number) => {
   const newDate = new Date(date);
   newDate.setDate(newDate.getDate() + duration);
   return newDate.toISOString().slice(0, 10);
+};
+
+const offers = [...ToursStore[0].data, ...ToursStore[1].data, ...ToursStore[2].data];
+export const getOfferById = (offerId: string | undefined) => {
+  if (offerId) {
+    return offers.find(({ id }) => id === +offerId);
+  }
+  return null;
 };

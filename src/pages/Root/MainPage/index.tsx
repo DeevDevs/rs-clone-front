@@ -3,7 +3,6 @@ import SignUpLoginContainer from './SignUpLoginContainer';
 import Statistics from './Statistics';
 import styles from './style.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../store';
-// import { useAppSelector } from '../../../store';
 
 import MainMap from './MainMap';
 import { mapboxActions } from '../../../store/mapbox';
