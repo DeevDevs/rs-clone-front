@@ -160,8 +160,11 @@
     background: index.$button-gradient;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
-    border-color: index.$very-dark-blue;
+    border: none;
     cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
 .map {
