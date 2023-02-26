@@ -4,10 +4,8 @@ import { userReducer } from './user';
 import { memoirReducer } from './memoir';
 import { statsReducer } from './stats';
 import { mapboxReducer } from './mapbox';
-import { temp } from './temp';
 
 export const rootReducer = combineReducers({
-  tempReducer: temp.reducer,
   userReducer,
   memoirReducer,
   statsReducer,
