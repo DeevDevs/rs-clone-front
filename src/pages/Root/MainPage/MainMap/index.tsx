@@ -89,7 +89,7 @@ const MainMap = () => {
       cbDetermineClickTarget('map');
       toggleModuleOverlay();
     }
-  }, [mapLoading]);
+  }, [mapLoading, clickLong, clickLat]);
 
   useEffect(() => {
     if (clickLocation[0] === 0 && clickLocation[1] === 0) return;
@@ -107,7 +107,7 @@ const MainMap = () => {
         Number(userLocation[0].toFixed(4)),
         Number(userLocation[1].toFixed(4)),
       ],
-      zoom: 5,
+      zoom: 4,
       maxZoom: 9,
       minZoom: 2,
       projection: {

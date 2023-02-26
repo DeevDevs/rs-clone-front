@@ -65,6 +65,7 @@ export interface OfferInterface {
   images: string[],
   rating: number,
   id: number,
+  locations?: number[][],
 }
 
 export interface SingleOfferOnPageInterface extends OfferInterface {

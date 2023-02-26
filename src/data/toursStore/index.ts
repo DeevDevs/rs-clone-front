@@ -29,6 +29,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Discover backwaters, karst-studded bays, bustling cities and bicycle-powered food carts',
+        locations: [
+          [105.8369, 21.0227],
+          [108.3470, 15.9182],
+          [106.4150, 10.7546],
+        ],
       },
       {
         header: 'Beautiful Bali',
@@ -52,6 +57,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Travel to Bali and visit Indonesia\'s beautiful island getaway',
+        locations: [
+          [115.2611, -8.6952],
+          [115.0231, -8.1609],
+          [115.5264, -8.4473],
+          [115.2660, -8.4961],
+        ],
       },
       {
         header: 'Sri Lanka in Depth',
@@ -385,7 +396,6 @@ const toursStore = [
         subHeader: 'Encounter rare wildlife in the heart of East Africa',
         locations: [
           [36.7073, -1.3032],
-          [36.8570, -1.2980],
           [32.5290, 0.3130],
         ],
       },

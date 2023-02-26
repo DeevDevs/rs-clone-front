@@ -58,6 +58,7 @@ const UserDataContainer = () => {
             }`}
             type="text"
             id="namefield"
+            maxLength={30}
           />
         </div>
         <button
