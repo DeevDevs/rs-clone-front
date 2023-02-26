@@ -27,7 +27,7 @@ const Statistics = () => {
             <div className={styles.info}>
               <Marks
                 places={statsObj.places}
-                satisfaction={statsObj.places}
+                satisfaction={statsObj.averageRate}
                 sites={statsObj.sites.length}
               />
               <Kilometers distance={statsObj.distance} />
