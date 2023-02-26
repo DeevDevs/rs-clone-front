@@ -8,12 +8,16 @@ import goBackImg from '../../../../../assets/svg/backButton.svg';
 import descriptionAsideStore from '../../../../../data/DescriptionAsideStore';
 import { SingleOfferOnPageInterface } from '../../../../../interfaces';
 import keyGenerator from '../../../../../functions';
+import OfferMap from '../OfferMap/OfferMap';
 
 const Aside = ({ data }: { data: SingleOfferOnPageInterface | null | undefined }) => {
   const navigate = useNavigate();
+  const tourLocations = data?.locations as [number, number][];
   return (
     <aside className={styles.aside}>
-      <div className={styles.map}>map</div>
+      <div className={styles.map}>
+        {data?.locations && <OfferMap locations={tourLocations} /> }
+      </div>
       {descriptionAsideStore.map(({ img, text }) => (
         <SvgAndText
           img={img}
