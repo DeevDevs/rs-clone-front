@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { TripErrorMessages } from '../../../../enums';
 import { FileTransferObj, FileTransferProps } from '../../../../types';
+import getKey from '../../../../functions/index';
 import style from './DragZone.module.scss';
 
-const DragZone = ({ photos, setPhotos } : FileTransferProps) => {
+const DragZone = ({
+  photos, setPhotos, photosLinks, setPhotosLinks,
+} : FileTransferProps) => {
   const [highLight, setHighLight] = useState(false);
 
   const handleFiles = (files: FileList) => {
@@ -60,15 +63,53 @@ const DragZone = ({ photos, setPhotos } : FileTransferProps) => {
 
   const handleDelete = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const target = (e.target as HTMLElement).parentElement;
-    const targetIndex = target?.dataset.imgindex;
+    const targetIndex = target?.dataset.imgindex?.slice(1) as string;
+    const idxChar = target?.dataset.imgindex?.slice(0, 1) as string;
 
-    if (targetIndex) {
+    if (photosLinks && photosLinks.length && idxChar === 'i') {
+      setPhotosLinks([
+        ...photosLinks.slice(0, +targetIndex),
+        ...photosLinks.slice(+targetIndex + 1),
+      ]);
+    } else if (idxChar === 'p') {
       setPhotos([
         ...photos.slice(0, +targetIndex),
         ...photos.slice(+targetIndex + 1),
       ]);
     }
   };
+
+  let photoList;
+  if (photos.length > 0) {
+    photoList = photos.map((item, idx) => (
+      <div
+        className={
+                    item.size * 9.537e-7 > 2
+                      ? `${style.prev_img} ${style.forbidden}`
+                      : style.prev_img
+                    }
+        key={`${item.name + idx}`}
+        data-imgindex={`p${idx}`}
+      >
+        <button type="button" onClick={(e) => handleDelete(e)}>&times;</button>
+        <img src={item.src} alt={item.name} />
+      </div>
+    ));
+  }
+
+  let imageList;
+  if (photosLinks) {
+    imageList = photosLinks.map((item, idx) => (
+      <div
+        className={style.prev_img}
+        key={getKey()}
+        data-imgindex={`i${idx}`}
+      >
+        <button type="button" onClick={(e) => handleDelete(e)}>&times;</button>
+        <img src={item} alt="" />
+      </div>
+    ));
+  }
 
   return (
     <div className={style.file_upload}>
@@ -96,21 +137,8 @@ const DragZone = ({ photos, setPhotos } : FileTransferProps) => {
           </label>
         </div>
         <div className={style.file_preview}>
-          {photos.length > 0 && photos
-            .map((item, idx) => (
-              <div
-                className={
-                  item.size * 9.537e-7 > 2
-                    ? `${style.prev_img} ${style.forbidden}`
-                    : style.prev_img
-                }
-                key={`${item.name + idx}`}
-                data-imgindex={idx}
-              >
-                <button type="button" onClick={(e) => handleDelete(e)}>&times;</button>
-                <img src={item.src} alt={item.name} />
-              </div>
-            ))}
+          {photoList && photoList}
+          {imageList && imageList}
         </div>
         <div className={
           photos.filter((photo) => photo.size * 9.537e-7 > 2).length

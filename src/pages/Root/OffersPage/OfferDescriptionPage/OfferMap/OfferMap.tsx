@@ -30,13 +30,13 @@ const OfferMap = (props: OfferMapProps) => {
       zoom: 1,
       maxZoom: 9,
       minZoom: 2,
-      // scrollZoom: false,
+      scrollZoom: false,
       projection: {
         name: 'mercator',
         center: [0, 30],
         parallels: [30, 30],
       },
-      // interactive: false,
+      interactive: false,
     });
     // const coordinates = [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]] as [number, number][];
     const { locations } = props;

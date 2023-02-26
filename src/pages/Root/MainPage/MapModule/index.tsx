@@ -84,8 +84,10 @@ const MapModule = () => {
                 navigate(`trip/${clickedMemoirID}`);
                 return;
               }
-              toggleModuleOverlay();
-              navigate('trip');
+              if (clickTarget === 'map') {
+                toggleModuleOverlay();
+                navigate('trip');
+              }
             }
           }}
         >

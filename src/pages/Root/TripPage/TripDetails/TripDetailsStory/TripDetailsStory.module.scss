@@ -1,0 +1,26 @@
+@use './../../../../../sass/index.scss';
+
+.details {
+  &_story {
+    max-width: 600px;
+    width: 100%;
+    &>h3 {
+      @include index.font(normal, 700, 36px, 41px);
+      padding-bottom: 53px;
+    }
+    &>p {
+      @include index.font(normal, 400, 22px, 120%);
+      overflow: auto;
+      &::-webkit-scrollbar {
+        background-color: index.$very-dark-blue;
+        border-radius: 3px;
+        height: 6px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: index.$dark-blue;
+        border-radius: 7px;
+      }
+    }
+  }
+}
+

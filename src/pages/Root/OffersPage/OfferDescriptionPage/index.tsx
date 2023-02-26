@@ -13,6 +13,8 @@ const OfferDescriptionPage = () => {
   useEffect(() => {
     if (!data) {
       navigate(`/${PagePath.ErrorRedirect}`);
+    } else {
+      window.scrollTo(0, 0);
     }
   }, []);
   return (

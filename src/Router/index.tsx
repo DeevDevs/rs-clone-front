@@ -5,11 +5,10 @@ import Root from '../pages/Root';
 import MainPage from '../pages/Root/MainPage';
 import { PagePath } from '../enums';
 import TripFormPage from '../pages/Root/TripFormPage';
-import TripPage from '../pages/Root/TripFormPage/TripPageComp';
+import TripPage from '../pages/Root/TripPage';
 import OffersPage from '../pages/Root/OffersPage';
 import OfferDescriptionPage from '../pages/Root/OffersPage/OfferDescriptionPage';
 import ProfilePage from '../pages/Root/ProfilePage';
-import TestPage from '../components/TempAllReqComponent';
 
 const Router = () => (
   <BrowserRouter>
@@ -38,10 +37,6 @@ const Router = () => (
         <Route
           path={PagePath.Profile}
           element={<ProfilePage />}
-        />
-        <Route
-          path="test"
-          element={<TestPage />}
         />
       </Route>
       <Route

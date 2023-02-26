@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading,jsx-a11y/label-has-associated-control */
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { signUpLoginContainerState } from '../../../../data/signUpLoginStore';
@@ -13,7 +13,7 @@ import * as userTypes from '../../../../store/user/userTypes';
 import { login, signup } from '../../../../store/user/userThunks';
 
 const SignUpLoginContainer = () => {
-  const [state] = useState(signUpLoginContainerState);
+  const state = signUpLoginContainerState;
   const [isSignUp, setSignUp] = useState(true);
   const dispatchApp = useAppDispatch();
   const callbackSignup = useCallback(async (userData: userTypes.TSignupReq) => {
@@ -92,10 +92,16 @@ const SignUpLoginContainer = () => {
             key={item.id}
             className={styles.inputContainer}
           >
-            <label className={styles.label}>{item.label}</label>
+            <label
+              className={styles.label}
+              htmlFor={item.id}
+            >
+              {item.label}
+            </label>
             <input
               type={item.type}
               className={styles.input}
+              id={item.id}
               {...register(item.name, {
                 ...item.options,
                 validate: (value) => {
@@ -166,11 +172,17 @@ const SignUpLoginContainer = () => {
             key={item.id}
             className={styles.inputContainer}
           >
-            <label className={styles.label}>{item.label}</label>
+            <label
+              className={styles.label}
+              htmlFor={item.id}
+            >
+              {item.label}
+            </label>
             <input
               type={item.type}
               className={styles.input}
               {...register(item.name, item.options)}
+              id={item.id}
             />
             {errors[item.name]
               && errors[item.name]?.type === ValidationTypes.Required

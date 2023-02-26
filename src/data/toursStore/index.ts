@@ -29,7 +29,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Discover backwaters, karst-studded bays, bustling cities and bicycle-powered food carts',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [105.8369, 21.0227],
+          [108.3470, 15.9182],
+          [106.4150, 10.7546],
+        ],
       },
       {
         header: 'Beautiful Bali',
@@ -53,8 +57,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Travel to Bali and visit Indonesia\'s beautiful island getaway',
-        // eslint-disable-next-line max-len
-        locations: [[115.2611, -8.6952], [115.0231, -8.1609], [115.5264, -8.4473], [115.2660, -8.4961]],
+        locations: [
+          [115.2611, -8.6952],
+          [115.0231, -8.1609],
+          [115.5264, -8.4473],
+          [115.2660, -8.4961],
+        ],
       },
       {
         header: 'Sri Lanka in Depth',
@@ -66,7 +74,7 @@ const toursStore = [
       isle will bring nothing but smiles.`,
         images: [
           'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/sigiriya_ancient_rock_fortress.jpg',
-          'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/HPPS_Intrepid%20Travel-sri-lanka-FeatureStay-NuwaraEliya-StAndrewsHotel-Exterior-1100x735.jpg,',
+          'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/HPPS_IntrepidTravel-SriLanka-Local-cooking-class-1100x735.jpg',
           'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/HPPS_IntrepidTravel-sri-lanka_elephants_Yala-Np-playing-trunks-1100x735.jpg',
           'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/HPPS_Intrepid%20Travel-sri-lanka-FeatureStay-NuwaraEliya-StAndrews-Interior-1100x735.jpg',
         ],
@@ -77,7 +85,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Premium,
         subHeader: 'Discover Sri Lanka, the pearl of the Indian Ocean.',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [79.8583, 7.1894],
+          [80.6258, 7.2945],
+          [79.8562, 6.9218],
+        ],
       },
       {
         header: 'Everest Base Camp Trek',
@@ -101,7 +113,10 @@ const toursStore = [
         theme: TravelTheme.WalkingAndTrekking,
         style: TravelStyle.Original,
         subHeader: 'Walk among giants, test your limits, discover your strength',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [85.2911, 27.7089],
+          [86.8276, 27.9807],
+        ],
       },
       {
         header: 'Premium India',
@@ -124,7 +139,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Premium,
         subHeader: 'Experience the wonders of Rajasthan on a journey from Mumbai to Delhi',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [72.7411, 19.0822],
+          [74.4746, 26.4866],
+          [75.6118, 25.4359],
+          [76.8130, 28.6438],
+        ],
       },
     ],
   },
@@ -152,7 +172,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'See a less crowded side of Italy on this winter adventure',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [12.3959, 41.9099],
+          [10.6716, 43.8443],
+          [11.2616, 44.4990],
+          [12.1071, 45.4042],
+        ],
       },
       {
         header: 'Iceland Discovery',
@@ -177,7 +202,10 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Move on to greener pastures full of geothermal springs, glaciers and geysers',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [-21.9224, 64.133],
+          [-18.2754, 65.6692],
+        ],
       },
       {
         header: 'Athens to Santorini',
@@ -198,7 +226,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'From ancient Athens, embark on a colourful Greek Islands tour',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [23.7033, 37.9908],
+          [24.7151, 37.4982],
+          [25.3108, 37.4514],
+          [25.3505, 36.4071],
+        ],
       },
       {
         header: 'Highlights of Scotland',
@@ -223,7 +256,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Discover the highlights of the Highlands on this Scottish adventure',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [-4.3725, 55.8553],
+          [-6.7784, 57.3617],
+          [-5.1207, 56.8169],
+          [-3.2753, 55.9411],
+        ],
       },
       {
         header: 'Highlights of Malta & Gozo',
@@ -246,7 +284,10 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Set your watch to island time for a Maltese adventure',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [14.4951, 35.9121],
+          [14.5085, 35.8984],
+        ],
       },
     ],
   },
@@ -274,7 +315,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Marvel in the colours and flavours of Morocco’s majesty.',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [-7.6570, 33.5722],
+          [-5.9045, 35.7632],
+          [-8.0778, 31.6346],
+        ],
       },
       {
         header: 'Magical Kenya',
@@ -298,7 +343,10 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Experience the natural and cultural beauty of colourful Kenya',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [36.7073, -1.3032],
+          [36.0527, -0.3592],
+        ],
       },
       {
         header: 'Brilliant Botswana',
@@ -320,7 +368,10 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Incredible nature, landscapes and culture await in brilliant Botswana',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [25.1382, -17.8117],
+          [23.3838, -20.0003],
+        ],
       },
       {
         header: 'Gorillas & Game Parks',
@@ -343,7 +394,10 @@ const toursStore = [
         theme: TravelTheme.OverlandAndWildlife,
         style: TravelStyle.Basics,
         subHeader: 'Encounter rare wildlife in the heart of East Africa',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [36.7073, -1.3032],
+          [32.5290, 0.3130],
+        ],
       },
       {
         header: 'Wildlife in Rwanda',
@@ -365,7 +419,10 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Encounter resilience and rare wildlife in Rwanda and Uganda',
-        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
+        locations: [
+          [29.9871, -1.9297],
+          [29.6113, -1.0521],
+        ],
       },
     ],
   },

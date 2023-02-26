@@ -9,7 +9,7 @@ import getStats from '../../../../store/stats/statsThunks';
 
 const Statistics = () => {
   const statsObj = useAppSelector((state) => state.statsReducer);
-  const { statsID, memoirIDs } = useAppSelector((state) => state.userReducer);
+  const { statsID } = useAppSelector((state) => state.userReducer);
   const dispatchApp = useAppDispatch();
   const callbackGetStats = useCallback(async (userStatsID: string) => {
     await dispatchApp(getStats(userStatsID));
@@ -20,14 +20,14 @@ const Statistics = () => {
   }, []);
   return (
     <div className={styles.statistics}>
-      {memoirIDs.length > 0
+      {statsObj.places
         ? (
           <>
             <h2 className={styles.header}>Your statistics</h2>
             <div className={styles.info}>
               <Marks
                 places={statsObj.places}
-                satisfaction={statsObj.places}
+                satisfaction={statsObj.averageRate}
                 sites={statsObj.sites.length}
               />
               <Kilometers distance={statsObj.distance} />

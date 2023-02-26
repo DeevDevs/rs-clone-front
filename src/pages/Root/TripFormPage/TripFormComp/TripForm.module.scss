@@ -61,6 +61,7 @@
     border-radius: 10px; 
     width: 100%;
     padding: 0 10px 10px 10px;
+    border-left-width: 10px;
     &::placeholder {
       font-size: 20px;
       display: flex;
@@ -85,12 +86,22 @@
       display: flex;
       justify-content: flex-start;
     }
+    & input[type="date"] {
+      appearance: none;
+      width: 200px;
+      border-radius: 6px;
+      font-family: "Comic Neue", cursive;
+      @include index.font(normal, 400, 22px, 37px);
+      padding: 0 5px 0 8px;
+      border: 1px solid index.$very-dark-blue;
+      border-left-width: 8px;
+    }
   }
   &_statistic {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    padding-top: 70px;
+    padding: 70px 70px 0 70px;
     &>div {
       width: initial;
     }
@@ -113,6 +124,10 @@
         font-weight: 700;
       }
     }
+    & tspan {
+      font-family: 'Comic Neue', cursive !important;
+      font-weight: 700;
+    }
   }
   &_area {
     font-family: inherit;
@@ -120,10 +135,20 @@
     width: 100%;
     background-color: index.$light-blue;
     border: 2px solid index.$very-dark-blue;
-    border-radius: 10px;
+    border-radius: 7px;
     resize: none;
     @include index.font(normal, 400, 25px, 37px);
     padding: 5px;
+    cursor: pointer;
+    &::-webkit-scrollbar {
+      background-color: index.$very-dark-blue;
+      border-radius: 3px;
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: index.$dark-blue;
+      border-radius: 7px;
+    }
   }
   &_submit {
     max-width: 320px;
@@ -145,16 +170,9 @@
   border: 2px solid index.$very-dark-blue;
   border-radius: 10px;
   overflow: hidden;
-}
-input[type="date" i] {
-  appearance: none;
-  width: 200px;
-  border: 2px solid index.$very-dark-blue;
-  border-radius: 10px;
-  font-family: "Comic Neue";
-  letter-spacing: 2px;
-  @include index.font(normal, 400, 25px, 37px);
-  padding: 0 5px 0 5px;
+  &>div {
+    height: 100%;
+  }
 }
 .error {
   color: #ff0033;
