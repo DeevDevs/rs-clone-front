@@ -46,8 +46,7 @@ export async function uploadMemoirImages(
   }
   if (files.length === 0 && listToRemove.length > 0) {
     const listWithoutDeletedPhotos = originalList.filter(
-      (url) => listToRemove.indexOf(url) < 0
-      || url !== 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg',
+      (url) => listToRemove.indexOf(url) < 0,
     );
     return listWithoutDeletedPhotos.length > 0
       ? listWithoutDeletedPhotos
