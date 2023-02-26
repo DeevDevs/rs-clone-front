@@ -1,38 +1,48 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import MapComponent from '../../../../components/MapComponent';
 import StatisticItem from '../../../../components/StatisticItem';
-import { StatisticsItemsText, TripErrorMessages } from '../../../../enums';
-import { getFile } from '../../../../functions';
+import { TripErrorMessages } from '../../../../enums';
+import {
+  getFile, getDate, getGradeText, getTripDist,
+} from '../../../../functions';
 import { useAppDispatch, useAppSelector } from '../../../../store';
-import { createNewMemoir } from '../../../../store/memoir/memoirThunks';
-import { TNewMemoirReq } from '../../../../store/memoir/memoirTypes';
-import { FileTransferObj, FormInputItems, ValuesKey } from '../../../../types';
+import { mapboxActions } from '../../../../store/mapbox';
+import { createNewMemoir, getMemoirPreviews, updateMemoir } from '../../../../store/memoir/memoirThunks';
+import { TMemoir, TNewMemoirReq, TUpdMemoirReq } from '../../../../store/memoir/memoirTypes';
+import { getStats } from '../../../../store/stats/statsThunks';
+import {
+  FileTransferObj, FormInputItems, MapProps, ValuesKey,
+} from '../../../../types';
 import Drag from '../DragZone';
-import TripMap from '../TripMapComp';
 import TripSelect from '../TripSelect/TripSelect';
 import TripSitesBox from '../TripSitesBox';
 import style from './TripForm.module.scss';
 
 const initialFormValues = {
-  memoir: '',
-  destination: '',
-  country: '',
-  continent: '',
-  sites: '',
+  memoir: 'tripName',
+  destination: 'destinationName',
+  country: 'countryName',
+  continent: 'continentName',
+  sites: 'sites',
 };
 
 const satisfaction = {
   maximum: 10,
-  text: StatisticsItemsText.Satisfaction,
+  text: getGradeText(5),
 };
 
 const initialSites: string[] = [];
 
 const TripForm = () => {
+  const navigate = useNavigate();
   const initialPhotos: FileTransferObj[] = [];
   const [photos, setPhotos] = useState(initialPhotos);
   const [rateValue, setRateValue] = useState(5);
   const [sites, setSites] = useState(initialSites);
+  const [clickLocation, setClickLocation] = useState([0, 0]);
+  const [photosLinks, setPhotosLinks] = useState(initialSites);
 
   const {
     register,
@@ -42,43 +52,79 @@ const TripForm = () => {
     handleSubmit,
     reset,
     getValues,
+    setValue,
   } = useForm<FormInputItems>({ mode: 'all' });
 
   const dispatchApp = useAppDispatch();
-  const { id } = useAppSelector((state) => state.userReducer);
-  const tempNewMemoirData = {
+  const { id, statsID } = useAppSelector((state) => state.userReducer);
+  const { id: memoirId } = useAppSelector((state) => state.memoirReducer);
+  const { clickTarget } = useAppSelector((state) => state.mapboxReducer);
+  const memoirObj = useAppSelector((state) => state.memoirReducer);
+
+  const {
+    clickLong, clickLat, country, place, callPage,
+  } = useAppSelector((state) => state.mapboxReducer);
+
+  const newMemoirData: TNewMemoirReq = {
     userID: id,
-    tripName: 'Lonesome October',
-    destinationName: 'Tashkent',
-    longLat: [23.090029, 105.399203],
-    countryName: 'Uzb',
-    continentName: 'Asia',
-    whereFromLongLat: [23.090029, 100.399203],
-    distance: 239,
-    description: 'Whatever is here',
+    tripName: '',
+    destinationName: '',
+    longLat: [0, 0],
+    countryName: '',
+    continentName: '',
+    whereFromLongLat: [0, 0],
+    distance: 0,
+    description: '',
     memoirPhotos: [],
-    date: '2023-02-01T10:22:23.815Z',
-    rateValue: 4,
-    days: 7,
-    sites: ['Palace', 'Market', 'Tower'],
-  } as TNewMemoirReq;
+    date: '',
+    rateValue: 0,
+    days: 0,
+    sites: [],
+  };
+
   const callbackCreateMemoir = useCallback(async (memoirData: TNewMemoirReq) => {
     await dispatchApp(createNewMemoir(memoirData));
   }, []);
+  const callbackGetMemoirPreviews = useCallback(async () => {
+    await dispatchApp(getMemoirPreviews());
+  }, []);
+  const callbackGetStats = useCallback(async (userStatsID: string) => {
+    await dispatchApp(getStats(userStatsID));
+  }, []);
+  const callbackUpdateMemoir = useCallback(async (memoirData: TUpdMemoirReq) => {
+    await dispatchApp(updateMemoir(memoirData));
+  }, []);
+
+  const cbCleanUpMapboxState = (): void => { dispatchApp(mapboxActions.cleanUpState()); };
+
   const addFieldsFromForm = (formData:FormInputItems): void => {
     const dateTo = new Date(formData.dateTo);
     const dateFrom = new Date(formData.dateFrom);
     const diffHours = +new Date(+dateTo - +dateFrom) / 36e5;
     const duration = Math.floor(diffHours / 24);
+    const longLat = [clickLong, clickLat].join('');
 
-    tempNewMemoirData.tripName = formData.memoir;
-    tempNewMemoirData.destinationName = formData.destination;
-    tempNewMemoirData.countryName = formData.country;
-    tempNewMemoirData.continentName = formData.continent;
-    tempNewMemoirData.sites = sites.length ? sites : getValues('sites').split(' ');
-    tempNewMemoirData.date = formData.dateFrom;
-    tempNewMemoirData.rateValue = rateValue;
-    tempNewMemoirData.days = duration;
+    if (clickLocation.join('') === '00' && callPage === 'trip') {
+      newMemoirData.whereFromLongLat = [...memoirObj.whereFromLongLat];
+    } else {
+      newMemoirData.whereFromLongLat = clickLocation;
+    }
+
+    newMemoirData.longLat = longLat === '00' ? memoirObj.longLat as [number, number] : [clickLong, clickLat];
+    newMemoirData.distance = getTripDist(
+      newMemoirData.whereFromLongLat,
+      newMemoirData.longLat,
+    );
+
+    newMemoirData.tripName = formData.tripName;
+    newMemoirData.destinationName = formData.destinationName;
+    newMemoirData.countryName = formData.countryName;
+    newMemoirData.continentName = formData.continentName;
+    newMemoirData.description = formData.description;
+    newMemoirData.date = formData.dateFrom;
+    newMemoirData.rateValue = rateValue;
+    newMemoirData.days = duration;
+    newMemoirData.sites = sites.length ? sites : getValues('sites').split(' ');
   };
 
   const onSubmit: SubmitHandler<FormInputItems> = (async (data) => {
@@ -87,13 +133,29 @@ const TripForm = () => {
     filesFromDropZone.forEach((item) => {
       if (item.status === 'fulfilled') { dt.items.add(item.value); }
     });
-    tempNewMemoirData.memoirPhotos = dt.files;
+    newMemoirData.memoirPhotos = dt.files;
     addFieldsFromForm(data);
-    callbackCreateMemoir(tempNewMemoirData);
+    cbCleanUpMapboxState();
+
+    const newUdpMemoirData = {
+      ...newMemoirData,
+      id: memoirId,
+      prevPhotos: memoirObj.memoirPhotos,
+      photosToDelete: memoirObj.memoirPhotos.filter((photo) => photosLinks.indexOf(photo) < 0),
+    };
+
+    if (callPage === 'main') {
+      await callbackCreateMemoir(newMemoirData);
+    } else {
+      await callbackUpdateMemoir(newUdpMemoirData);
+    }
+    await callbackGetStats(statsID);
+    await callbackGetMemoirPreviews();
     reset();
     setPhotos([]);
     setRateValue(5);
     setSites([]);
+    navigate(`${memoirId}`);
   });
 
   const handleSites = () => {
@@ -104,17 +166,18 @@ const TripForm = () => {
   };
 
   const inputs = Object
-    .keys(initialFormValues)
-    .map((key: ValuesKey | string) => {
+    .entries(initialFormValues)
+    .map((el: [string, ValuesKey | string]) => {
+      const [key, val] = el;
       const {
         name, ref, onBlur, onChange,
-      } = register(key as ValuesKey, {
+      } = register(val as ValuesKey, {
         required: TripErrorMessages.Field,
       });
 
       return (
         <div key={key}>
-          <label htmlFor={key}>
+          <label htmlFor={val}>
             {key}
             <input
               name={name}
@@ -153,6 +216,48 @@ const TripForm = () => {
     required: TripErrorMessages.EndDate,
   });
 
+  const newMap: MapProps = {
+    pointTo: {
+      baseLocation: callPage === 'main' ? [clickLong, clickLat] : [memoirObj.longLat[0], memoirObj.longLat[1]],
+      popupName: `Go to ${callPage === 'main' ? place : memoirObj.destinationName}`,
+    },
+    pointFrom: {
+      baseLocation: [memoirObj.whereFromLongLat[0], memoirObj.whereFromLongLat[1]],
+      popupName: 'Journey started here',
+    },
+  };
+
+  useEffect(() => {
+    if (callPage === 'main') {
+      setValue('countryName', country);
+      setValue('destinationName', place);
+    } else {
+      setRateValue(memoirObj.rateValue);
+      setValue('dateFrom', memoirObj.date.slice(0, 10));
+      setValue('dateTo', getDate(memoirObj.date.slice(0, 10), memoirObj.days));
+      Object
+        .entries(initialFormValues)
+        .forEach((el: [string, ValuesKey | string]) => {
+          const [, val] = el;
+          if (typeof val === 'string' && val !== 'sites') { setValue(val as ValuesKey, memoirObj[val as keyof TMemoir] as string); }
+          if (typeof val === 'string' && val === 'sites') {
+            setSites(memoirObj.sites);
+            setValue(val as ValuesKey, memoirObj.sites[0]);
+          }
+        });
+      setValue('countryName', memoirObj.countryName);
+      setValue('destinationName', memoirObj.destinationName);
+      setValue('description', memoirObj.description);
+      setPhotosLinks(memoirObj.memoirPhotos);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (clickTarget === 'memoir' || clickTarget === '') {
+      navigate(`${memoirId}`);
+    }
+  }, [memoirId]);
+
   return (
     <form id="tripForm" className={style.form} onSubmit={handleSubmit(onSubmit)}>
       <div className={style.form_leftSide}>
@@ -160,7 +265,11 @@ const TripForm = () => {
         <TripSitesBox sites={sites} handleDelete={setSites} />
         <h2 className={style.form_mapTitle}>Show us where you arrived from</h2>
         <div className={style.map}>
-          <TripMap />
+          <MapComponent
+            pointTo={newMap.pointTo}
+            pointFrom={callPage === 'main' ? undefined : newMap.pointFrom}
+            onChangeLocation={setClickLocation}
+          />
         </div>
         <div className={style.form_date}>
           <div>
@@ -184,12 +293,17 @@ const TripForm = () => {
         <input className={style.form_submit} type="submit" value="Record this Memoir" />
       </div>
       <div className={style.form_rightSide}>
-        <Drag photos={photos} setPhotos={setPhotos} />
+        <Drag
+          photos={photos}
+          setPhotos={setPhotos}
+          photosLinks={photosLinks && photosLinks}
+          setPhotosLinks={setPhotosLinks}
+        />
         <div className={style.form_statistic}>
           <StatisticItem
             mark={rateValue}
             maximum={satisfaction.maximum}
-            text={satisfaction.text}
+            text={getGradeText(rateValue)}
           />
           <TripSelect
             values={[...new Array(10)].map((el, idx) => String(idx + 1))}

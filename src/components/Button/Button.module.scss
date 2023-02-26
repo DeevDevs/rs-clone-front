@@ -1,0 +1,16 @@
+@use './../../sass/index.scss';
+
+.btn {
+  @include index.font(normal, 700, 24px, 35px);
+  font-family: 'Finger Paint';
+  padding: 15px 38px;
+  border-radius: 10px;
+  border: none;
+  text-transform: uppercase;
+  background: linear-gradient(270deg, #8D60CC 0%, #48B9E8 100%);
+  color: #fff;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+}

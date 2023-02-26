@@ -122,6 +122,12 @@ export enum StatisticsItemsText {
   Sites = 'Sites seen',
   Rating = 'Rating',
   None = '',
+  Awful = 'It was awful',
+  DidNotLike = "I didn't like it much",
+  Good = 'It was good',
+  Great = 'It was great',
+  Awesome = 'It was awesome',
+  Ok = 'It was OK',
 }
 
 export enum ContinentNames {

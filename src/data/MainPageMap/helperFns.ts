@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import * as memoirTypes from '../../store/memoir/memoirTypes';
+import { MapPoint } from '../../types';
 import * as mapboxTypes from '../../store/mapbox/mapboxTypes';
 
 export function addMarkerCurLocation(
@@ -57,6 +58,34 @@ export function addMarkerMemoir(
   };
   // eslint-disable-next-line consistent-return
   return markerPopup;
+}
+
+export function addPoint(
+  map: React.MutableRefObject<mapboxgl.Map | null>,
+  coordinates: [number, number],
+  popupName?: string,
+): MapPoint | null {
+  if (!map || !map.current) return null;
+  const el = document.createElement('div');
+  el.className = popupName === 'Journey started here' ? 'marker up' : 'marker down';
+  const marker = new mapboxgl.Marker({
+    element: el,
+    anchor: 'bottom',
+  })
+    .setLngLat(coordinates)
+    .addTo(map.current);
+
+  const popup = new mapboxgl.Popup({
+    offset: 30,
+    closeOnClick: false,
+    closeButton: false,
+  })
+    .setLngLat(coordinates)
+    .setHTML(
+      `<p>${popupName}</p>`
+    )
+    .addTo(map.current);
+  return { marker, popup };
 }
 
 export function toggleModuleOverlay() {

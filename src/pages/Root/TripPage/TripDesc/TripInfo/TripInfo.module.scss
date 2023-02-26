@@ -1,0 +1,27 @@
+@use './../../../../../sass/index.scss';
+
+.trip_info {
+  max-width: 600px;
+  width: 100%;
+  &>h3 {
+    @include index.font(normal, 700, 48px, 55px);
+    padding-bottom: 17px;
+  }
+  & p:nth-child(2) {
+    @include index.font(normal, 400, 40px, 46px);
+    padding-bottom: 32px;
+  }
+  & p:nth-child(3) {
+    @include index.font(normal, 700, 28px, 32px);
+    padding-bottom: 24px;
+  }
+  & p:nth-child(5) {
+    @include index.font(normal, 700, 28px, 32px);
+    padding-top: 24px;
+    font-size: 28px;
+    line-height: 155%;
+  }
+  & p:nth-child(6) {
+    @include index.font(normal, 400, 28px, 155%);
+  }
+}

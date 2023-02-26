@@ -1,0 +1,14 @@
+@use 'src/sass' as *;
+
+
+.mapContainer {
+height: 600px;
+width: 1580px;
+}
+
+.marker {
+  height: 80px;
+  width: 80px;
+  background-image: url('./../../../../data/MainPageMap/marker.png');
+  background-color: antiquewhite;
+}

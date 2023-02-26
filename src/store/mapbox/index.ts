@@ -17,6 +17,7 @@ const initialState: mapboxTypes.TMapbox = {
   mainMapMarkers: [],
   mapLoading: false,
   mapError: '',
+  callPage: 'main',
 };
 
 export const mapboxSlice = createSlice({
@@ -40,6 +41,15 @@ export const mapboxSlice = createSlice({
     },
     emptyMarkers(state) {
       state.mainMapMarkers = [];
+    },
+    cleanUpState(state) {
+      state.clickTarget = '';
+      state.clickLat = 0;
+      state.clickLong = 0;
+    },
+    changeCallPage(state, { payload }) {
+      state.clickTarget = 'map';
+      state.callPage = payload;
     },
   },
   extraReducers: (builder) => {
