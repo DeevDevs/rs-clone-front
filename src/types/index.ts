@@ -28,7 +28,9 @@ export type FileTransferObj = {
 
 export type FileTransferProps = {
   photos: FileTransferObj[],
+  photosLinks?: string[];
   setPhotos: (photos: FileTransferObj[]) => void,
+  setPhotosLinks: (images: string[]) => void,
 };
 
 export type TripSelectProp = {
