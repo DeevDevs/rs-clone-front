@@ -29,6 +29,7 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Discover backwaters, karst-studded bays, bustling cities and bicycle-powered food carts',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Beautiful Bali',
@@ -52,6 +53,8 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Travel to Bali and visit Indonesia\'s beautiful island getaway',
+        // eslint-disable-next-line max-len
+        locations: [[115.2611, -8.6952], [115.0231, -8.1609], [115.5264, -8.4473], [115.2660, -8.4961]],
       },
       {
         header: 'Sri Lanka in Depth',
@@ -74,6 +77,7 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Premium,
         subHeader: 'Discover Sri Lanka, the pearl of the Indian Ocean.',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Everest Base Camp Trek',
@@ -97,6 +101,7 @@ const toursStore = [
         theme: TravelTheme.WalkingAndTrekking,
         style: TravelStyle.Original,
         subHeader: 'Walk among giants, test your limits, discover your strength',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Premium India',
@@ -119,6 +124,7 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Premium,
         subHeader: 'Experience the wonders of Rajasthan on a journey from Mumbai to Delhi',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
     ],
   },
@@ -146,6 +152,7 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'See a less crowded side of Italy on this winter adventure',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Iceland Discovery',
@@ -170,6 +177,7 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Move on to greener pastures full of geothermal springs, glaciers and geysers',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Athens to Santorini',
@@ -190,6 +198,7 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'From ancient Athens, embark on a colourful Greek Islands tour',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Highlights of Scotland',
@@ -214,6 +223,7 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Discover the highlights of the Highlands on this Scottish adventure',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Highlights of Malta & Gozo',
@@ -236,6 +246,7 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Set your watch to island time for a Maltese adventure',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
     ],
   },
@@ -263,6 +274,7 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Marvel in the colours and flavours of Morocco’s majesty.',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Magical Kenya',
@@ -286,6 +298,7 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Experience the natural and cultural beauty of colourful Kenya',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Brilliant Botswana',
@@ -307,6 +320,7 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Incredible nature, landscapes and culture await in brilliant Botswana',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Gorillas & Game Parks',
@@ -329,6 +343,7 @@ const toursStore = [
         theme: TravelTheme.OverlandAndWildlife,
         style: TravelStyle.Basics,
         subHeader: 'Encounter rare wildlife in the heart of East Africa',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
       {
         header: 'Wildlife in Rwanda',
@@ -350,6 +365,7 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Encounter resilience and rare wildlife in Rwanda and Uganda',
+        locations: [[105.8369, 21.0227], [108.3470, 15.9182], [106.4150, 10.7546]],
       },
     ],
   },
