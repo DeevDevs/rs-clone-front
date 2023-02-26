@@ -29,6 +29,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Discover backwaters, karst-studded bays, bustling cities and bicycle-powered food carts',
+        places: [
+          'Hanoi',
+          'Hue',
+          'Ho Chi Minh City',
+        ],
       },
       {
         header: 'Beautiful Bali',
@@ -52,6 +57,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Travel to Bali and visit Indonesia\'s beautiful island getaway',
+        places: [
+          'Ubud',
+          'Lovina',
+          'Sanur',
+        ],
       },
       {
         header: 'Sri Lanka in Depth',
@@ -74,6 +84,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Premium,
         subHeader: 'Discover Sri Lanka, the pearl of the Indian Ocean.',
+        places: [
+          'Negombo',
+          'Kandy',
+          'Colombo',
+        ],
       },
       {
         header: 'Everest Base Camp Trek',
@@ -97,6 +112,10 @@ const toursStore = [
         theme: TravelTheme.WalkingAndTrekking,
         style: TravelStyle.Original,
         subHeader: 'Walk among giants, test your limits, discover your strength',
+        places: [
+          'Kathmandu',
+          'Gorak Shep',
+        ],
       },
       {
         header: 'Premium India',
@@ -119,6 +138,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Premium,
         subHeader: 'Experience the wonders of Rajasthan on a journey from Mumbai to Delhi',
+        places: [
+          'Mumbai',
+          'Pushkar',
+          'Bundi',
+          'Delhi',
+        ],
       },
     ],
   },
@@ -146,6 +171,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'See a less crowded side of Italy on this winter adventure',
+        places: [
+          'Rome',
+          'Florence',
+          'Bologna',
+          'Venice',
+        ],
       },
       {
         header: 'Iceland Discovery',
@@ -170,6 +201,10 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Move on to greener pastures full of geothermal springs, glaciers and geysers',
+        places: [
+          'Reykjavik',
+          'Akureyri',
+        ],
       },
       {
         header: 'Athens to Santorini',
@@ -190,6 +225,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'From ancient Athens, embark on a colourful Greek Islands tour',
+        places: [
+          'Athens',
+          'Syros',
+          'Mykonos',
+          'Santorini',
+        ],
       },
       {
         header: 'Highlights of Scotland',
@@ -214,6 +255,12 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Discover the highlights of the Highlands on this Scottish adventure',
+        places: [
+          'Glasgow',
+          'Isle of Skye',
+          'Fort William',
+          'Edinburgh',
+        ],
       },
       {
         header: 'Highlights of Malta & Gozo',
@@ -236,6 +283,10 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Set your watch to island time for a Maltese adventure',
+        places: [
+          'Sliema',
+          'Valletta',
+        ],
       },
     ],
   },
@@ -263,6 +314,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Marvel in the colours and flavours of Morocco’s majesty.',
+        places: [
+          'Casablanca',
+          'Tangier',
+          'Marrakech',
+        ],
       },
       {
         header: 'Magical Kenya',
@@ -286,6 +342,10 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Experience the natural and cultural beauty of colourful Kenya',
+        places: [
+          'Nairobi',
+          'Lake Nakuru',
+        ],
       },
       {
         header: 'Brilliant Botswana',
@@ -307,6 +367,10 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Incredible nature, landscapes and culture await in brilliant Botswana',
+        places: [
+          'Kasane',
+          'Maun',
+        ],
       },
       {
         header: 'Gorillas & Game Parks',
@@ -329,6 +393,11 @@ const toursStore = [
         theme: TravelTheme.OverlandAndWildlife,
         style: TravelStyle.Basics,
         subHeader: 'Encounter rare wildlife in the heart of East Africa',
+        places: [
+          'Nairobi',
+          'Jinja',
+          'Kampala',
+        ],
       },
       {
         header: 'Wildlife in Rwanda',
@@ -350,6 +419,10 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Encounter resilience and rare wildlife in Rwanda and Uganda',
+        places: [
+          'Kigali',
+          'Bwindi Impenetrable Forest',
+        ],
       },
     ],
   },
