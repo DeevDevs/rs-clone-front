@@ -57,7 +57,7 @@ export async function uploadMemoirImages(
   const listOfURLs = listOfResolutions.map((resol) => (resol.status === 'fulfilled' ? resol.value : 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg'));
   const updatedList = [...originalList, ...listOfURLs] as string[];
   const listWithoutDeletedPhotos = updatedList.filter(
-    (url) => listToRemove.indexOf(url) < 0 || url !== 'https://i.ibb.co/XWyGkgv/default-trip-img.jpg',
+    (url) => listToRemove.indexOf(url) < 0,
   );
   return listWithoutDeletedPhotos;
 }
