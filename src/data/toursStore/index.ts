@@ -29,11 +29,6 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Discover backwaters, karst-studded bays, bustling cities and bicycle-powered food carts',
-        places: [
-          'Hanoi',
-          'Hue',
-          'Ho Chi Minh City',
-        ],
       },
       {
         header: 'Beautiful Bali',
@@ -57,11 +52,6 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Travel to Bali and visit Indonesia\'s beautiful island getaway',
-        places: [
-          'Ubud',
-          'Lovina',
-          'Sanur',
-        ],
       },
       {
         header: 'Sri Lanka in Depth',
@@ -84,10 +74,10 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Premium,
         subHeader: 'Discover Sri Lanka, the pearl of the Indian Ocean.',
-        places: [
-          'Negombo',
-          'Kandy',
-          'Colombo',
+        locations: [
+          [79.8583, 7.1894],
+          [80.6258, 7.2945],
+          [79.8562, 6.9218],
         ],
       },
       {
@@ -112,9 +102,9 @@ const toursStore = [
         theme: TravelTheme.WalkingAndTrekking,
         style: TravelStyle.Original,
         subHeader: 'Walk among giants, test your limits, discover your strength',
-        places: [
-          'Kathmandu',
-          'Gorak Shep',
+        locations: [
+          [85.2911, 27.7089],
+          [86.8276, 27.9807],
         ],
       },
       {
@@ -138,11 +128,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Premium,
         subHeader: 'Experience the wonders of Rajasthan on a journey from Mumbai to Delhi',
-        places: [
-          'Mumbai',
-          'Pushkar',
-          'Bundi',
-          'Delhi',
+        locations: [
+          [72.7411, 19.0822],
+          [74.4746, 26.4866],
+          [75.6118, 25.4359],
+          [76.8130, 28.6438],
         ],
       },
     ],
@@ -171,11 +161,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'See a less crowded side of Italy on this winter adventure',
-        places: [
-          'Rome',
-          'Florence',
-          'Bologna',
-          'Venice',
+        locations: [
+          [12.3959, 41.9099],
+          [10.6716, 43.8443],
+          [11.2616, 44.4990],
+          [12.1071, 45.4042],
         ],
       },
       {
@@ -201,9 +191,9 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Move on to greener pastures full of geothermal springs, glaciers and geysers',
-        places: [
-          'Reykjavik',
-          'Akureyri',
+        locations: [
+          [-21.9224, 64.133],
+          [-18.2754, 65.6692],
         ],
       },
       {
@@ -225,11 +215,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'From ancient Athens, embark on a colourful Greek Islands tour',
-        places: [
-          'Athens',
-          'Syros',
-          'Mykonos',
-          'Santorini',
+        locations: [
+          [23.7033, 37.9908],
+          [24.7151, 37.4982],
+          [25.3108, 37.4514],
+          [25.3505, 36.4071],
         ],
       },
       {
@@ -255,11 +245,11 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Discover the highlights of the Highlands on this Scottish adventure',
-        places: [
-          'Glasgow',
-          'Isle of Skye',
-          'Fort William',
-          'Edinburgh',
+        locations: [
+          [-4.3725, 55.8553],
+          [-6.7784, 57.3617],
+          [-5.1207, 56.8169],
+          [-3.2753, 55.9411],
         ],
       },
       {
@@ -283,9 +273,9 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Set your watch to island time for a Maltese adventure',
-        places: [
-          'Sliema',
-          'Valletta',
+        locations: [
+          [14.4951, 35.9121],
+          [14.5085, 35.8984],
         ],
       },
     ],
@@ -314,10 +304,10 @@ const toursStore = [
         theme: TravelTheme.Explorer,
         style: TravelStyle.Original,
         subHeader: 'Marvel in the colours and flavours of Morocco’s majesty.',
-        places: [
-          'Casablanca',
-          'Tangier',
-          'Marrakech',
+        locations: [
+          [-7.6570, 33.5722],
+          [-5.9045, 35.7632],
+          [-8.0778, 31.6346],
         ],
       },
       {
@@ -342,9 +332,9 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Experience the natural and cultural beauty of colourful Kenya',
-        places: [
-          'Nairobi',
-          'Lake Nakuru',
+        locations: [
+          [36.7073, -1.3032],
+          [36.0527, -0.3592],
         ],
       },
       {
@@ -367,9 +357,9 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Incredible nature, landscapes and culture await in brilliant Botswana',
-        places: [
-          'Kasane',
-          'Maun',
+        locations: [
+          [25.1382, -17.8117],
+          [23.3838, -20.0003],
         ],
       },
       {
@@ -393,10 +383,10 @@ const toursStore = [
         theme: TravelTheme.OverlandAndWildlife,
         style: TravelStyle.Basics,
         subHeader: 'Encounter rare wildlife in the heart of East Africa',
-        places: [
-          'Nairobi',
-          'Jinja',
-          'Kampala',
+        locations: [
+          [36.7073, -1.3032],
+          [36.8570, -1.2980],
+          [32.5290, 0.3130],
         ],
       },
       {
@@ -419,9 +409,9 @@ const toursStore = [
         theme: TravelTheme.Wildlife,
         style: TravelStyle.Premium,
         subHeader: 'Encounter resilience and rare wildlife in Rwanda and Uganda',
-        places: [
-          'Kigali',
-          'Bwindi Impenetrable Forest',
+        locations: [
+          [29.9871, -1.9297],
+          [29.6113, -1.0521],
         ],
       },
     ],
