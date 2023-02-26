@@ -73,7 +73,7 @@ const toursStore = [
       isle will bring nothing but smiles.`,
         images: [
           'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/sigiriya_ancient_rock_fortress.jpg',
-          'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/HPPS_Intrepid%20Travel-sri-lanka-FeatureStay-NuwaraEliya-StAndrewsHotel-Exterior-1100x735.jpg,',
+          'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/HPPS_IntrepidTravel-SriLanka-Local-cooking-class-1100x735.jpg',
           'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/HPPS_IntrepidTravel-sri-lanka_elephants_Yala-Np-playing-trunks-1100x735.jpg',
           'https://www.intrepidtravel.com/sites/intrepid/files/styles/480w/public/elements/product/hero/HPPS_Intrepid%20Travel-sri-lanka-FeatureStay-NuwaraEliya-StAndrews-Interior-1100x735.jpg',
         ],
