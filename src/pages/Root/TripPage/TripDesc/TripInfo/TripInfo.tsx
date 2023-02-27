@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import StatisticItem from '../../../../../components/StatisticItem';
 import styles from './TripInfo.module.scss';
 import { StatisticsItemsText } from '../../../../../enums';
-import { useAppDispatch, useAppSelector } from '../../../../../store';
-import { getMemoir } from '../../../../../store/memoir/memoirThunks';
+import { useAppSelector } from '../../../../../store';
 import months from '../../../../../constants/tripPage';
 import { getGradeText } from '../../../../../functions';
 
@@ -25,18 +24,6 @@ const TripInfo = () => {
 
   const newDate = new Date(date);
   const tripDate = `${months[newDate.getMonth()]}, ${newDate.getFullYear()}`;
-  const memoirID = window.location.href.split('/').at(-1);
-  const dispatchApp = useAppDispatch();
-
-  const callbackGetMemoir = useCallback(async (memoirId: string) => {
-    await dispatchApp(getMemoir(memoirId));
-  }, []);
-
-  useEffect(() => {
-    if (memoirID) {
-      callbackGetMemoir(memoirID);
-    }
-  }, []);
 
   return (
     <div className={styles.trip_info}>
