@@ -71,7 +71,7 @@ const SensDataUpdContainer = () => {
         }`}
         onClick={async () => {
           if (isLoading) return;
-          if (!setNewEmailRdy) return;
+          if (!newEmailRdy) return;
           storeNewEmail(updateBody);
           await callbackUpdateUser(updateBody);
           emptyAllFields('email');
