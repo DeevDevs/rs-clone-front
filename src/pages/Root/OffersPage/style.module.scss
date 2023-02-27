@@ -9,12 +9,13 @@
 }
 
 .header {
-  font-family: 'Finger Paint', cursive;
-  font-size: 36px;
+  font-family: 'Julee', cursive;
+  font-size: 56px;
+  margin-top: 60px;
   line-height: 120%;
   color: basics.$black;
-  text-align: center;
-  width: 60%;
+  text-align: left;
+  width: 90%;
 }
 
 .swiperContainer {
@@ -25,8 +26,10 @@
 }
 
 .continentHeader {
-  font-family: 'Julee', cursive;
-  font-size: 42px;
-  line-height: 49px;
+    font-family: 'Finger Paint', cursive;
+  font-size: 52px;
+  margin-bottom: 30px;
+  margin-top: 60px;
+  line-height: 70px;
   color: basics.$black;
 }
