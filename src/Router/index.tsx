@@ -38,11 +38,11 @@ const Router = () => (
           path={PagePath.Profile}
           element={<ProfilePage />}
         />
+        <Route
+          path={PagePath.Error}
+          element={<ErrorPage />}
+        />
       </Route>
-      <Route
-        path={PagePath.Error}
-        element={<ErrorPage />}
-      />
     </Routes>
   </BrowserRouter>
 );

@@ -162,8 +162,9 @@
     border-radius: 14px;
     border: none;
     cursor: pointer;
+    transition: all 0.15s;
     &:hover {
-      opacity: 0.8;
+          transform: scale(1.03);
     }
   }
 }
