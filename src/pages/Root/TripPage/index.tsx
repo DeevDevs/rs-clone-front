@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button';
 import { useAppDispatch, useAppSelector } from '../../../store';
@@ -9,7 +9,8 @@ import TripDetails from './TripDetails/TripDetails';
 import styles from './TripPage.module.scss';
 
 const TripPage = () => {
-  const { tripName } = useAppSelector((state) => state.memoirReducer);
+  const [errorMessage, setErrorMessage] = useState('');
+  const { tripName, longLat } = useAppSelector((state) => state.memoirReducer);
 
   const dispatchApp = useAppDispatch();
   const callbackDeleteMemoir = useCallback(async (memoirId: string) => {
@@ -17,7 +18,7 @@ const TripPage = () => {
   }, []);
   const memoirIdURL = window.location.href.split('/').at(-1);
   const navigate = useNavigate();
-  const { id: memoirId, previews } = useAppSelector((state) => state.memoirReducer);
+  const { id: memoirId } = useAppSelector((state) => state.memoirReducer);
 
   const callbackGetMemoirPreviews = useCallback(async () => {
     await dispatchApp(getMemoirPreviews());
@@ -25,53 +26,60 @@ const TripPage = () => {
 
   const callbackGetMemoir = useCallback(async (newMemoirId: string) => {
     await dispatchApp(getMemoir(newMemoirId));
+    setErrorMessage('We are sorry we could not find this memoir');
   }, []);
 
   const cbChangeCallMapboxState = (): void => {
     dispatchApp(mapboxActions.changeCallPage('trip'));
   };
 
-  const handleEraseClick = () => {
-    callbackDeleteMemoir(memoirIdURL as string);
+  const handleEraseClick = async () => {
+    await callbackDeleteMemoir(memoirIdURL as string);
+    await callbackGetMemoirPreviews();
+    navigate('/');
   };
 
   const handleEditClick = async () => {
     cbChangeCallMapboxState();
-    await callbackGetMemoir(memoirIdURL as string);
     navigate('/trip');
   };
 
   useEffect(() => {
-    if (memoirId === '') {
-      callbackGetMemoirPreviews();
+    if (!memoirId && memoirIdURL) {
+      callbackGetMemoir(memoirIdURL);
     }
-  }, [memoirId]);
-
-  useEffect(() => {
-    if (memoirId === '') {
-      navigate('/');
-    }
-  }, [previews]);
+  }, []);
 
   return (
     <div className={styles.trip}>
-      <h2 className={styles.trip_title}>
-        { tripName }
-      </h2>
-      <TripDesc className={styles.trip_desc} />
-      <TripDetails className={styles.trip_details} />
-      <Button
-        className={styles.trip_btn}
-        onClick={handleEraseClick}
-      >
-        Erase this Memoir
-      </Button>
-      <Button
-        className={styles.trip_btn}
-        onClick={handleEditClick}
-      >
-        Edit this Memoir
-      </Button>
+      {longLat.length !== 0
+        ? (
+          <>
+            <h2 className={styles.trip_title}>
+              { tripName }
+            </h2>
+            <TripDesc className={styles.trip_desc} />
+            <TripDetails className={styles.trip_details} />
+            <Button
+              className={styles.trip_btn}
+              onClick={handleEraseClick}
+            >
+              Erase this Memoir
+            </Button>
+            <Button
+              className={styles.trip_btn}
+              onClick={handleEditClick}
+            >
+              Edit this Memoir
+            </Button>
+          </>
+        )
+        : (
+          <div className={styles.trip_error}>
+            {errorMessage}
+          </div>
+        )}
+
     </div>
   );
 };

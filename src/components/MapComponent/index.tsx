@@ -34,6 +34,20 @@ const MapComponent = (props : MapProps) => {
       },
     });
 
+    if (pointFrom) {
+      const bounds = new mapboxgl.LngLatBounds();
+      bounds.extend(pointTo.baseLocation);
+      bounds.extend(pointFrom.baseLocation);
+      map.current.fitBounds(bounds, {
+        padding: {
+          top: 60,
+          bottom: 60,
+          left: 140,
+          right: 140,
+        },
+      });
+    }
+
     let mapPoint: MapPoint | null = null;
 
     map.current.dragRotate.disable();

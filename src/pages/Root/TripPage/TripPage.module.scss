@@ -7,6 +7,9 @@
     padding-bottom: 70px;
     text-align: center;
   }
+  &_desc {
+    flex-wrap: wrap;
+  }
   &_desc,
   &_details {
     display: flex;
@@ -27,6 +30,13 @@
       transform: scale(1.03);
       opacity: 1 !important;
     }
+  }
+  &_error {
+    height: calc(100vh - 311px - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
   }
 }
 
