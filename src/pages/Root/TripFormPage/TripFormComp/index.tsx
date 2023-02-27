@@ -1,4 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  useState, useCallback, useEffect,
+} from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import MapComponent from '../../../../components/MapComponent';
@@ -96,11 +98,10 @@ const TripForm = () => {
   }, []);
 
   const cbCleanUpMapboxState = (): void => { dispatchApp(mapboxActions.cleanUpState()); };
-
   const addFieldsFromForm = (formData:FormInputItems): void => {
     const dateTo = new Date(formData.dateTo);
     const dateFrom = new Date(formData.dateFrom);
-    const diffHours = +new Date(+dateTo - +dateFrom) / 36e5;
+    const diffHours = Math.abs(+new Date(+dateTo - +dateFrom) / 36e5);
     const duration = Math.floor(diffHours / 24);
     const longLat = [clickLong, clickLat].join('');
 

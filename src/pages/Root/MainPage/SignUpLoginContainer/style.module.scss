@@ -87,4 +87,9 @@
   line-height: 47px;
   color: basics.$white;
   font-family: 'Finger Paint', cursive;
+  transition: all 0.15s;
+
+  &:hover{
+    transform: scale(1.03);
+  }
 }
