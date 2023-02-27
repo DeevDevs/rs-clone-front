@@ -219,7 +219,7 @@ const TripForm = () => {
   const newMap: MapProps = {
     pointTo: {
       baseLocation: callPage === 'main' ? [clickLong, clickLat] : [memoirObj.longLat[0], memoirObj.longLat[1]],
-      popupName: `Go to ${callPage === 'main' ? place : memoirObj.destinationName}`,
+      popupName: `Visited ${callPage === 'main' ? place : memoirObj.destinationName}`,
     },
     pointFrom: {
       baseLocation: [memoirObj.whereFromLongLat[0], memoirObj.whereFromLongLat[1]],
