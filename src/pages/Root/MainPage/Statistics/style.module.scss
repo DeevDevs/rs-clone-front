@@ -6,9 +6,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 13vh;
+  padding-top: 80px;
   // margin-top: 64px;
-  height: 82vh;
+  min-height: 680px;
   position: relative;
 }
 
@@ -25,6 +25,7 @@
   justify-content: space-between;
   align-items: center;
   font-weight: 700;
+  min-height: 460px;
 }
 
 .zeroStatisticsMessage {

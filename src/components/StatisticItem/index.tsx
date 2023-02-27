@@ -30,11 +30,11 @@ const StatisticItem = ({
         verticalAnchor="middle"
         x={200}
         y={200}
-        style={{ fontSize: 140, lineHeight: 140 }}
+        style={{ fontSize: 120, lineHeight: 140 }}
         text={mark}
       />
-      <circle cx="200" cy="200" r="100" fill="none" stroke="#8860d0" strokeWidth={15} />
-      <circle cx="200" cy="200" r="155" fill="none" stroke="#8860d0" strokeWidth={15} />
+      <circle cx="200" cy="200" r="100" fill="none" stroke="#8860d0" strokeWidth={6} />
+      <circle cx="200" cy="200" r="155" fill="none" stroke="#8860d0" strokeWidth={6} />
     </svg>
     {text
       ? (
