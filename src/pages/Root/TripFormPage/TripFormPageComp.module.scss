@@ -2,6 +2,16 @@
 
 .tripPage {
   padding-bottom: 63px;
+  &_error {
+    height: calc(100vh - 311px - 80px - 123px - 63px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+  }
 }
 .tripPageTitle {
   font-family: 'Finger Paint';
