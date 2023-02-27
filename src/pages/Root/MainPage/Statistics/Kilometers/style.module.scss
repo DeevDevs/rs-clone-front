@@ -1,14 +1,14 @@
 @use "src/sass/index" as basics;
 
 .container {
-  width: 30%;
+  width: 36%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .number {
-  font-size: 9vh;
+  font-size: 64px;
   line-height: 69px;
   color: basics.$black;
   font-weight: 700;
@@ -16,7 +16,7 @@
 
 .text {
   color: basics.$black;
-  font-size: 4vh;
+  font-size: 32px;
   line-height: 37px;
   font-weight: 700;
 }

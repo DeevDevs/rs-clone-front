@@ -19,6 +19,9 @@ const MapModule = () => {
   const cbStoreChosenMemoirID = (data: string): void => {
     dispatchApp(mapboxActions.storeChosenMemoirID(data));
   };
+  const cbDetermineClickTarget = (data: string): void => {
+    dispatchApp(mapboxActions.determineClickTarget(data));
+  };
   const callbackGetMemoir = useCallback(async (memoirId: string) => {
     await dispatchApp(getMemoir(memoirId));
   }, []);
@@ -26,12 +29,14 @@ const MapModule = () => {
   const [btnText, setBtnText] = useState('Write new memoir');
 
   useEffect(() => {
-    const memoirName = previews.find(
-      (memoir) => memoir.memoirID === clickedMemoirID,
-    )?.memoirName;
-    setModuleMessage(`${memoirName}`);
-    setBtnText('Read this memoir');
-  }, [clickedMemoirID]);
+    if (clickTarget === 'memoir') {
+      const memoirName = previews.find(
+        (memoir) => memoir.memoirID === clickedMemoirID,
+      )?.memoirName;
+      setModuleMessage(`${memoirName}`);
+      setBtnText('Read this memoir');
+    }
+  }, [clickTarget]);
 
   useEffect(() => {
     if (id) {
@@ -53,6 +58,7 @@ const MapModule = () => {
         const target = e.target as HTMLElement;
         if (!target.classList.contains('mapOverlay')) return;
         toggleModuleOverlay();
+        cbDetermineClickTarget('');
         cbStoreChosenMemoirID('');
       }}
     >
@@ -62,6 +68,7 @@ const MapModule = () => {
           type="button"
           onClick={() => {
             toggleModuleOverlay();
+            cbDetermineClickTarget('');
             cbStoreChosenMemoirID('');
           }}
         >

@@ -6,7 +6,6 @@ userTypes.TSignupResp,
 userTypes.TSignupReq,
 { rejectValue: userTypes.TDBMsg }
 >('signup', async (newUserData: userTypes.TSignupReq, thunkApi) => {
-  console.log('USER DATA: YOU SEND FROM COMPONENT', newUserData);
   const reqBody: userTypes.TSignupReq = {
     name: newUserData.name,
     email: newUserData.email,
@@ -28,7 +27,6 @@ userTypes.TSignupReq,
     });
   }
   const data: userTypes.TSignupResp = await response.json();
-  console.log('USER DATA: YOU RECEIVE FROM SERVER', data);
   return data;
 });
 
@@ -37,7 +35,6 @@ userTypes.TUserDataResp,
 void,
 { rejectValue: userTypes.TDBMsg }
 >('isloggedin', async (_, thunkApi) => {
-  console.log('USER DATA: YOU SEND FROM COMPONENT', null);
   // const authString = `Bearer ${cookie}`;
   const response = await fetch('https://rs-clone-back.herokuapp.com/api/user/isloggedin', {
     method: 'GET',
@@ -53,7 +50,6 @@ void,
     });
   }
   const data: userTypes.TUserDataResp = await response.json();
-  console.log('USER DATA: YOU RECEIVE FROM SERVER', data);
   return data;
 });
 
@@ -62,7 +58,6 @@ userTypes.TLogoutResp,
 void,
 { rejectValue: userTypes.TDBMsg }
 >('logout', async (_, thunkApi) => {
-  console.log('USER DATA: YOU SEND FROM COMPONENT', null);
   const response = await fetch('https://rs-clone-back.herokuapp.com/api/user/logout', {
     method: 'POST',
     credentials: 'include',
@@ -77,7 +72,6 @@ void,
     });
   }
   const data: userTypes.TLogoutResp = await response.json();
-  console.log('USER DATA: YOU RECEIVE FROM SERVER', data);
   return data;
 });
 
@@ -86,7 +80,6 @@ userTypes.TSignupResp,
 userTypes.TLoginReq,
 { rejectValue: userTypes.TDBMsg }
 >('login', async (loginData: userTypes.TLoginReq, thunkApi) => {
-  console.log('USER DATA: YOU SEND FROM COMPONENT', loginData);
   const reqBody: userTypes.TLoginReq = {
     email: loginData.email,
     password: loginData.password,
@@ -106,7 +99,6 @@ userTypes.TLoginReq,
     });
   }
   const data: userTypes.TSignupResp = await response.json();
-  console.log('USER DATA: YOU RECEIVE FROM SERVER', data);
   return data;
 });
 
@@ -115,7 +107,6 @@ userTypes.TUserDataResp,
 userTypes.TUpdUserReq,
 { rejectValue: userTypes.TDBMsg }
 >('updateUser', async (userData: userTypes.TUpdUserReq, thunkApi) => {
-  console.log('USER DATA: YOU SEND FROM COMPONENT', userData);
   const response = await fetch('https://rs-clone-back.herokuapp.com/api/user/updateUser', {
     method: 'PATCH',
     credentials: 'include',
@@ -133,7 +124,6 @@ userTypes.TUpdUserReq,
     });
   }
   const data: userTypes.TUserDataResp = await response.json();
-  console.log('USER DATA: YOU RECEIVE FROM SERVER', data);
   return data;
 });
 
@@ -143,7 +133,6 @@ string,
 { rejectValue: userTypes.TDBMsg }
 >('getUser', async (id, thunkApi) => {
   // const authString = `Bearer ${credentials.token}`;
-  console.log('USER DATA: YOU SEND FROM COMPONENT', id);
   const response = await fetch(
     `https://rs-clone-back.herokuapp.com/api/user/oneUser?id=${id}`,
     {
@@ -163,7 +152,6 @@ string,
     });
   }
   const data: userTypes.TUserDataResp = await response.json();
-  console.log('USER DATA: YOU RECEIVE FROM SERVER', data);
   return data;
 });
 
@@ -172,7 +160,6 @@ null,
 string,
 { rejectValue: userTypes.TDBMsg }
 >('deleteUser', async (id, thunkApi) => {
-  console.log('USER DATA: YOU SEND FROM COMPONENT', id);
   // const authString = `Bearer ${credentials.token}`;
   const response = await fetch(`https://rs-clone-back.herokuapp.com/api/user/deleteUser?id=${id}`, {
     method: 'DELETE',
@@ -189,7 +176,6 @@ string,
       status: errorMessage.status,
     });
   }
-  console.log('USER DATA: YOU RECEIVE FROM SERVER', null);
   return null;
 });
 
@@ -198,7 +184,6 @@ userTypes.TUserDataResp,
 userTypes.TUploadImgReq,
 { rejectValue: userTypes.TDBMsg }
 >('addProfileImage', async (updData: userTypes.TUploadImgReq, thunkApi) => {
-  console.log('USER DATA: YOU SEND FROM COMPONENT', updData);
   const file = updData.files[0] as File;
   if (!file) return thunkApi.rejectWithValue({ status: 'Uploading interrupted. File not found' });
   if (
@@ -246,6 +231,5 @@ userTypes.TUploadImgReq,
     });
   }
   const data: userTypes.TUserDataResp = await response.json();
-  console.log('USER DATA: YOU RECEIVE FROM SERVER', data);
   return data;
 });

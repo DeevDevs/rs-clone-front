@@ -17,7 +17,7 @@ const TripDetailsMap = () => {
   const newMapData: MapProps = {
     pointTo: {
       baseLocation: [longTo, latTo],
-      popupName: `Go to ${destinationName}`,
+      popupName: `Visited ${destinationName}`,
     },
     pointFrom: {
       baseLocation: [longFrom, latFrom],

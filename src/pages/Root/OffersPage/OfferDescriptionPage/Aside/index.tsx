@@ -22,12 +22,12 @@ const Aside = ({ data }: { data: SingleOfferOnPageInterface | null | undefined }
         <SvgAndText
           img={img}
           header={`${text[0].toUpperCase()}${text.slice(1, text.length)}`}
-          text={data![text]}
+          text={data ? data[text] : 'info-missing'}
           key={keyGenerator(text)}
         />
       ))}
       <StatisticItem
-        mark={data!.rating}
+        mark={data ? data.rating : 10}
         maximum={10}
         text={StatisticsItemsText.Rating}
         size="medium"
