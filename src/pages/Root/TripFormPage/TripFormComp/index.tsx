@@ -174,7 +174,7 @@ const TripForm = () => {
       } = register(val as ValuesKey, {
         required: TripErrorMessages.Field,
         maxLength: {
-          value: 20,
+          value: 30,
           message: TripErrorMessages.FieldMaxLength,
         },
       });

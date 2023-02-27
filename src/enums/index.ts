@@ -114,7 +114,7 @@ export enum TripErrorMessages {
   AreaMinLength = 'description must be at least 50 characters',
   AreaMaxLength = 'description must be no more than 500 characters',
   MaxFileLength = 'max file size is 2MB! Please, delete the highlighted file(s)',
-  FieldMaxLength = 'field must be no more than 20 characters',
+  FieldMaxLength = 'field must be no more than 30 characters',
 }
 
 export enum StatisticsItemsText {
