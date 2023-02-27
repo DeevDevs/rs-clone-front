@@ -253,6 +253,7 @@ const TripForm = () => {
   }, []);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (clickTarget === 'memoir' || clickTarget === '') {
       navigate(`${memoirId}`);
     }
