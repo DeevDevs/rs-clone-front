@@ -5,7 +5,11 @@
   max-width: 870px;
   min-width: 500px;
   width: 100%;
-  
+  height: 600px;
+  &>div {
+    height: 100%;
+    width: 100%;
+  }
   &_leftArrow,
   &_rightArrow {
     width: 30px;
@@ -50,6 +54,6 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 10px;
-    background-size: contain;
+    background-size: cover;
   }
 }

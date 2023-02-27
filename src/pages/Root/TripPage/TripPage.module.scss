@@ -7,6 +7,9 @@
     padding-bottom: 70px;
     text-align: center;
   }
+  &_desc {
+    flex-wrap: wrap;
+  }
   &_desc,
   &_details {
     display: flex;

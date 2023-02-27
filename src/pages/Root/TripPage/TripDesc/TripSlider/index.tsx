@@ -24,26 +24,28 @@ const TripSlider = () => {
 
   return (
     <div className={styles.slider}>
-      {memoirPhotos.length > 1 && (
-      <div
-        className={styles.slider_leftArrow}
-        role="presentation"
-        onClick={goToPrev}
-      />
-      )}
-      <div
-        style={
+      <div>
+        {memoirPhotos.length > 1 && (
+        <div
+          className={styles.slider_leftArrow}
+          role="presentation"
+          onClick={goToPrev}
+        />
+        )}
+        <div
+          style={
           { backgroundImage: `url(${memoirPhotos[currIdx]})` }
         }
-        className={styles.slider_imgContainer}
-      />
-      {memoirPhotos.length > 1 && (
-      <div
-        className={styles.slider_rightArrow}
-        role="presentation"
-        onClick={goToNext}
-      />
-      )}
+          className={styles.slider_imgContainer}
+        />
+        {memoirPhotos.length > 1 && (
+        <div
+          className={styles.slider_rightArrow}
+          role="presentation"
+          onClick={goToNext}
+        />
+        )}
+      </div>
     </div>
   );
 };
