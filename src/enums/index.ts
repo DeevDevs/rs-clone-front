@@ -111,9 +111,10 @@ export enum TripErrorMessages {
   Field = 'please, fill in the field',
   StartDate = 'please, fill in start date',
   EndDate = 'please, fill in end date',
-  FieldMinLength = 'description must be at least 50 characters',
-  FieldMaxLength = 'description must be no more than 500 characters',
+  AreaMinLength = 'description must be at least 50 characters',
+  AreaMaxLength = 'description must be no more than 500 characters',
   MaxFileLength = 'max file size is 2MB! Please, delete the highlighted file(s)',
+  FieldMaxLength = 'field must be no more than 30 characters',
 }
 
 export enum StatisticsItemsText {

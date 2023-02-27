@@ -173,6 +173,10 @@ const TripForm = () => {
         name, ref, onBlur, onChange,
       } = register(val as ValuesKey, {
         required: TripErrorMessages.Field,
+        maxLength: {
+          value: 30,
+          message: TripErrorMessages.FieldMaxLength,
+        },
       });
 
       return (
@@ -201,11 +205,11 @@ const TripForm = () => {
     required: TripErrorMessages.Field,
     maxLength: {
       value: 500,
-      message: TripErrorMessages.FieldMaxLength,
+      message: TripErrorMessages.AreaMaxLength,
     },
     minLength: {
       value: 50,
-      message: TripErrorMessages.FieldMinLength,
+      message: TripErrorMessages.AreaMinLength,
     },
   });
 
