@@ -30,7 +30,6 @@ statsTypes.TStatsResp,
 string,
 { rejectValue: statsTypes.TDBMsg }
 >('getStats', async (id: string, thunkApi) => {
-  console.log('STATS DATA: YOU SEND FROM COMPONENT', id);
   // const authString = `Bearer ${cookie}`;
   const response = await fetch(`https://rs-clone-back.herokuapp.com/api/stats?id=${id}`, {
     method: 'GET',
@@ -46,7 +45,6 @@ string,
     });
   }
   const data: statsTypes.TStatsResp = await response.json();
-  console.log('STATS DATA: YOU RECEIVE FROM SERVER', data);
   return data;
 });
 

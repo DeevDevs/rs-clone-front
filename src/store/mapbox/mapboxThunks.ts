@@ -9,7 +9,6 @@ number[],
 >(
   'getLocationData',
   async (clickLocation: number[], thunkApi) => {
-    console.log('MAPBOX DATA: YOU SEND LOCATION', clickLocation[0], clickLocation[1]);
     const [long, lat] = clickLocation;
     const response = await fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=pk.eyJ1IjoiZGVldmRldnMiLCJhIjoiY2xkdWpvZnlyMDZqdzNzcmYwcmhoNTVyZSJ9.TL4fwGpN6YdtqRKZpqOaAQ`
@@ -20,7 +19,6 @@ number[],
       });
     }
     const data: mapboxTypes.TLocationDataResp = await response.json();
-    console.log('MAPBOX DATA: YOU RECEIVE FROM SERVER', data);
     return data;
   }
 );
