@@ -1,0 +1,42 @@
+@use './../../../sass/index.scss';
+
+.trip {
+  &_title {
+    font-size: 60px;
+    line-height: 88px;
+    padding-bottom: 70px;
+    text-align: center;
+  }
+  &_desc {
+    flex-wrap: wrap;
+  }
+  &_desc,
+  &_details {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 50px;
+  }
+  &_story {
+    width: 500px;
+    height: 400px;
+  }
+  &_btn {
+    transition: all 0.15s;
+    &:nth-child(4) {
+      margin-right: 30px;
+    }
+    &:hover{
+      transform: scale(1.03);
+      opacity: 1 !important;
+    }
+  }
+  &_error {
+    height: calc(100vh - 311px - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+  }
+}
+

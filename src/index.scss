@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Finger+Paint&family=Julee&display=swap');
+
+// font-family: 'Comic Neue', cursive;
+// font-family: 'Finger Paint', cursive;
+// font-family: 'Julee', cursive;
+
+:root {
+  --toastify-color-info: #8D60CC !important;
+  --toastify-color-success: #07bc0c;
+  --toastify-color-warning: #f1c40f;
+  --toastify-color-error: #e74c3c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 400;
+  font-style: normal;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hiddenMenu {
+  display: none !important;
+  transform: translateY(-30px) !important;
+}
+
+.toast-class {
+  margin-top: 40px;
+}

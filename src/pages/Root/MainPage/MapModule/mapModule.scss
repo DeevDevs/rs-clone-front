@@ -1,0 +1,93 @@
+@use 'src/sass' as *;
+
+.mapDialogue {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 360px;
+  height: 180px;
+  z-index: 2;
+  background-color: #f2f9ff;
+  border-radius: 6px;
+  padding: 10px 15px 10px 7px;
+  border-top: 1px solid #8d60cc;
+  border-right: 1px solid #8d60cc;
+  border-bottom: 1px solid #8d60cc;
+  border-left: 7px solid #8d60cc;
+  transition: all 0.2s;
+
+  &_close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 1px solid #8d60cc;
+    border-radius: 3px;
+    background-image: url('../../../../data/MainPageMap/purple-cross.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &:hover {
+      background-image: url('../../../../data/MainPageMap/white-cross.png');
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: #8d60cc;
+    }
+  }
+
+  &_message {
+    margin: 40px auto 0 auto;
+    text-align: center;
+    font-family: 'Comic Neue', cursive;
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  &_open {
+    outline: none;
+    cursor: pointer;
+    color: #8d60cc;
+    background-color: #f2f9ff;
+    border: 1px solid #8d60cc;
+    height: 35px;
+    width: 180px;
+    border-radius: 6px;
+    font-family: 'Comic Neue', cursive;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 20px auto 10px auto;
+
+    &:hover {
+      color: #f2f9ff;
+      background-color: #8d60cc;
+      border: 1px solid #f2f9ff;
+    }
+  }
+}
+
+.mapOverlay {
+  position: absolute;
+  height: inherit;
+  width: calc(100%);
+  max-width: 1580px;
+  background-color: rgba(0, 0, 0, 0.314);
+  z-index: 2;
+  transition: all 0.2s;
+}
+
+.dissolved {
+  opacity: 0;
+}
+
+.hidden {
+  display: none;
+}

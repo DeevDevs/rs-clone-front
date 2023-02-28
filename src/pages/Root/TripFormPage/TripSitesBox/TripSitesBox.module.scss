@@ -1,0 +1,65 @@
+@use "../../../../sass/index";
+
+.sightBox {
+  height: 170px;
+  border: 2px solid index.$very-dark-blue;
+  border-radius: 10px;
+  background-color: #FFF;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  overflow: auto;
+  row-gap: 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: index.$very-dark-blue;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: index.$dark-blue;
+    border-radius: 9em;
+  }
+  &>div {
+    position: relative;
+    padding: 5px;
+    height: 34px;
+    font-size: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    border: 2px solid index.$very-dark-blue;
+    background-color: index.$light-blue;
+    cursor: pointer;
+    &> button {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: index.$very-dark-blue;
+      font-size: 14px;
+      width: 20px;
+      height: 20px;
+      background-color: index.$purple;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      border-color: index.$very-dark-blue;
+      cursor: pointer;
+      z-index: 2;
+    }
+    &:hover button {
+      display: flex;
+    }
+    &:hover::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}

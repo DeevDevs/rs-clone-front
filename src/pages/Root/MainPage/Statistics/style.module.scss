@@ -1,0 +1,41 @@
+@use 'src/sass' as *;
+
+.statistics {
+  width: 100%;
+  background-color: $medium-blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+  // margin-top: 64px;
+  min-height: 680px;
+  position: relative;
+}
+
+.header {
+  color: $black;
+  font-family: 'Finger Paint', cursive;
+  font-size: 52px;
+  line-height: 77px;
+}
+
+.info {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  min-height: 460px;
+}
+
+.zeroStatisticsMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

@@ -1,0 +1,35 @@
+@use "src/sass/index" as basics;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 0 2%;
+}
+
+.header {
+  font-family: 'Julee', cursive;
+  font-size: 56px;
+  margin-top: 60px;
+  line-height: 120%;
+  color: basics.$black;
+  text-align: left;
+  width: 90%;
+}
+
+.swiperContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.continentHeader {
+    font-family: 'Finger Paint', cursive;
+  font-size: 52px;
+  margin-bottom: 30px;
+  margin-top: 60px;
+  line-height: 70px;
+  color: basics.$black;
+}

@@ -1,0 +1,39 @@
+@use "src/sass/index" as basics;
+
+.container {
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  width: 28%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.countries, .continents {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.countries {
+  margin-bottom: 20px;
+}
+
+.text {
+  width: 100%;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 37px;
+  color: basics.$black;
+  text-align: center;
+}
+
+.name {
+  font-size: 20px;
+  line-height: 38px;
+  padding: 0 8px;
+  color: basics.$purple;
+  font-family: 'Finger Paint', cursive;
+}

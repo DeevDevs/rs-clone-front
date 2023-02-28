@@ -1,0 +1,89 @@
+@use "src/sass/index" as basics;
+
+.container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10%;
+}
+
+.content {
+  position: relative;
+  width: 80%;
+  height: 558px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: basics.$light-blue;
+  margin-left: 10%;
+}
+
+.header {
+  font-family: 'Julee', cursive;
+  font-size: 42px;
+  line-height: 49px;
+  color: basics.$black;
+  width: 80%;
+  height: 110px;
+  margin-top: 20px;
+  transform: translateX(-10px);
+}
+
+.text {
+  font-family: 'Comic Neue', cursive;
+  font-size: 24px;
+  line-height: 38px;
+  color: basics.$black;
+  width: 40%;
+  text-align: justify;
+  transform: translateY(-30px);
+}
+
+.mainImg {
+  position: absolute;
+  left: 8%;
+  width: 480px;
+  border: 2px solid basics.$very-dark-blue;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 2px;
+  transform: rotate(-4.28deg);
+  z-index: 2;
+  transition: all 0.4s;
+
+  &:hover{
+    transform: rotate(-2.28deg);
+  }
+}
+
+.plane {
+  position: absolute;
+  transform: rotate(7.59deg);
+  top: 0;
+  right: 0;
+}
+
+.button {
+  width: 240px;
+  height: 60px;
+  background: basics.$button-gradient;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-family: 'Finger Paint', cursive;
+  cursor: pointer;
+  color: basics.$white;
+  border-radius: 15px;
+  text-decoration: none;
+  padding: 0 12px;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.25);
+  margin: 0 0 40px 0;
+  transform: translateX(-60px);
+  transition: all 0.15s;
+}
+
+.button:hover {
+  transform: translateX(-60px) scale(1.03);
+}

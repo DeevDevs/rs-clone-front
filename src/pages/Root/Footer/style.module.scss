@@ -1,0 +1,50 @@
+@use "../../../sass/index" as basics;
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 40px;
+  padding: 0 2% 30px 2%;
+}
+
+.logo {
+  width: 589px;
+  height: 133px;
+  margin-bottom: 58px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.rsEmblem {
+  width: 110px;
+  height: 40px;
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+}
+
+.ghLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  .ghLink__img {
+    width: 71px;
+    height: 70px;
+  }
+}
+
+.year {
+  font-size: 20px;
+  line-height: 29px;
+  font-family: 'Finger Paint', cursive;
+  color: basics.$black;
+}

@@ -1,0 +1,70 @@
+@use "../../../sass/index" as *;
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  z-index: 4;
+}
+
+.header__text {
+  color: $black;
+  @include font(normal, 400, 42px, 49px);
+  font-family: 'Julee', cursive;
+  margin-left: 30px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 65px;
+}
+
+.button, .button_active {
+  width: 121px;
+  height: 47px;
+  background: $button-gradient;
+  text-decoration: none;
+  color: $white;
+  @include font(normal, 400, 24px, 35px);
+  padding: 0 12px;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Finger Paint', cursive;
+  transition: all 0.15s;
+}
+
+.button:hover {
+  transform: scale(1.03);
+}
+
+.button_active {
+  border: 3px solid $very-dark-blue;
+  color: $very-dark-blue;
+  box-shadow: none;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  align-items: center;
+  width: 235px;
+
+  .user__name {
+    @include font(normal, 700, 24px, 28px);
+    color: $black;
+  }
+
+  .user__img {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    border: 1px solid $black;
+  }
+}
