@@ -34,7 +34,7 @@ const MapComponent = (props : MapProps) => {
       },
     });
 
-    if (pointFrom) {
+    if (pointFrom && pointFrom.baseLocation.join('') !== '00') {
       const bounds = new mapboxgl.LngLatBounds();
       bounds.extend(pointTo.baseLocation);
       bounds.extend(pointFrom.baseLocation);
@@ -52,7 +52,7 @@ const MapComponent = (props : MapProps) => {
 
     map.current.dragRotate.disable();
     addPoint(map, baseLocationTo, popupNameTo);
-    if (pointFrom) {
+    if (pointFrom && pointFrom.baseLocation.join('') !== '00') {
       const { baseLocation: baseLocationFrom, popupName: popupNameFrom } = pointFrom;
       mapPoint = addPoint(map, baseLocationFrom, popupNameFrom);
     }

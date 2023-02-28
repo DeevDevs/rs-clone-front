@@ -12,7 +12,9 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../../store';
 import { mapboxActions } from '../../../../store/mapbox';
 import { createNewMemoir, getMemoirPreviews, updateMemoir } from '../../../../store/memoir/memoirThunks';
-import { TMemoir, TNewMemoirReq, TUpdMemoirReq } from '../../../../store/memoir/memoirTypes';
+import {
+  TMemoir, TNewMemoirReq, TUpdMemoirReq, TMemoirResp,
+} from '../../../../store/memoir/memoirTypes';
 import { getStats } from '../../../../store/stats/statsThunks';
 import {
   FileTransferObj, FormInputItems, MapProps, ValuesKey,
@@ -84,9 +86,6 @@ const TripForm = () => {
     sites: [],
   };
 
-  const callbackCreateMemoir = useCallback(async (memoirData: TNewMemoirReq) => {
-    await dispatchApp(createNewMemoir(memoirData));
-  }, []);
   const callbackGetMemoirPreviews = useCallback(async () => {
     await dispatchApp(getMemoirPreviews());
   }, []);
@@ -95,6 +94,17 @@ const TripForm = () => {
   }, []);
   const callbackUpdateMemoir = useCallback(async (memoirData: TUpdMemoirReq) => {
     await dispatchApp(updateMemoir(memoirData));
+  }, []);
+  const callbackCreateMemoir = useCallback(async (memoirData: TNewMemoirReq) => {
+    const data = await dispatchApp(createNewMemoir(memoirData));
+    const newMemoirDBData = data.payload as TMemoirResp;
+    await callbackGetStats(statsID);
+    await callbackGetMemoirPreviews();
+    reset();
+    setPhotos([]);
+    setRateValue(5);
+    setSites([]);
+    navigate(`${newMemoirDBData.data._id}`);
   }, []);
 
   const cbCleanUpMapboxState = (): void => { dispatchApp(mapboxActions.cleanUpState()); };
@@ -149,14 +159,14 @@ const TripForm = () => {
       await callbackCreateMemoir(newMemoirData);
     } else {
       await callbackUpdateMemoir(newUdpMemoirData);
+      await callbackGetStats(statsID);
+      await callbackGetMemoirPreviews();
+      reset();
+      setPhotos([]);
+      setRateValue(5);
+      setSites([]);
+      navigate(`${memoirId}`);
     }
-    await callbackGetStats(statsID);
-    await callbackGetMemoirPreviews();
-    reset();
-    setPhotos([]);
-    setRateValue(5);
-    setSites([]);
-    navigate(`${memoirId}`);
   });
 
   const handleSites = () => {
